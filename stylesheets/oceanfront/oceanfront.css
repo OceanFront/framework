@@ -1,0 +1,145 @@
+/* 
+ * http://meyerweb.com/eric/tools/css/reset/ 
+ * v2.0 | 20110126
+ * License: none (public domain)
+ *
+ * Resets everything for less trouble with compatibility, remove if you don't want to reset
+ */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, input, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, textarea, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0 none;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	position: relative;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	position: relative;
+}
+
+/*
+ * Oceanfront convenience classes when programmatically building with objects.
+ * Developers should use these 
+ *	
+ */
+
+.clickable { cursor: pointer; }
+.cursor-pointer { cursor: pointer; }
+.cursor-default { cursor: default; }
+.link {
+	text-decoration: underline;
+}
+.absolute {position: absolute;}
+
+.left   { float:left; }
+.right  { float:right; }
+.clear-left { clear: left;}
+.clear-right { clear: right;}
+.clear-both { clear: both;}
+
+.inline {display: inline-block;}
+
+.hide   { display: none; }
+.show, .block   { display: block; }
+
+.align-justify  { text-align:justify; } 
+.align-left     { text-align:left; } 
+.align-center   { text-align:center; } 
+.align-right    { text-align:right; } 
+
+.valign-baseline      { vertical-align: baseline   ; }
+.valign-sub           { vertical-align: sub        ; }
+.valign-super         { vertical-align: super      ; }
+.valign-top           { vertical-align: top        ; }
+.valign-text-top      { vertical-align: text-top   ; }
+.valign-middle        { vertical-align: middle     ; }
+.valign-bottom        { vertical-align: bottom     ; }
+.valign-text-bottom   { vertical-align: text-bottom; }
+
+.small      { font-size: 0.6em; }
+.large      { font-size: 1.3em; }
+.strong     { font-weight: bold; }
+
+.padding5	{padding: 5px;}
+.padding10	{padding: 10px;}
+.margin5	{margin: 5px;}
+
+.d5			{margin-top: 5px;}
+.d10		{margin-top: 10px;}
+.d20		{margin-top: 20px;}
+.d50		{margin-top: 50px;}
+
+.r20		{margin-left: 20px;}
+
+.l5			{margin-right: 5px;}
+.l10		{margin-right: 10px;}
+.l20		{margin-right: 20px;}
+
+.automargin {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.max-width {
+	width: 100%;
+}
+
+.max-height {
+	height: 100%;
+}
+
+.scrollable {
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.error-text {
+	color: red;
+}
+
+.success-text {
+	color: green;
+}
+
+.relief-shadow {
+	text-shadow: 0px 1px #fff;
+}
+
+.gwt-Grid {
+	margin: auto;
+}
