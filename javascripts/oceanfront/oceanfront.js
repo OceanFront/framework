@@ -2836,3 +2836,333 @@ var APIError = Class.extend({
   }
 });
 
+var MenuPane = FlowPanel.extend({
+  init: function() {
+    this._super();
+    this.setElement(this.render());
+    this.setPrimaryStyleName('gwt-MenuPane');
+  },
+  clearActive: function(allBut) {
+    $.each(this.children, function(i, ea)  {
+      if(ea.active)
+        ea.setActive(false);
+    }); 
+  },
+  render: function() {
+    return html.ul({});
+  }
+});
+
+var MenuItemBase = FocusWidget.extend({
+  init: function(name,action,href, id) {
+    this.href = href;
+    this.name = name;
+    this.id = id;
+    this._super(this.render());
+    this.active = false;
+    var self = this;
+    this.addClickListener(function(evt) { self.onClick(evt); });
+    if (action)
+      this.addClickListener(action);
+  },
+  onClick: function(evt) {
+    this.parent.clearActive();
+    this.setActive(true);
+  },
+  setActive: function(bool) {
+    this.active = bool;
+    if(this.active) {
+      DOM.addStyleName(this.getElement(), "active");
+    }
+    else
+      DOM.removeStyleName(this.getElement(), "active");
+  },
+  render: function() {
+    // subclass resp
+  }
+});
+
+var MenuItem = MenuItemBase.extend({
+  init: function(stylename, name, action, href, id) {
+    this._super(name, action, href, id);
+    this.setStyleName(stylename);
+    this.setStyleName('btn clickable');
+  },
+  render: function() {
+    return html.li({'id':"mainmenu-"+this.id.toLowerCase()},
+        html.a({'class':'btntxt', 'href':this.href}, this.name));
+  }
+});
+
+var FormGrid = Grid.extend({
+  init: function(rows, cols) {
+    this._super(rows, cols);
+    // Wrap the grid with a physical Form node
+    this.form = html.form({});
+    DOM.appendChild(this.form, this.tableElement);
+    this.setElement(this.form);
+
+    // Setup default listeners behavior
+    this.submitListeners = [];
+    this.sinkEvents(Event.ONSUBMIT|Event.ONCLICK);
+    this.addSubmitListener(function(that, e) {
+      // Prevent default submit behavior for Forms
+      e.preventDefault();
+    });
+
+    // Create initial default group of validation objects
+    this.validationObjects = [];
+
+    this.render();
+  },
+  addOnSave: function(fn) {
+    // Add onSave function to be executed whenever the whole form is valid
+    this.onSaveFn = fn;
+  },
+  addOnCancel: function(fn) {
+    // Add onCancel function to be executed whenever the Cancel button is pressed
+    this.onCancelFn = fn;
+  },
+  addSubmitListener: function(listener) {
+    this.submitListeners.push(listener);
+    return this;
+  },
+  onBrowserEvent: function(event) {
+    this._super(event);
+    var type = DOM.eventGetType(event);
+    if (type == 'submit') {
+      for (var i = 0; i < this.submitListeners.length; i++) {
+        this.submitListeners[i](this, event);
+      }
+    }
+  },
+  clearAll: function() {
+    // Clear both errors, focus and values
+    var inputs = $('input', this.getElement());
+    for(var i=0; i<inputs.length; i++) {
+      $(inputs[i]).val("");
+    }
+    this.clearErrors();
+  },
+  clearErrors: function() {
+    this.bubble.hide();
+  },
+  showErrorOnWidget: function(widget) {
+    // Reset bubble if already shown
+    if(!this.bubble.isHidden())
+      this.bubble.hide();
+    this.bubble.showErrorOnWidget(widget);
+    this.lastValidatedObject = widget;
+    // Force focus on ValidationObject
+    widget.getElement().focus();
+  },
+  clearBubbleOnWidget: function(widget) {
+    this.bubble.hide(widget);
+  },
+  validateForm: function() {
+    // Get all type of Validation objects and assemble a list (array) of the ones with error
+    var errorInputs = [];
+
+    for(var i=0; i<this.validationObjects.length; i++) {
+      if(!this.validationObjects[i].validate()) {
+        errorInputs.push(this.validationObjects[i]);
+      }
+    }
+    // Show bubble on first error and return false
+    if(errorInputs[0]) {
+      this.showErrorOnWidget(errorInputs[0]);
+      return false;
+    } else {
+      // No error found
+      return true;
+    }
+  },
+  setWidget: function(row,col,widget) {
+    this._super(row,col,widget);
+    // Check if object is a validation object, thus contains a setForm function
+    if(widget.setForm) {
+      // Save this form pointer for the widget so it can call for messagge bubble
+      widget.setForm(this);
+      this.validationObjects.push(widget);
+    } else if($('button', widget.getElement()).length > 0) {
+      // Check if widget is a container for buttons or a button, thus validation buttons
+      // Make their cell span over all columns for centering
+      $(widget.getElement().parentElement).attr('colspan', "100");
+      // Get table row, parent is cell
+      var tr = widget.getElement().parentElement.parentElement;
+      // Remove all child cells except with colspan on
+      for(var i=0;i<tr.childNodes.length;i++) {
+        if($(tr.childNodes[i]).attr('colspan')) {
+          return;
+        } else {
+          DOM.removeChild(tr, tr.childNodes[i]);
+        }
+      }
+    }
+  },
+  render: function() {
+    var self = this;
+
+    // Create and attach a MessageBubble for this Form to use when showing errors and/or success
+    this.bubble = new MessageBubble(this);
+    DOM.appendChild(this.getElement(), this.bubble.getElement());
+
+    // Setup basic evaluation behavior logic for the form and it's underlying valuation objects
+    this.addTableListener(function(form, event) {
+      var target = event.target;
+      if(event.type === 'focus' && target.nodeName !== 'BUTTON') {
+        if(form.currentBlurItem && target.nodeName === 'INPUT') {
+          // Take care of Blured objects that should evaluate
+          // Blur event is not used because it fires before anything else and makes it impossible to NOT validate when needed as below
+
+          // Evaluate simulate blurobject and act if its valid
+          if(form.currentBlurItem.validate(true)) {
+            // If the Blured element evaluates, iterate forward to next focus element
+            form.currentBlurItem = target.widget;
+          }
+        } else {
+          // Here we dont have previous form.currentBlurItem, meaning the form is fresh and usually
+          // one element got autofocus firing focus event upon show of form.
+          form.currentBlurItem = target.widget;
+        }
+        
+      } else if(event.type === 'click' && $(target).attr('name') === 'save') {
+        // Validate whole form because user wants to submit/save it
+        if(form.validateForm()) {
+          self.onSaveFn(form, event);
+        } else {
+          // Not valid form
+          console.log("Not valid form");
+        }
+      } else if(event.type === 'click' && $(target).attr('name') === 'cancel') {
+        // No validation since user want to Cancel
+        self.onCancelFn(form,event);
+      }
+    });
+  }
+});
+
+var MessageBubble = FlowPanel.extend({
+  init: function(form) {
+    this._super();
+    this.setStyleName("message-bubble");
+    this.render();
+    this.form = form;
+    this.currentWidget = null;
+    $(this.getElement()).css("display", "none");
+  },
+  showErrorOnWidget: function(widget) {
+    var self = this;
+    if(!widget.getElement()) {
+      console.warn("Tried to show message bubble without supplying a element to show for!!");
+      return;
+    }
+    // Position Bubble to element and make it visible
+    this._positionBubble(widget);
+
+    // Animate Bubble
+    // With animation keyframe it's always played when you set display:block
+    // Add replay of animation here if you want to if bubble already is shown (aka same error on same input continously)
+
+  },
+  _positionBubble: function(widget) {
+    var self = this;
+    var element = widget.getElement();
+    var height = $(element).height();
+    var itemOffset = $(element).offset();
+    var formOffset = $(this.form.getElement()).offset();
+    // This if-statement is just to not show bubble if everything is zero. And that happens in rare cases
+    // when Blur/Focus fires on the grid when it's going between visible/not visible
+    if(!(itemOffset.top === 0 && itemOffset.left === 0 && formOffset.top === 0 && formOffset.left === 0)) {
+
+      // Position bubble correctly to widget
+      this.setText($(element).attr('errormessage'));
+      $(this.getElement()).css('top', itemOffset.top - formOffset.top + height + 5);
+      $(this.getElement()).css('left', itemOffset.left - formOffset.left);
+      $(this.getElement()).css('display', 'block');
+      this.currentWidget = widget;
+
+      var hideTimer = setTimeout(function() {
+        self.hide();
+      }, 4000);
+    }
+  },
+  isHidden: function() {
+    return $(this.getElement()).css('display') === "none" ? true : false;
+  },
+  hide: function(widget) {
+    if(widget) {
+      if(widget == this.currentWidget) {
+        $(this.getElement()).css("display", "none");
+      }
+    } else {
+      $(this.getElement()).css("display", "none");
+    }
+  },
+  setText: function(text) {
+    this.label.setText(text);
+  },
+  render: function() {
+    this.label = new Label("", true);
+    var arrow = new SimplePanel();
+    
+    arrow.setStyleName("message-bubble-arrow");
+    this.label.setStyleName("message-bubble-text");
+
+    this.add(arrow);
+    this.add(this.label);
+  }
+});
+
+var WidgetLoader = Widget.extend({
+  init: function() {
+    this._super();
+    this.setElement(this.render());
+    this.setStyleName("widget-loader");
+    this.setStyle('display', 'none');
+
+    this.parentWidth = null;
+    this.parentHeight = null;
+  },
+  adaptSize: function() {
+    // Calculate if there is a fixed height on parent, then use that
+    var parentheight = $(this.getElement().parentElement).height();
+    var parentwidth = $(this.getElement().parentElement).width();
+    if(parentheight === 0)
+      parentheight = '100%';
+    
+    // Expand height to fill parent
+    $(this.getElement()).height(parentheight);
+    // Position spinner
+    if(typeof parentheight === "number") {
+      $('img', this.getElement()).css('top', parseInt(parentheight/2 - 20));
+    } else {
+      $('img', this.getElement()).css('top', '45%');
+    }
+    if(typeof parentwidth === "number" && parentwidth > 0) {
+      $('img', this.getElement()).css('left', parseInt(parentwidth/2 - 20));
+    } else {
+      $('img', this.getElement()).css('left', '40%');
+    }
+
+    this.parentWidth = parentwidth;
+    this.parentHeight = parentheight;
+  },
+  show: function(adapt) {
+    if(adapt || !this.parentHeight && !this.parentWidth) {
+      // Basically only adapt first time
+      this.adaptSize();
+    }
+    // Start animation and finish with showing Loader
+    $('img', this.getElement()).css('-webkit-animation-play-state', 'running');
+    $(this.getElement()).css('display', 'block');
+  },
+  hide: function() {
+    $(this.getElement()).css('display', 'none');
+    $('img', this.getElement()).css('-webkit-animation-play-state', 'paused');
+  },
+  render: function() {
+    return html.div({},
+            html.img({'class':'widget-loader-spinner','src':'../images/loader.png'}));
+  }
+});
