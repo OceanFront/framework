@@ -2863,8 +2863,8 @@ var MenuPane = FlowPanel.extend({
 });
 
 var MenuItemBase = FocusWidget.extend({
-  init: function(name,action,href, id) {
-    this.href = href;
+  init: function(name,action,flowCommand, id) {
+    this.flowCommand = flowCommand; // type: [[state1, state2, ..], obj];
     this.name = name;
     this.id = id;
     this._super(this.render());
@@ -2892,14 +2892,15 @@ var MenuItemBase = FocusWidget.extend({
 });
 
 var MenuItem = MenuItemBase.extend({
-  init: function(stylename, name, action, href, id) {
-    this._super(name, action, href, id);
+  init: function(stylename, name, flowCommand, id, fn) {
+    // flowCommand type: [[state1, state2, ..], obj];
+    this._super(name, fn, flowCommand, id);
     this.setStyleName(stylename);
     this.setStyleName('btn clickable');
   },
   render: function() {
     return html.li({'id':"mainmenu-"+this.id.toLowerCase()},
-        html.a({'class':'btntxt', 'href':this.href}, this.name));
+        html.a({'class':'btntxt', 'href':HashFactory.getHREF(this.flowCommand)}, this.name));
   }
 });
 
