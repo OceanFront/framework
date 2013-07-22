@@ -226,10 +226,8 @@ var HashFactoryBase = Class.extend({
         // Takes care of changes in hash state during App usage 
         self.eventFunction();
       });
-      if(window.location.hash != "") {
-        // Takes care of initial load and initialisation in hash state
-        self.setInitFlowState();
-      } 
+      // Takes care of initial load and initialisation in hash state
+      self.setInitFlowState();
     } else {
       if(console) console.warn("Error init HashFactoryBase!! Either this.setInitFlowState and/or this.eventFunction were not set prior to this._super() call!!");
     }
@@ -2916,6 +2914,7 @@ var MenuItemBase = FocusWidget.extend({
     this.href = href; // type: [[state1, state2, ..], obj];
     this.name = name;
     this.id = id;
+    this.action = action;
     this._super(this.render());
     this.active = false;
     var self = this;
@@ -2926,6 +2925,10 @@ var MenuItemBase = FocusWidget.extend({
   onClick: function(evt) {
     this.parent.clearActive();
     this.setActive(true);
+    if(!evt && this.action) {
+      // manually trigger, so trigger action for complete click cycle
+      this.action();
+    }
   },
   setActive: function(bool) {
     this.active = bool;
