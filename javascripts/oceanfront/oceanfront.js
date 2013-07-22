@@ -228,11 +228,8 @@ var HashFactoryBase = Class.extend({
       });
       if(window.location.hash != "") {
         // Takes care of initial load and initialisation in hash state
-        self.eventFunction();
-      } else { 
-        // When the page is loaded with no params, show the first view
         self.setInitFlowState();
-      }
+      } 
     } else {
       if(console) console.warn("Error init HashFactoryBase!! Either this.setInitFlowState and/or this.eventFunction were not set prior to this._super() call!!");
     }
@@ -247,22 +244,6 @@ var HashFactoryBase = Class.extend({
   },
   flowTo: function(appState) {
     if(console) console.warn("Did not override flowTo in HashFactoryBase! Add your app logic in override!");
-  },
-  getHREF: function(appState, obj) {
-    var href = '#!';
-    if($.isArray(appState) && appState[0]) {
-      for (var i = 0; i < appState.length; i++) {
-        if(i > 0) {
-          href += '/' + appState[i];
-        } else {
-          href += appState[i];
-        }
-      };
-      if(obj && typeof obj === "String") {
-        href += '|' + obj;
-      }
-    }
-    return href;
   },
   goto: function(appState, obj) {
     // Flow logic for application
@@ -814,23 +795,24 @@ var Event = {
 
 var NotificationCenter = Class.extend({
   init: function() {
-          this.notificationListeners = {};
-        },
-    postNotification: function(notificationType, source) {
-                        var l = this.notificationListeners[notificationType];
-                        for(var i=0; i<l.length; i++) {
-                          if(l[i]['on'+notificationType])
-  l[i]['on'+notificationType](source);
-                          else 
-  l[i](source);
-                        }
-                      },
-    addListener: function(notificationType, listener) {
-                   if(this.notificationListeners[notificationType] == undefined) {
-                     this.notificationListeners[notificationType] = [];
-                   }
-                   this.notificationListeners[notificationType].push(listener);
-                 }
+    this.notificationListeners = {};
+  },
+  postNotification: function(notificationType, source) {
+    var l = this.notificationListeners[notificationType];
+    for(var i=0; i<l.length; i++) {
+      if(l[i]['on'+notificationType]) {
+        l[i]['on'+notificationType](source);
+      } else { 
+        l[i](source);
+      }
+    }
+  },
+  addListener: function(notificationType, listener) {
+    if(this.notificationListeners[notificationType] == undefined) {
+      this.notificationListeners[notificationType] = [];
+    }
+    this.notificationListeners[notificationType].push(listener);
+  }
 });
 
 window.nc = new NotificationCenter();
@@ -2930,8 +2912,8 @@ var MenuPane = FlowPanel.extend({
 });
 
 var MenuItemBase = FocusWidget.extend({
-  init: function(name,action,flowCommand, id) {
-    this.flowCommand = flowCommand; // type: [[state1, state2, ..], obj];
+  init: function(name,action,href, id) {
+    this.href = href; // type: [[state1, state2, ..], obj];
     this.name = name;
     this.id = id;
     this._super(this.render());
@@ -2966,10 +2948,8 @@ var MenuItem = MenuItemBase.extend({
     this.setStyleName('btn clickable');
   },
   render: function() {
-    var hf_tmp = new HashFactoryBase();
-    var href = hf_tmp.getHREF(this.flowCommand[0], this.flowCommand[1]);
-    return html.li({'id':"mainmenu-"+this.id.toLowerCase()},
-        html.a({'class':'btntxt', 'href':href}, this.name));
+    return html.li({'id':"menu-item-"+this.id.toLowerCase()},
+        html.a({'class':'btntxt', 'href':this.href}, this.name));
   }
 });
 
