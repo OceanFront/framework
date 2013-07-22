@@ -2965,8 +2965,9 @@ var MenuItem = MenuItemBase.extend({
     this.setStyleName('btn clickable');
   },
   render: function() {
+    var href = HashFactoryBase.getHREF(this.flowCommand[0], this.flowCommand[1]);
     return html.li({'id':"mainmenu-"+this.id.toLowerCase()},
-        html.a({'class':'btntxt', 'href':HashFactoryBase.getHREF(this.flowCommand)}, this.name));
+        html.a({'class':'btntxt', 'href':href}, this.name));
   }
 });
 
