@@ -209,6 +209,72 @@ function gdispatchEvent(evt) {
     DOM.dispatchEvent(evt, curElem, listener);
 }
 
+// HashFactory for handling baking, reading and reaction on URL for the application flow
+// State driven applications are to let SEO crawler find their way with correct links, and let users bookmark important flow states
+var HashFactoryBase = Class.extend({
+  init: function() {
+    //This object handles all the actual flows in application thru set hash bong states
+    //Syntax in URL: exampleApp.se/appname#!state|data
+    //Example: exampleApp.se/hotels#!product|london/hilton/123451
+    var self = this;
+
+    // MUST set these 2 function before calling this_super();
+    // Only way to interface the choosen app logic
+
+    if(this.setInitFlowState && this.eventFunction) {
+      $(window).bind('hashchange', function() {
+        // Takes care of changes in hash state during App usage 
+        this.eventFunction();
+      });
+      if(window.location.hash != "") {
+        // Takes care of initial load and initialisation in hash state
+        this.eventFunction();
+      } else { 
+        // When the page is loaded with no params, show the first view
+        this.setInitFlowState();
+      }
+    } else {
+      if(console) console.warn("Error init HashFactoryBase!! Either this.setInitFlowState and/or this.eventFunction were not set prior to this._super() call!!");
+    }
+    
+
+  },
+  setURL: function(appState, obj) {
+    if(console) console.warn("Did not override setURL in HashFactoryBase! Add your app logic in an override!");
+  },
+  parseURL: function() {
+    if(console) console.warn("Did not override parseURL in HashFactoryBase! Add your app logic in an override!");
+  },
+  flowTo: function(appState) {
+    if(console) console.warn("Did not override flowTo in HashFactoryBase! Add your app logic in override!");
+  },
+  getHREF: function(appState, obj) {
+    var href = '!#';
+    if($.isArray(appState) && appState[0]) {
+      for (var i = 0; i < appState.length; i++) {
+        if(i > 0) {
+          href += '/' + appState[i];
+        } else {
+          href += appState[i];
+        }
+      };
+      if(obj && typeof obj === "String") {
+        href += '|' + obj;
+      }
+    }
+    return href;
+  },
+  goto: function(appState, obj) {
+    // Main method call from other Widgets to start a flow state change
+    if($.isArray(appState)) {
+      this.setURL(appState, obj);
+    } else {
+      if (console) console.warn("HashFactory didn't get an Array for appState! Could not move in state!");
+    }
+
+  }
+});
+
 // low level dom abstraction
 var DOM = {
   // Constants
@@ -2900,7 +2966,7 @@ var MenuItem = MenuItemBase.extend({
   },
   render: function() {
     return html.li({'id':"mainmenu-"+this.id.toLowerCase()},
-        html.a({'class':'btntxt', 'href':HashFactory.getHREF(this.flowCommand)}, this.name));
+        html.a({'class':'btntxt', 'href':HashFactoryBase.getHREF(this.flowCommand)}, this.name));
   }
 });
 
