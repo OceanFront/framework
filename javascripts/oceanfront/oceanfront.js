@@ -224,14 +224,14 @@ var HashFactoryBase = Class.extend({
     if(this.setInitFlowState && this.eventFunction) {
       $(window).bind('hashchange', function() {
         // Takes care of changes in hash state during App usage 
-        this.eventFunction();
+        self.eventFunction();
       });
       if(window.location.hash != "") {
         // Takes care of initial load and initialisation in hash state
-        this.eventFunction();
+        self.eventFunction();
       } else { 
         // When the page is loaded with no params, show the first view
-        this.setInitFlowState();
+        self.setInitFlowState();
       }
     } else {
       if(console) console.warn("Error init HashFactoryBase!! Either this.setInitFlowState and/or this.eventFunction were not set prior to this._super() call!!");
@@ -249,7 +249,7 @@ var HashFactoryBase = Class.extend({
     if(console) console.warn("Did not override flowTo in HashFactoryBase! Add your app logic in override!");
   },
   getHREF: function(appState, obj) {
-    var href = '!#';
+    var href = '#!';
     if($.isArray(appState) && appState[0]) {
       for (var i = 0; i < appState.length; i++) {
         if(i > 0) {
@@ -265,15 +265,11 @@ var HashFactoryBase = Class.extend({
     return href;
   },
   goto: function(appState, obj) {
-    // Main method call from other Widgets to start a flow state change
-    if($.isArray(appState)) {
-      this.setURL(appState, obj);
-    } else {
-      if (console) console.warn("HashFactory didn't get an Array for appState! Could not move in state!");
-    }
-
+    // Flow logic for application
+    if(console) console.warn("Did not override goto in HashFactoryBase! Add your app logic in override!");
   }
 });
+
 
 // low level dom abstraction
 var DOM = {
@@ -2632,10 +2628,15 @@ var DeckPanel = ComplexPanel.extend({
   },
   fadeToWidget: function(index) {
   	// TEMPFIX:
+    /*
+    .browser deprecated in jquery 1.9 and above.
+    This is to encourage feature checks rather than browser
+    TODO: Make tests with IE and make proper changes if it still has problems animating smoothly
   	if($.browser.msie) {
   		this.showWidget(index);
   		return;
   	}
+    */
     this.checkIndex(index);
   	var self = this;
     if(this.visibleWidget != null) {
@@ -2965,7 +2966,8 @@ var MenuItem = MenuItemBase.extend({
     this.setStyleName('btn clickable');
   },
   render: function() {
-    var href = HashFactoryBase.getHREF(this.flowCommand[0], this.flowCommand[1]);
+    var hf_tmp = new HashFactoryBase();
+    var href = hf_tmp.getHREF(this.flowCommand[0], this.flowCommand[1]);
     return html.li({'id':"mainmenu-"+this.id.toLowerCase()},
         html.a({'class':'btntxt', 'href':href}, this.name));
   }
