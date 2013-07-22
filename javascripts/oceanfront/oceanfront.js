@@ -216,22 +216,7 @@ var HashFactoryBase = Class.extend({
     //This object handles all the actual flows in application thru set hash bong states
     //Syntax in URL: exampleApp.se/appname#!state|data
     //Example: exampleApp.se/hotels#!product|london/hilton/123451
-    var self = this;
-
-    // MUST set these 2 function before calling this_super();
-    // Only way to interface the choosen app logic
-
-    if(this.setInitFlowState && this.eventFunction) {
-      $(window).bind('hashchange', function() {
-        // Takes care of changes in hash state during App usage 
-        self.eventFunction();
-      });
-      // Takes care of initial load and initialisation in hash state
-      self.setInitFlowState();
-    } else {
-      if(console) console.warn("Error init HashFactoryBase!! Either this.setInitFlowState and/or this.eventFunction were not set prior to this._super() call!!");
-    }
-    
+    var self = this;   
 
   },
   setURL: function(appState, obj) {
