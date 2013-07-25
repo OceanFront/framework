@@ -2882,12 +2882,25 @@ var MenuPane = FlowPanel.extend({
     this._super();
     this.setElement(this.render());
     this.setPrimaryStyleName('gwt-MenuPane');
+    this.menuMap = {};
   },
   clearActive: function(allBut) {
     $.each(this.children, function(i, ea)  {
       if(ea.active)
         ea.setActive(false);
     }); 
+  },
+  getItemById: function(id) {
+    if(this.menuMap[id])
+      return this.menuMap[id]; 
+    else
+      return this.menuMap['_first'];
+  },
+  add: function(widget) {
+    this._super(widget, this.getElement());
+    if(!this.menuMap['_first'])
+      this.menuMap['_first'] = widget;
+    this.menuMap[widget.id] = widget;
   },
   render: function() {
     return html.ul({});
@@ -2902,10 +2915,17 @@ var MenuItemBase = FocusWidget.extend({
     this.action = action;
     this._super(this.render());
     this.active = false;
+    this.subMenu = null;
     var self = this;
     this.addClickListener(function(evt) { self.onClick(evt); });
     if (action)
       this.addClickListener(action);
+  },
+  setSubMenu: function(menu) {
+    this.subMenu = menu;
+  },
+  getSubMenu: function() {
+    return this.subMenu;
   },
   onClick: function(evt) {
     this.parent.clearActive();
