@@ -941,7 +941,7 @@ var Widget = UIObject.extend({
       this.parent.remove(this);
   },
   getId: function() {
-    return DOM.getAttribute(this.Getelement(),'id');
+    return DOM.getAttribute(this.getElement(),'id');
   },
   setId: function(id) {
     DOM.setAttribute(this.getElement(), 'id', id);
