@@ -2883,6 +2883,7 @@ var MenuPane = FlowPanel.extend({
     this.setElement(this.render());
     this.setPrimaryStyleName('gwt-MenuPane');
     this.menuMap = {};
+    this.defaultMenuItemName = null; 
   },
   clearActive: function(allBut) {
     $.each(this.children, function(i, ea)  {
@@ -2894,12 +2895,14 @@ var MenuPane = FlowPanel.extend({
     if(this.menuMap[id])
       return this.menuMap[id]; 
     else
-      return this.menuMap['_first'];
+      return this.defaultMenuItemName;
   },
+  // This function is used to add MenuItem elements to this MenuPane
   add: function(widget) {
     this._super(widget, this.getElement());
-    if(!this.menuMap['_first'])
-      this.menuMap['_first'] = widget;
+
+    if(this.defaultMenuItemName === null)
+      this.defaultMenuItemName = widget;
     this.menuMap[widget.id] = widget;
   },
   render: function() {
