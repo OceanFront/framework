@@ -2931,8 +2931,10 @@ var MenuItemBase = FocusWidget.extend({
     return this.subMenu;
   },
   onClick: function(evt) {
-    this.parent.clearActive();
-    this.setActive(true);
+    if(!this.active) {
+      this.parent.clearActive();
+      this.setActive(true);
+    }
     if(!evt && this.action) {
       // manually trigger, so trigger action for complete click cycle
       this.action();
