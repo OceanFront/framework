@@ -2713,10 +2713,10 @@ var PAPIBase = Class.extend({
   api_version: function(key) {
     switch(key) {
       case "texts_version": 
-        return config.API_VERSIONS.texts || config.API_VERSIONS._default;
+        return config.API_VERSIONS.texts || config.API_VERSIONS._default
         break;
       case "media_version": 
-        return config.API_VERSIONS.media || config.API_VERSIONS._default;
+        return config.API_VERSIONS.media || config.API_VERSIONS._default
         break;
       default: 
         return config.API_VERSIONS._default;
