@@ -162,7 +162,7 @@ var html = (function() {
     thunk();
     var diff = (new Date).getTime() - start;
     html.append_at(target_id, html.p({'class':'benchmark'},"Time taken: "+diff));
-  }
+  };
   return res;
 })();
 
@@ -171,18 +171,18 @@ var html = (function() {
 Array.prototype.remove = function(s) {
   for(var i=0;i<this.length;i++)
     if(s==this[i]) this.splice(i, 1);
-}
+};
 
 Array.prototype.index = function(obj) {
   for(var i=0;i<this.length;i++)
     if(this[i] == obj)
       return i;
   return null;
-}
+};
 
 Array.prototype.insert = function(i,obj) {
   this.splice(i,0,obj);
-}
+};
 
 next_hash_id = 0;
 
@@ -291,7 +291,7 @@ var DOM = {
                         return e;
                       },
   createInputCheck: function() { return this.createInputElement('checkbox'); },
-  createInputPassword: function() { return this.createInputElement('password') },
+  createInputPassword: function() { return this.createInputElement('password'); },
   createIFrame: function() { return this.createElement('iframe');},
 
   // Attributes
@@ -578,7 +578,7 @@ var DOM = {
                         },
 
   eventCancelBubble: function(evt, cancel) {
-                       evt.cancelBubble = cancel
+                       evt.cancelBubble = cancel;
                      },
 
   eventGetAltKey: function(evt) {
@@ -705,7 +705,7 @@ var DOM = {
                  },
   // Adapted from getPageSize() by quirksmode.com
   getPageHeight: function () {
-                   var windowHeight
+                   var windowHeight;
                      if (self.innerHeight) { // all except Explorer
                        windowHeight = self.innerHeight;
                      } else if (document.documentElement && document.documentElement.clientHeight) {
@@ -713,7 +713,7 @@ var DOM = {
                      } else if (document.body) { // other Explorers
                        windowHeight = document.body.clientHeight;
                      }
-                   return windowHeight
+                   return windowHeight;
                  }
 };
 
@@ -774,7 +774,7 @@ var Event = {
   FOCUSEVENTS:    0x01800, // ONFOCUS | ONBLUR,
   KEYEVENTS:      0x00380, // ONKEYDOWN | ONKEYPRESS | ONKEYUP
   MOUSEEVENTS:    0x0007C // ONMOUSEDOWN | ONMOUSEUP | ONMOUSEMOVE | ONMOUSEOVER | ONMOUSEOUT
-}
+};
 
 var NotificationCenter = Class.extend({
   init: function() {
@@ -806,7 +806,7 @@ var UIObject = Class.extend({
     this.__element = null;
   },
   getElement: function() {
-    return this.__element
+    return this.__element;
   },
   setElement: function(element) {
     this.__element = element;
@@ -895,7 +895,7 @@ var UIObject = Class.extend({
     return DOM.getAbsoluteTop(this.getElement());
   },
   setTitle: function(title) {
-    DOM.setAttribute(this.getElement(), "title", title)
+    DOM.setAttribute(this.getElement(), "title", title);
   },
   isVisible: function() {
     return this.getStyle('display') != 'none';
@@ -969,7 +969,7 @@ var Widget = UIObject.extend({
     if(this.isAttached())
       return;
     this.attached = true;
-    DOM.setEventListener(this.getElement(), this)
+    DOM.setEventListener(this.getElement(), this);
     this.doAttachChildren();
     this.onLoad();
   },
@@ -991,12 +991,12 @@ var Panel = Widget.extend({
   clear: function() {
     for (var i = 0; i < this.children.length; i++) {
       // Physical detach
-      var elem = this.children[i].getElement()
+      var elem = this.children[i].getElement();
       DOM.removeChild(DOM.getParent(elem), elem);
       // Logical detach
       this.children[i].setParent(null);
       delete this.children[i];
-    };
+    }
     this.children = [];
     return true;
   },
@@ -1481,7 +1481,7 @@ var CheckBox = ButtonBase.extend({
   setWordWrap: function(wrap) {
     var style = 'normal';
     if(!wrap)
-      style = 'nowrap'
+      style = 'nowrap';
     DOM.setStyleAttribute(this.getElement(), 'whiteSpace', style);
 
   }
@@ -1515,8 +1515,8 @@ var CellFormatter = Class.extend({
     this.setVerticalAlignment(row, column, vAlign);
   },
   setWidth: function(row, column, width) {
-    this.outer.prepareCell(row, column)
-    DOM.setStyleAttribute(this.getCellElement(this.outer.getBodyElement(), row, column), "width", width)
+    this.outer.prepareCell(row, column);
+    DOM.setStyleAttribute(this.getCellElement(this.outer.getBodyElement(), row, column), "width", width);
   },
   setHeight: function(row, column, height) {
     this.outer.prepareCell(row, column);
@@ -1534,7 +1534,7 @@ var CellFormatter = Class.extend({
   },
   setVerticalAlignment: function(row, column, align) {
     this.outer.prepareCell(row, column);
-    DOM.setStyleAttribute(this.getCellElement(this.outer.getBodyElement(), row, column), "verticalAlign", align)
+    DOM.setStyleAttribute(this.getCellElement(this.outer.getBodyElement(), row, column), "verticalAlign", align);
   },
   setVisible: function(row, column, visible) {
     var element = this.ensureElement(row, column);
@@ -1583,12 +1583,12 @@ var HTMLTable = Panel.extend({
     this.cellFormatter = new CellFormatter(this);
     this.rowFormatter = new RowFormatter(this);
     this.tableListeners = [];
-    this.widgetMap = {}
+    this.widgetMap = {};
     this.tableElement = DOM.createTable();
     this.bodyElement = DOM.createTBody();
     DOM.appendChild(this.tableElement, this.bodyElement);
     this.setElement(this.tableElement);
-    this.sinkEvents(Event.ONCLICK|Event.ONKEYPRESS|Event.ONFOCUS|Event.ONBLUR|Event.ONMOUSEOVER)
+    this.sinkEvents(Event.ONCLICK|Event.ONKEYPRESS|Event.ONFOCUS|Event.ONBLUR|Event.ONMOUSEOVER);
   },
   onBrowserEvent: function(event) {
   	var type = DOM.eventGetType(event);
@@ -1657,7 +1657,7 @@ var HTMLTable = Panel.extend({
     return this.bodyElement;
   },
   setBorderWidth: function(width) {
-    DOM.setAttribute(this.tableElement, "border", width)
+    DOM.setAttribute(this.tableElement, "border", width);
   },
   getCellFormatter: function() {
     return this.cellFormatter;
@@ -1666,10 +1666,10 @@ var HTMLTable = Panel.extend({
     return this.rowFormatter;
   },
   setCellPadding: function(padding) {
-    DOM.setAttribute(this.tableElement, "cellPadding", padding)
+    DOM.setAttribute(this.tableElement, "cellPadding", padding);
   },
   setCellSpacing: function(spacing) {
-    DOM.setAttribute(this.tableElement, "cellSpacing", spacing)
+    DOM.setAttribute(this.tableElement, "cellSpacing", spacing);
   },
   addTableListener: function(listener) {
     this.tableListeners.push(listener);
@@ -1757,7 +1757,7 @@ var Hidden = Widget.extend({
 var CMSObject = Widget.extend({
   init: function(cmsobj) {
     this._super();
-    if(!this.getElement()) {this.setElement(DOM.createDiv())};
+    if(!this.getElement()) {this.setElement(DOM.createDiv()); }
     this.clickListeners = [];
     this.obj = cmsobj;
   },
@@ -1822,7 +1822,7 @@ var Label = CMSObject.extend({
   setWordWrap: function(wrap) {
     var style = 'normal';
     if(!wrap)
-      style = 'nowrap'
+      style = 'nowrap';
     DOM.setStyleAttribute(this.getElement(), 'whiteSpace', style);
 
   },
@@ -2180,13 +2180,13 @@ var ScrollPanel = SimplePanel.extend({
     var type = event.type;
     if(type == 'scroll') {
       for(var i=0; i<this.scrollListeners.length; i++)
-	this.scrollListeners[i].onScroll(this, this.getHorizontalScrollPosition(), this.getScrollPosition())
+	this.scrollListeners[i].onScroll(this, this.getHorizontalScrollPosition(), this.getScrollPosition());
     }
   },
   setAlwaysShowScrollBars: function(alwaysShow) {
     var value = 'scroll';
     if(!alwaysShow)
-      value = 'auto'
+      value = 'auto';
     DOM.setStyleAttribute(this.getElement(), 'overflow', value);
   },
   setScrollPosition: function(position) {
@@ -2236,7 +2236,7 @@ var RootPanel = AbsolutePanel.extend({
     if(!element)
 		  element = this.getBodyElement();
   	else if(typeof(element) === 'string')
-  		element = DOM.getElementById(element)
+  		element = DOM.getElementById(element);
     this.setElement(element);
     this.onAttach();
   },
@@ -2275,7 +2275,7 @@ var ListBox = FocusWidget.extend({
   },
   getValue: function(index) {
     var option = DOM.getChild(this.getElement(), index);
-    return DOM.getAttribute(option, "value")
+    return DOM.getAttribute(option, "value");
   },
   getSelectedValue: function() {
     var index = this.getSelectedIndex();
@@ -2623,7 +2623,7 @@ var DeckPanel = ComplexPanel.extend({
   },
   checkIndex: function(index) {
     if((index < 0) || (index >= this.getWidgetCount()))
-      console.error('Deckpanel#checkIndex bad index')
+      console.error('Deckpanel#checkIndex bad index');
   }
 });
 
@@ -2719,7 +2719,7 @@ var PAPIBase = Class.extend({
         return config.API_VERSIONS.media || config.API_VERSIONS._default
         break;
       default: 
-        return config.API_VERSIONS._default
+        return config.API_VERSIONS._default;
     }
   },
   apiCall: function(link, data, method, success_callback, error_callback) {
