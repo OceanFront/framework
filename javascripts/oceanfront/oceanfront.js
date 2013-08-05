@@ -2882,8 +2882,9 @@ var MenuPane = FlowPanel.extend({
     this._super();
     this.setElement(this.render());
     this.setPrimaryStyleName('gwt-MenuPane');
-    this.menuMap = {};
-    this.defaultMenuItemName = null; 
+    this.menuItems = {};
+    this.defaultMenuItemName = null;
+    this.currentActiveItem = null;
   },
   clearActive: function(allBut) {
     $.each(this.children, function(i, ea)  {
@@ -2891,19 +2892,35 @@ var MenuPane = FlowPanel.extend({
         ea.setActive(false);
     }); 
   },
-  getItemById: function(id) {
-    if(this.menuMap[id])
-      return this.menuMap[id]; 
+  setActive: function(id) {
+    var item = this.getMenuItemById(id);
+    if(item && item.onClick) {
+      item.onClick();
+      this.currentActiveItem = item;
+    } else {
+      if(console) console.warn("Could not find any MenuItem to activate!");
+    }
+  },
+  setActiveSubMenu: function(id) {
+    if(this.currentActiveItem && this.currentActiveItem.getSubMenu) {
+      var submenu = this.currentActiveItem.getSubMenu();
+      submenu.setActive(id);
+    } else {
+      if(console) console.warn("No current active Item, couldn't set any active submenu item");
+    }
+  },
+  getMenuItemById: function(id) {
+    if(this.menuItems[id])
+      return this.menuItems[id]; 
     else
       return this.defaultMenuItemName;
   },
-  // This function is used to add MenuItem elements to this MenuPane
   add: function(widget) {
     this._super(widget, this.getElement());
-
+    // Set first added MenuItem as default
     if(this.defaultMenuItemName === null)
       this.defaultMenuItemName = widget;
-    this.menuMap[widget.id] = widget;
+    this.menuItems[widget.id] = widget;
   },
   render: function() {
     return html.ul({});
@@ -2918,17 +2935,10 @@ var MenuItemBase = FocusWidget.extend({
     this.action = action;
     this._super(this.render());
     this.active = false;
-    this.subMenu = null;
     var self = this;
     this.addClickListener(function(evt) { self.onClick(evt); });
     if (action)
       this.addClickListener(action);
-  },
-  setSubMenu: function(menu) {
-    this.subMenu = menu;
-  },
-  getSubMenu: function() {
-    return this.subMenu;
   },
   onClick: function(evt) {
     if(!this.active) {
@@ -2957,8 +2967,15 @@ var MenuItem = MenuItemBase.extend({
   init: function(stylename, name, flowCommand, id, fn) {
     // flowCommand type: [[state1, state2, ..], obj];
     this._super(name, fn, flowCommand, id);
+    this.subMenu = null;
     this.setStyleName(stylename);
     this.setStyleName('btn clickable');
+  },
+  setSubMenu: function(menu) {
+    this.subMenu = menu;
+  },
+  getSubMenu: function() {
+    return this.subMenu;
   },
   render: function() {
     return html.li({'id':"menu-item-"+this.id.toLowerCase()},
