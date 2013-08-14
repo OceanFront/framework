@@ -256,8 +256,6 @@ var DOM = {
   },
 
   // Element creation
-  // We want all the create methods to be explicit
-  // The we do not expose a string based aspi like DOM.create('div')
   createElement:   function(tag) { return document.createElement(tag); },
   createText:      function(text) { return document.createTextNode(text); },
   createTextArea:  function() { return this.createElement('textarea'); },
