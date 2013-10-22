@@ -143,3 +143,31 @@ table {
 .gwt-Grid {
 	margin: auto;
 }
+
+.widget-loader {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: rgba(0,0,0,0.75);
+	z-index: 100;
+}
+
+.widget-loader-spinner {
+	position: absolute;
+	top: 0;
+	left: 0;
+	/*
+	position: relative;
+	margin: 130% auto auto auto;
+	*/
+	width: 42px;
+	height: 42px;
+	border: none;
+
+	-webkit-animation-name: spinner;
+	-webkit-animation-duration: 1.0s;
+	-webkit-animation-timing-function: linear;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-play-state: paused;
+}
