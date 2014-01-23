@@ -2986,6 +2986,7 @@ var FormGrid = Grid.extend({
     this._super(rows, cols);
     // Wrap the grid with a physical Form node
     this.form = html.form({});
+    this.currentBlurItem = null;
     DOM.appendChild(this.form, this.tableElement);
     this.setElement(this.form);
 
@@ -3024,12 +3025,10 @@ var FormGrid = Grid.extend({
     }
   },
   clearAll: function() {
-    // Clear both errors, focus and values
-    var inputs = $('input', this.getElement());
-    for(var i=0; i<inputs.length; i++) {
-      $(inputs[i]).val("");
-    }
+    // Clear values, errors and focus
+    var slask = $('input', this.getElement()).val("");
     this.clearErrors();
+    this.currentBlurItem = null;
   },
   clearErrors: function() {
     this.bubble.hide();
@@ -3049,7 +3048,7 @@ var FormGrid = Grid.extend({
   validateForm: function() {
     // Get all type of Validation objects and assemble a list (array) of the ones with error
     var errorInputs = [];
-
+    if(console) console.log("Validate form");
     for(var i=0; i<this.validationObjects.length; i++) {
       if(!this.validationObjects[i].validate()) {
         errorInputs.push(this.validationObjects[i]);
@@ -3108,8 +3107,8 @@ var FormGrid = Grid.extend({
             form.currentBlurItem = target.widget;
           }
         } else {
-          // Here we dont have previous form.currentBlurItem, meaning the form is fresh and usually
-          // one element got autofocus firing focus event upon show of form.
+          // Here we dont have previous form.currentBlurItem, meaning the form is fresh or reset and 
+          // one element got autofocus, firing focus event upon show of form.
           form.currentBlurItem = target.widget;
         }
         
@@ -3119,7 +3118,7 @@ var FormGrid = Grid.extend({
           self.onSaveFn(form, event);
         } else {
           // Not valid form
-          console.log("Not valid form");
+          if(console) console.log("Not valid form");
         }
       } else if(event.type === 'click' && $(target).attr('name') === 'cancel') {
         // No validation since user want to Cancel
