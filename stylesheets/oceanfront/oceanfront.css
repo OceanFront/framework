@@ -140,8 +140,12 @@ table {
 	text-shadow: 0px 1px #fff;
 }
 
-.gwt-Grid {
+.of-Grid {
 	margin: auto;
+}
+
+.of-FormGrid button {
+	float: right;
 }
 
 .widget-loader {

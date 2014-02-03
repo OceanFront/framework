@@ -1121,7 +1121,7 @@ var SimplePanel = Panel.extend({
       element = DOM.createDiv();
     }
     this.setElement(element);
-    this.setStyleName('gwt-SimplePanel');
+    this.setStyleName('of-SimplePanel');
   },
   add: function(widget) {
     if(this.getWidget()){
@@ -1407,7 +1407,7 @@ var AbsolutePanel = ComplexPanel.extend({
     this.setElement(DOM.createDiv());
     DOM.setStyleAttribute(this.getElement(), 'position', 'relative');
     DOM.setStyleAttribute(this.getElement(), 'overflow', 'hidden');
-    this.setStyleName('gwt-AbsolutePanel');
+    this.setStyleName('of-AbsolutePanel');
   },
   add: function(widget, left, top) {
     this._super(widget, this.getElement());
@@ -1991,7 +1991,7 @@ var FlowPanel = ComplexPanel.extend({
   init: function() {
     this._super();
     this.setElement(DOM.createDiv());
-    //this.setStyleName('gwt-FlowPanel');
+    //this.setStyleName('of-FlowPanel');
   },
   add: function(widget) {
     this._super(widget, this.getElement());
@@ -2247,7 +2247,7 @@ var RadioButton = CheckBox.extend({
   init: function(group, label, asHTML) {
     this._super();
     this.initElement(DOM.createInputRadio(group));
-    this.setStyleName('gwt-RadioButton');
+    this.setStyleName('of-RadioButton');
     if(label != null) {
       if (asHTML == true)
       	this.setHTML(label);
@@ -2430,7 +2430,7 @@ var Grid = HTMLTable.extend({
     //this.numCols = 0
     //this.numRows = 0
     this.create(rows,cols);
-    this.setStyleName('gwt-Grid');
+    this.setStyleName('of-Grid');
   },
   createCell: function() {
     var td = this._super();
@@ -2549,7 +2549,7 @@ var DeckPanel = ComplexPanel.extend({
     this._super();
     this.visibleWidget = null;
     this.setElement(DOM.createDiv());
-    this.setStyleName('gwt-DeckPanel');
+    this.setStyleName('of-DeckPanel');
   },
   add: function(widget) {
     this.insert(widget, this.getWidgetCount());
@@ -2631,7 +2631,7 @@ var Button = ButtonBase.extend({
     this.setHTML(html);
     if(listener)
       this.addClickListener(listener);
-    this.setStyleName('gwt-Button');
+    this.setStyleName('of-Button');
   }
 });
 
@@ -2879,7 +2879,7 @@ var MenuPane = FlowPanel.extend({
   init: function() {
     this._super();
     this.setElement(this.render());
-    this.setPrimaryStyleName('gwt-MenuPane');
+    this.setPrimaryStyleName('of-MenuPane');
     this.menuItems = {};
     this.defaultMenuItemName = null;
     this.currentActiveItem = null;
@@ -3002,6 +3002,7 @@ var FormGrid = Grid.extend({
     this.validationObjects = [];
 
     this.render();
+    this.setStyleName("of-FormGrid");
   },
   addOnSave: function(fn) {
     // Add onSave function to be executed whenever the whole form is valid
