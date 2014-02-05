@@ -2722,9 +2722,6 @@ var PAPIBase = Class.extend({
   },
   apiCall: function(link, data, method, success_callback, error_callback) {
     var self = this;
-    
-    // Quick fix until SSL certs are on place to substitute the wrong domain
-    link = link.replace("https", "http").replace("api.", "lb.");
 
     // Use custom token (user login) first, otherwise clients initial token
     var token = "";
