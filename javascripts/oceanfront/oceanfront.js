@@ -282,12 +282,12 @@ var DOM = {
     return element;
   },
   createInputElement: function(type) {
-                        var e = this.createElement('input');
-                        if(!$.browser.msie) {
-                          e.type = type;
-                        }
-                        return e;
-                      },
+    var e = this.createElement('input');
+    if(!$.browser.msie) {
+      e.type = type;
+    }
+    return e;
+  },
   createInputCheck: function() { return this.createInputElement('checkbox'); },
   createInputPassword: function() { return this.createInputElement('password'); },
   createIFrame: function() { return this.createElement('iframe');},
@@ -297,441 +297,398 @@ var DOM = {
     element[attribute] = value;
   },
   getAttribute: function(element, attribute) {
-                  return element[attribute];
-                },
+    return element[attribute];
+  },
   // Style attributes
   setStyleAttribute: function(element, attribute, value) {
-                       this.setAttribute(element.style,attribute,value);
-                     },
+    this.setAttribute(element.style,attribute,value);
+  },
   getStyleAttribute: function(element, attribute) {
-                       return this.getAttribute(element.style,attribute);
-                     },
+    return this.getAttribute(element.style,attribute);
+  },
   // Tree operations
   removeChild: function(parent, child) {
-                 parent.removeChild(child);
-               },
+    parent.removeChild(child);
+  },
   insertChild: function(parent, element, index) {
-                 var count = 0, child = parent.firstChild, before = null;
-                 while (child) {
-                   if (child.nodeType == 1) {
-                     if (count == index) {
-                       before = child;
-                       break;
-                     }
-                     ++count;
-                   }
-                   child = child.nextSibling;
-                 }
-                 parent.insertBefore(element, before);
-               },
+  var count = 0, child = parent.firstChild, before = null;
+    while (child) {
+      if (child.nodeType == 1) {
+        if (count == index) {
+          before = child;
+          break;
+        }
+        ++count;
+      }
+      child = child.nextSibling;
+    }
+    parent.insertBefore(element, before);
+  },
   appendChild: function(parent, element) {
-                 if(parent == null || element == null) {
-                   if(console)
-                     console.error("DOM.appendChild called with null value");
-                 }
-                 else {
-                   parent.appendChild(element);
-                 }
-               },
+    if(parent == null || element == null) {
+      if(console)
+        console.error("DOM.appendChild called with null value");
+    } else {
+      parent.appendChild(element);
+    }
+  },
   getChild: function(element,index) {
-              var count = 0, child = element.firstChild;
-              while (child) {
-                var next = child.nextSibling;
-                if (child.nodeType == 1) {
-                  if (index == count)
-                    return child;
-                  ++count;
-                }
-                child = next;
-              }
-              return null;
-            },
+    var count = 0, child = element.firstChild;
+    while (child) {
+      var next = child.nextSibling;
+      if (child.nodeType == 1) {
+        if (index == count)
+          return child;
+        ++count;
+      }
+      child = next;
+    }
+    return null;
+  },
   getNextSibling: function(element) {
-                    var sib = element.nextSibling;
-                    while (sib && sib.nodeType != 1)
-                      sib = sib.nextSibling;
-                    return sib ? sib : null;
-                  },
+    var sib = element.nextSibling;
+    while (sib && sib.nodeType != 1) {
+      sib = sib.nextSibling;
+    }
+    return sib ? sib : null;
+  },
   getFirstChild: function(element) {
-                   var child = element.firstChild;
-                   while (child && child.nodeType != 1)
-                     child = child.nextSibling;
-                   return child ? child : null;
-                 },
+    var child = element.firstChild;
+    while (child && child.nodeType != 1) {
+      child = child.nextSibling;
+    }
+    return child ? child : null;
+  },
   getChildCount: function(element) {
-                   var count = 0, child = element.firstChild;
-                   while (child) {
-                     if (child.nodeType == 1)
-                       ++count;
-                     child = child.nextSibling;
-                   }
-                   return count;
-                 },
+    var count = 0, child = element.firstChild;
+    while (child) {
+      if (child.nodeType == 1)
+        ++count;
+      child = child.nextSibling;
+    }
+    return count;
+  },
   getElementById: function(id) {
-                    var elem = document.getElementById(id);
-                    return elem ? elem : null;
-                  },
+    var elem = document.getElementById(id);
+    return elem ? elem : null;
+  },
   getParent: function(element) {
-               var parent = element.parentNode;
-               if(parent == null) {
-                 return null;
-               }
-               if (parent.nodeType != 1)
-                 parent = null;
-               return parent ? parent : null;
-             },
+    var parent = element.parentNode;
+    if(parent == null) {
+      return null;
+    }
+    if (parent.nodeType != 1)
+      parent = null;
+    return parent ? parent : null;
+  },
   insertListItem: function(select, item, value, index) {
-                    var option = this.createElement("option");
-                    this.setInnerText(option, item);
-                    if(value != null)
-                      this.setAttribute(option, "value", value);
-                    if (index == -1)
-                      this.appendChild(select, option);
-                    else
-                      this.insertChild(select, option, index);
-                  },
+    var option = this.createElement("option");
+    this.setInnerText(option, item);
+    if(value != null)
+      this.setAttribute(option, "value", value);
+    if (index == -1)
+      this.appendChild(select, option);
+    else
+      this.insertChild(select, option, index);
+  },
   // Events
   eventPreventDefault: function(event) {
-                         if(event.preventDefault)
-                           event.preventDefault();
-                       },
-  addEventPreview: function(preview) {
-                     // TODO
-                   },
-  removeEventPreview: function(preview) {
-                        // TODO
-                      },
+    if(event.preventDefault)
+      event.preventDefault();
+  },
   sinkEvents: function(element, bits) {
-                element.__eventBits = bits;
+    element.__eventBits = bits;
 
-                element.onclick       = (bits & 0x00001) ? gdispatchEvent : null;
-                element.ondblclick    = (bits & 0x00002) ? gdispatchEvent : null;
-                element.onmousedown   = (bits & 0x00004) ? gdispatchEvent : null;
-                element.onmouseup     = (bits & 0x00008) ? gdispatchEvent : null;
-                element.onmouseover   = (bits & 0x00010) ? gdispatchEvent : null;
-                element.onmouseout    = (bits & 0x00020) ? gdispatchEvent : null;
-                element.onmousemove   = (bits & 0x00040) ? gdispatchEvent : null;
-                element.onkeydown     = (bits & 0x00080) ? gdispatchEvent : null;
-                element.onkeypress    = (bits & 0x00100) ? gdispatchEvent : null;
-                element.onkeyup       = (bits & 0x00200) ? gdispatchEvent : null;
-                element.onchange      = (bits & 0x00400) ? gdispatchEvent : null;
-                element.onfocus       = (bits & 0x00800) ? gdispatchEvent : null;
-                element.onblur        = (bits & 0x01000) ? gdispatchEvent : null;
-                element.onlosecapture = (bits & 0x02000) ? gdispatchEvent : null;
-                element.onscroll      = (bits & 0x04000) ? gdispatchEvent : null;
-                element.onload        = (bits & 0x08000) ? gdispatchEvent : null;
-                element.onloadstart   = (bits & 0x08001) ? gdispatchEvent : null;
-                element.onloadend     = (bits & 0x08001) ? gdispatchEvent : null;
-                element.onerror       = (bits & 0x10000) ? gdispatchEvent : null;
-                element.oncontextmenu = (bits & 0x20000) ? gdispatchEvent : null;
-                element.onabort       = (bits & 0x11000) ? gdispatchEvent : null;
-                element.onprogress    = (bits & 0x11001) ? gdispatchEvent : null;
-                element.ondragstart   = (bits & 0x40000) ? gdispatchEvent : null;
-                element.ondrag        = (bits & 0x40001) ? gdispatchEvent : null;
-                element.ondragenter   = (bits & 0x40011) ? gdispatchEvent : null;
-                element.ondragleave   = (bits & 0x40111) ? gdispatchEvent : null;
-                element.ondragover    = (bits & 0x41111) ? gdispatchEvent : null;
-                element.ondrop        = (bits & 0x40002) ? gdispatchEvent : null;
-                element.ondragend     = (bits & 0x40012) ? gdispatchEvent : null;
-                element.onsearch      = (bits & 0x50000) ? gdispatchEvent : null;
-                element.onsubmit      = (bits & 0x60000) ? gdispatchEvent : null;
-              },
+    element.onclick       = (bits & Event.ONCLICK) ? gdispatchEvent : null;
+    element.ondblclick    = (bits & Event.ONDBLCLICK) ? gdispatchEvent : null;
+    element.onmousedown   = (bits & Event.ONMOUSEDOWN) ? gdispatchEvent : null;
+    element.onmouseup     = (bits & Event.ONMOUSEUP) ? gdispatchEvent : null;
+    element.onmouseover   = (bits & Event.ONMOUSEOVER) ? gdispatchEvent : null;
+    element.onmouseout    = (bits & Event.ONMOUSEOUT) ? gdispatchEvent : null;
+    element.onmousemove   = (bits & Event.ONMOUSEMOVE) ? gdispatchEvent : null;
+    element.onkeydown     = (bits & Event.ONKEYDOWN) ? gdispatchEvent : null;
+    element.onkeypress    = (bits & Event.ONKEYPRESS) ? gdispatchEvent : null;
+    element.onkeyup       = (bits & Event.ONKEYUP) ? gdispatchEvent : null;
+    element.onchange      = (bits & Event.ONCHANGE) ? gdispatchEvent : null;
+    element.onfocus       = (bits & Event.ONFOCUS) ? gdispatchEvent : null;
+    element.onblur        = (bits & Event.ONBLUR) ? gdispatchEvent : null;
+    element.onlosecapture = (bits & Event.ONLOSECAPTURE) ? gdispatchEvent : null;
+    element.onscroll      = (bits & Event.ONSCROLL) ? gdispatchEvent : null;
+    element.onload        = (bits & Event.ONLOAD) ? gdispatchEvent : null;
+    element.onloadstart   = (bits & Event.ONLOADSTART) ? gdispatchEvent : null;
+    element.onloadend     = (bits & Event.ONLOADEND) ? gdispatchEvent : null;
+    element.onerror       = (bits & Event.ONERROR) ? gdispatchEvent : null;
+    element.oncontextmenu = (bits & Event.ONCONTEXTMENU) ? gdispatchEvent : null;
+    element.onabort       = (bits & Event.ONABORT) ? gdispatchEvent : null;
+    element.onprogress    = (bits & Event.ONPROGRESS) ? gdispatchEvent : null;
+    element.ondragstart   = (bits & Event.ONDRAGSTART) ? gdispatchEvent : null;
+    element.ondrag        = (bits & Event.ONDRAG) ? gdispatchEvent : null;
+    element.ondragenter   = (bits & Event.ONDRAGENTER) ? gdispatchEvent : null;
+    element.ondragleave   = (bits & Event.ONDRAGLEAVE) ? gdispatchEvent : null;
+    element.ondragover    = (bits & Event.ONDRAGOVER) ? gdispatchEvent : null;
+    element.ondrop        = (bits & Event.ONDROP) ? gdispatchEvent : null;
+    element.ondragend     = (bits & Event.ONDRAGEND) ? gdispatchEvent : null;
+    element.onsearch      = (bits & Event.ONSEARCH) ? gdispatchEvent : null;
+    element.onsubmit      = (bits & Event.ONSUBMIT) ? gdispatchEvent : null;
+  },
   setEventListener: function(element, listener) {
-                      element.__listener = listener;
-                    },
+    element.__listener = listener;
+  },
   eventGetType: function(event) {
-                  return event.type;
-                },
+    return event.type;
+  },
   setIntStyleAttribute: function(element, attribute, value) {
-                          element[attribute] = value;
-                        },
+    element[attribute] = value;
+  },
   setInnerHTML: function(element, html) {
-                  element.innerHTML = html;
-                },
+    element.innerHTML = html;
+  },
   getInnerHTML: function(element) {
-                  var ret = element.innerHTML;
-                  return (ret == null) ? null : ret;
-                },
+    var ret = element.innerHTML;
+    return (ret == null) ? null : ret;
+  },
   setInnerText: function(element, text) {
-                  if(element.firstChild) {
-                    element.removeChild(element.firstChild);
-                  }
-                  element.appendChild(this.createText(text));
-                },
+    if(element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
+    element.appendChild(this.createText(text));
+  },
   getInnerText: function(element) {
-                  var text = '', child = element.firstChild;
-                  while (child) {
-                    if (child.nodeType == 1){
-                      // 1 == Element node
-                      text += DOM.getInnerText(child);
-                    } else if (child.nodeValue) {
-                      text += child.nodeValue;
-                    }
-                    child = child.nextSibling;
-                  }
-                  return text;
-                },
+    var text = '', child = element.firstChild;
+    while (child) {
+      if (child.nodeType == 1){
+        // 1 == Element node
+        text += DOM.getInnerText(child);
+      } else if (child.nodeValue) {
+        text += child.nodeValue;
+      }
+      child = child.nextSibling;
+    }
+    return text;
+  },
   eventGetClientX: function(event) {
-                     return event.clientX;
-                   },
+    return event.clientX;
+  },
   eventGetClientY: function(event) {
-                     return event.clientY;
-                   },
+    return event.clientY;
+  },
   getAbsoluteLeft: function(element) {
-                     var left = 0;
-                     while (element) {
-                       left += element.offsetLeft - element.scrollLeft;
-                       element = element.offsetParent;
-                     }
-                     return left + document.body.scrollLeft;
-                   },
+    var left = 0;
+    while (element) {
+      left += element.offsetLeft - element.scrollLeft;
+      element = element.offsetParent;
+    }
+    return left + document.body.scrollLeft;
+  },
   getAbsoluteTop: function(element) {
-                    var top = 0;
-                    while (element) {
-
-                      top += element.offsetTop - element.scrollTop;
-                      element = element.offsetParent;
-                    }
-                    return top + document.body.scrollTop;
-                  },
-
+    var top = 0;
+    while (element) {
+      top += element.offsetTop - element.scrollTop;
+      element = element.offsetParent;
+    }
+    return top + document.body.scrollTop;
+  },
   compare: function(element1, element2) {
              return element1 == element2;
            },
-
   /* style names */
-
   setStyleName: function(element, style) {
-                  this.setAttribute(element, 'className', style);
-                },
-
+    this.setAttribute(element, 'className', style);
+  },
   getStyleName: function(element) {
-                  return this.getAttribute(element, 'className');
-                },
-
+    return this.getAttribute(element, 'className');
+  },
   removeStyleName: function(element, style) {
-                     var names = this.getStyleNames(element);
-                     names.remove(style);
-                     this.setStyleName(element, names.join(' '));
-                   },
-
+    var names = this.getStyleNames(element);
+    names.remove(style);
+    this.setStyleName(element, names.join(' '));
+  },
   addStyleName: function(element, style){
-                  var curr_style = this.getStyleName(element);
-                  var names = this.getStyleNames(element);
-                  if(names.index(style) == null) {
-                    if(curr_style.length == 0 || names.length == 0)
-                      this.setStyleName(element, style);
-                    else
-                      this.setStyleName(element, curr_style + " " + style);
-                  }
-                },
-
+    var curr_style = this.getStyleName(element);
+    var names = this.getStyleNames(element);
+    if(names.index(style) == null) {
+      if(curr_style.length == 0 || names.length == 0)
+        this.setStyleName(element, style);
+      else
+        this.setStyleName(element, curr_style + " " + style);
+    }
+  },
   getStyleNames: function(element) {
-                   return this.getStyleName(element).split(' ');
-                 },
-
+    return this.getStyleName(element).split(' ');
+  },
   // FOCUS
-
   blur: function(elem) {
-          elem.blur();
-        },
-
+    elem.blur();
+  },
   createFocusable: function() {
-                     var e = $doc.createElement("DIV");
-                     e.tabIndex = 0;
-                     return e;
-                   },
-
+    var e = $doc.createElement("DIV");
+    e.tabIndex = 0;
+    return e;
+  },
   focus: function(element) {
-           element.focus();
-         },
-
+    element.focus();
+  },
   getTabIndex: function(element) {
-                 return element.tabIndex;
-               },
-
+    return element.tabIndex;
+  },
   setAccessKey: function(element, key) {
-                  element.accessKey = key;
-                },
-
+    element.accessKey = key;
+  },
   setTabIndex: function(element, index) {
-                 element.tabIndex = index;
-               },
-
+    element.tabIndex = index;
+  },
   getKeyboardModifiers: function(event) {
-                          var shift = 0;
-                          var ctrl = 0;
-                          var alt = 0;
-
-                          if (DOM.eventGetShiftKey(event))
-                            shift = DOM.MODIFIER_SHIFT;
-
-                          if(DOM.eventGetCtrlKey(event))
-                            ctrl = DOM.MODIFIER_CTRL;
-
-                          if(DOM.eventGetAltKey(event))
-                            alt = DOM.MODIFIER_ALT;
-
-                          return shift | ctrl | alt;
-                        },
-
+    var shift = 0;
+    var ctrl = 0;
+    var alt = 0;
+    if (DOM.eventGetShiftKey(event))
+      shift = DOM.MODIFIER_SHIFT;
+    if(DOM.eventGetCtrlKey(event))
+      ctrl = DOM.MODIFIER_CTRL;
+    if(DOM.eventGetAltKey(event))
+      alt = DOM.MODIFIER_ALT;
+    return shift | ctrl | alt;
+  },
   eventCancelBubble: function(evt, cancel) {
-                       evt.cancelBubble = cancel;
-                     },
-
+    evt.cancelBubble = cancel;
+  },
   eventGetAltKey: function(evt) {
-                    return evt.altKey;
-                  },
-
+    return evt.altKey;
+  },
   eventGetButton: function(evt) {
-                    return evt.button;
-                  },
-
+    return evt.button;
+  },
   eventGetClientX: function(evt) {
-                     return evt.clientX;
-                   },
-
+    return evt.clientX;
+  },
   eventGetClientY: function(evt) {
                      return evt.clientY;
                    },
-
   eventGetCtrlKey: function(evt) {
-                     return evt.ctrlKey;
-                   },
-
+    return evt.ctrlKey;
+  },
   eventGetFromElement: function(evt) {
-                         return evt.fromElement ? evt.fromElement : null;
-                       },
-
+    return evt.fromElement ? evt.fromElement : null;
+  },
   eventGetKeyCode: function(evt) {
-                     return evt.which ? evt.which : evt.keyCode;
-                   },
-
+    return evt.which ? evt.which : evt.keyCode;
+  },
   eventGetRepeat: function(evt) {
-                    return evt.repeat;
-                  },
-
+    return evt.repeat;
+  },
   eventGetScreenX: function(evt) {
-                     return evt.screenX;
-                   },
-
+    return evt.screenX;
+  },
   eventGetScreenY: function(evt) {
-                     return evt.screenY;
-                   },
-
+    return evt.screenY;
+  },
   eventGetShiftKey: function(evt) {
-                      return evt.shiftKey;
-                    },
-
+    return evt.shiftKey;
+  },
   eventGetTarget: function(evt) {
-                    return evt.target ? evt.target : evt.srcElement;
-                  },
-
+    return evt.target ? evt.target : evt.srcElement;
+  },
   eventGetToElement: function(evt) {
-                       return evt.relatedTarget ? evt.relatedTarget : null;
-                     },
-
+    return evt.relatedTarget ? evt.relatedTarget : null;
+  },
   eventGetType: function(event) {
-                  return event.type;
-                },
+    return event.type;
+  },
   eventGetTypeInt: function(event) {
-                     switch (event.type) {
-                       case "blur": return Event.ONBLUR;
-                       case "change": return Event.ONCHANGE;
-                       case "click": return Event.ONCLICK;
-                       case "dblclick": return Event.ONDBLCLICK;
-                       case "focus": return Event.ONFOCUS;
-                       case "keydown": return Event.ONKEYDOWN;
-                       case "keypress": return Event.ONKEYPRESS;
-                       case "keyup": return Event.ONKEYUP;
-                       case "load": return Event.ONLOAD;
-                       case "losecapture": return Event.ONLOSECAPTURE;
-                       case "mousedown": return Event.ONMOUSEDOWN;
-                       case "mousemove": return Event.ONMOUSEMOVE;
-                       case "mouseout": return Event.ONMOUSEOUT;
-                       case "mouseover": return Event.ONMOUSEUP;
-                       case "mouseup": return Event.ONMOUSEUP;
-                       case "scroll": return Event.ONSCROLL;
-                       case "error": return Event.ONERROR;
-                       case "contextmenu": return Event.ONCONTEXTMENU;
-                       case "abort": return Event.ONABORT;
-                       case "progress": return Event.ONPROGRESS;
-                       case "loadend": return Event.ONLOADEND;
-                       case "loadstart": return Event.ONLOADSTART;
-                       case "dragstart": return Event.ONDRAGSTART;
-                       case "drag": return Event.ONDRAG;
-                       case "dragenter": return Event.ONDRAGENTER;
-                       case "dragleave": return Event.ONDRAGLEAVE;
-                       case "dragover": return Event.ONDRAGOVER;
-                       case "drop": return Event.ONDROP;
-                       case "dragend": return Event.ONDRAGEND;
-                       case "search": return Event.ONSEARCH;
-                       case "submit": return Event.ONSUBMIT;
-                     }
-                   },
+    switch (event.type) {
+      case "blur": return Event.ONBLUR;
+      case "change": return Event.ONCHANGE;
+      case "click": return Event.ONCLICK;
+      case "dblclick": return Event.ONDBLCLICK;
+      case "focus": return Event.ONFOCUS;
+      case "keydown": return Event.ONKEYDOWN;
+      case "keypress": return Event.ONKEYPRESS;
+      case "keyup": return Event.ONKEYUP;
+      case "load": return Event.ONLOAD;
+      case "losecapture": return Event.ONLOSECAPTURE;
+      case "mousedown": return Event.ONMOUSEDOWN;
+      case "mousemove": return Event.ONMOUSEMOVE;
+      case "mouseout": return Event.ONMOUSEOUT;
+      case "mouseover": return Event.ONMOUSEUP;
+      case "mouseup": return Event.ONMOUSEUP;
+      case "scroll": return Event.ONSCROLL;
+      case "error": return Event.ONERROR;
+      case "contextmenu": return Event.ONCONTEXTMENU;
+      case "abort": return Event.ONABORT;
+      case "progress": return Event.ONPROGRESS;
+      case "loadend": return Event.ONLOADEND;
+      case "loadstart": return Event.ONLOADSTART;
+      case "dragstart": return Event.ONDRAGSTART;
+      case "drag": return Event.ONDRAG;
+      case "dragenter": return Event.ONDRAGENTER;
+      case "dragleave": return Event.ONDRAGLEAVE;
+      case "dragover": return Event.ONDRAGOVER;
+      case "drop": return Event.ONDROP;
+      case "dragend": return Event.ONDRAGEND;
+      case "search": return Event.ONSEARCH;
+      case "submit": return Event.ONSUBMIT;
+    }
+  },
   eventGetTypeString: function(event) {
-                        return DOM.eventGetType(event);
-                      },
+    return DOM.eventGetType(event);
+  },
   eventSetKeyCode: function(evt, key) {
-                     evt.keyCode = key;
-                   },
+    evt.keyCode = key;
+  },
   eventToString: function(evt) {
-                   return evt.toString();
-                 },
+    return evt.toString();
+  },
   iframeGetSrc: function(elem) {
-                  return elem.src;
-                },
+    return elem.src;
+  },
   getPageScroll: function() {
-                  // getPageScroll() by quirksmode.com
-                   var xScroll, yScroll;
-                   if (self.pageYOffset) {
-                     yScroll = self.pageYOffset;
-                     xScroll = self.pageXOffset;
-                   } else if (document.documentElement && document.documentElement.scrollTop) {
-                     yScroll = document.documentElement.scrollTop;
-                     xScroll = document.documentElement.scrollLeft;
-                   } else if (document.body) {// all other Explorers
-                     yScroll = document.body.scrollTop;
-                     xScroll = document.body.scrollLeft;
-                   }
-                   return [xScroll,yScroll];
-                 },
+    // getPageScroll() by quirksmode.com
+    var xScroll, yScroll;
+    if (self.pageYOffset) {
+      yScroll = self.pageYOffset;
+      xScroll = self.pageXOffset;
+    } else if (document.documentElement && document.documentElement.scrollTop) {
+      yScroll = document.documentElement.scrollTop;
+      xScroll = document.documentElement.scrollLeft;
+    } else if (document.body) {// all other Explorers
+      yScroll = document.body.scrollTop;
+      xScroll = document.body.scrollLeft;
+    }
+    return [xScroll,yScroll];
+  },
   getPageHeight: function () {
-                  // Adapted from getPageSize() by quirksmode.com
-                   var windowHeight;
-                     if (self.innerHeight) { // all except Explorer
-                       windowHeight = self.innerHeight;
-                     } else if (document.documentElement && document.documentElement.clientHeight) {
-                       windowHeight = document.documentElement.clientHeight;
-                     } else if (document.body) { // other Explorers
-                       windowHeight = document.body.clientHeight;
-                     }
-                   return windowHeight;
-                 }
+  // Adapted from getPageSize() by quirksmode.com
+    var windowHeight;
+    if (self.innerHeight) { // all except Explorer
+      windowHeight = self.innerHeight;
+    } else if (document.documentElement && document.documentElement.clientHeight) {
+      windowHeight = document.documentElement.clientHeight;
+    } else if (document.body) { // other Explorers
+      windowHeight = document.body.clientHeight;
+    }
+    return windowHeight;
+  }
 };
 
 var Window = {
-
   getClientHeight: function() {
-                     if (window.innerHeight)
-                       return window.innerHeight;
-                     else
-                       return document.body.clientHeight;
-                   },
-
+    if (window.innerHeight)
+      return window.innerHeight;
+    else
+      return document.body.clientHeight;
+  },
   getClientWidth: function() {
-                    if (window.innerWidth)
-                      return window.innerWidth;
-                    else
-                      return document.body.clientWidth;
-                  }
+    if (window.innerWidth)
+      return window.innerWidth;
+    else
+      return document.body.clientWidth;
+  }
 };
 
 var Event = {
   BUTTON_LEFT:    1,
   BUTTON_MIDDLE:  4,
   BUTTON_RIGHT:   2,
-
   ONBLUR:         0x01000,
   ONCHANGE:       0x00400,
   ONCLICK:        0x00001,
@@ -2846,15 +2803,15 @@ var APIError = Class.extend({
     var self = this;
     this.xhr = xhr;
     if(xhr.responseText !== "" || xhr.responseText !== undefined) {
-          var response = JSON.parse(xhr.responseText);
-          if(response._api_error) {
-            self.errorText = response._api_error;
-          } else {
-            self.errorText = null;
-          }
-        } else {
-          if(console) console.log("Didnt recieve understandable response text!");
-        }
+      var response = JSON.parse(xhr.responseText);
+      if(response._api_error) {
+        self.errorText = response._api_error;
+      } else {
+        self.errorText = null;
+      }
+    } else {
+      if(console) console.log("Didnt recieve understandable response text!");
+    }
   },
   getStatus: function() {
     return this.xhr.status;
