@@ -773,6 +773,7 @@ var UIObject = Class.extend({
         $(this.getElement()).attr(obj, hash[obj]);
       }
     }
+    return this;
   },
   attach: function() {
     DOM.setEventListener(this.getElement(), this);
@@ -815,6 +816,7 @@ var UIObject = Class.extend({
       DOM.setStyleName(element, style);
     else
       DOM.addStyleName(element, style);
+    return this;
   },
 
   getStyleName: function() {
@@ -1211,6 +1213,7 @@ var ButtonBase = FocusWidget.extend({
   },
   setText: function(text) {
     DOM.setInnerText(this.getElement(), text);
+    return this;
   },
   getHTML: function() {
     return DOM.setInnerHTML(this.getElement());
@@ -1258,7 +1261,8 @@ var TextBoxBase = FocusWidget.extend({
     return DOM.getAttribute(this.getElement(),"value");
   },
   setText:function(text) {
-    return DOM.setAttribute(this.getElement(),"value",text);
+    DOM.setAttribute(this.getElement(),"value",text);
+    return this;
   },
   getSelectedText: function() {
     var start = this.getCursorPos();
@@ -1421,6 +1425,7 @@ var CheckBox = ButtonBase.extend({
   },
   setText: function(text) {
     DOM.setInnerText(this.labelElement,text);
+    return this;
   },
   getHTML: function() {
     return DOM.getInnerHTML(this.labelElement);
@@ -1765,6 +1770,7 @@ var Label = CMSObject.extend({
   },
   setText: function(text) {
     DOM.setInnerText(this.getElement(),text);
+    return this;
   },
   replaceText: function(text) {
     DOM.setInnerHTML(this.getElement(), text);
