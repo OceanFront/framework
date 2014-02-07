@@ -2663,47 +2663,8 @@ var WImage = Widget.extend({
 
 var PAPIBase = Class.extend({
   init: function() {},
-  api_domain: function() {
-    return config.OCEAN_API_URL;
-  },
-  api_version: function(key) {
-    switch(key) {
-      case "texts_version": 
-        return config.API_VERSIONS.texts || config.API_VERSIONS._default
-        break;
-      case "media_version": 
-        return config.API_VERSIONS.media || config.API_VERSIONS._default
-        break;
-      default: 
-        return config.API_VERSIONS._default;
-    }
-  },
-  apiCall: function(link, data, method, success_callback, error_callback) {
+  apiCall: function(link, data, method, success_callback, error_callback, extra_headers) {
     var self = this;
-
-    // Use custom token (user login) first, otherwise clients initial token
-    var token = "";
-    if($.cookie("user-login")) {
-      if(typeof $.cookie("user-login") === "string") {
-        token = JSON.parse($.cookie("user-login")).token;
-      } else if(typeof $.cookie("user-login") === "object") {
-        token = $.cookie("user-login").token;
-      }
-      
-    } else {
-      token = config.INITIAL_API_TOKEN;
-      if(console) console.warn("Used applications auth token!!");
-    }
-
-    // Add extra headers specified in data hash
-    var headers_list = {"Accept": "application/json",
-              "X-API-Token": token
-              };
-    if(data && data.headers && typeof data.headers === "object") {
-      for(var obj in data.headers) {
-        headers_list[obj] = data.headers[obj];
-      }
-    }
 
     // detect IE CORS transport
     if($.browser.msie) {
@@ -2717,16 +2678,11 @@ var PAPIBase = Class.extend({
         // also, override the support check
         jQuery.support.cors = true;
       }
-      //Specials for IE to simulate PUT
-      if(method === "PUT") {
-        link += '?_method=PUT';
-        link += '&_x-api-token=' + config.INITIAL_API_TOKEN;
-        method = "POST";
-      }
     }
+
     if(data) {
       $.ajax(link, {
-        headers: headers_list,
+        headers: extra_headers,
         type: method,
         /*url: link,*/
         crossDomain: true,
@@ -2745,7 +2701,7 @@ var PAPIBase = Class.extend({
       });
     } else {
       $.ajax(link, {
-        headers: headers_list,
+        headers: extra_headers,
         type: method,
         /*url: link,*/
         crossDomain: true,
@@ -2773,34 +2729,6 @@ var PAPIBase = Class.extend({
     if(console) console.log(xhr);
     //if (console) console.log(textStatus);
     //if (console) console.log(errorThrown);
-    if(xhr.status == 419) {
-      // Need to refresh authentication token
-
-      // Clear cookie first since LoginView check if it's valid
-      $.cookie("user-login", null, "/");
-      if(window.mainFlow) {
-        // Login view
-        window.mainFlow.fadeToWidget(0);
-      }
-    }
-  },
-  save: function(link, data, success, error) {
-    this.apiCall(link, data, "PUT", success, error);
-  },
-  delete: function(link, success, error) {
-    this.apiCall(link, null, "DELETE", success, error);
-  },
-  get: function(data_or_link, success, error) {
-    var link = "";
-    link = this.construct_link(data_or_link, true);
-
-    PAPI.apiCall(link, null, "GET", success, error);
-  },
-  create: function(data, success, error) {
-
-    var link = "";
-    link = this.construct_link(data, false);
-    PAPI.apiCall(link, data, "POST", success, error);
   }
 });
 
