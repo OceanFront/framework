@@ -634,60 +634,55 @@ var DOM = {
   eventGetType: function(event) {
                   return event.type;
                 },
-
   eventGetTypeInt: function(event) {
                      switch (event.type) {
-                       case "blur": return 0x01000;
-                       case "change": return 0x00400;
-                       case "click": return 0x00001;
-                       case "dblclick": return 0x00002;
-                       case "focus": return 0x00800;
-                       case "keydown": return 0x00080;
-                       case "keypress": return 0x00100;
-                       case "keyup": return 0x00200;
-                       case "load": return 0x08000;
-                       case "losecapture": return 0x02000;
-                       case "mousedown": return 0x00004;
-                       case "mousemove": return 0x00040;
-                       case "mouseout": return 0x00020;
-                       case "mouseover": return 0x00010;
-                       case "mouseup": return 0x00008;
-                       case "scroll": return 0x04000;
-                       case "error": return 0x10000;
-                       case "contextmenu": return 0x20000;
-                       case "abort": return 0x11000;
-                       case "progress": return 0x11001;
-                       case "loadend": return 0x08001;
-                       case "loadstart": return 0x08011;
-                       case "dragstart": return 0x40000;
-                       case "drag": return 0x40001;
-                       case "dragenter": return 0x40011;
-                       case "dragleave": return 0x40111;
-                       case "dragover": return 0x41111;
-                       case "drop": return 0x40002;
-                       case "dragend": return 0x40012;
-                       case "search": return 0x50000;
-                       case "submit": return 0x60000;
+                       case "blur": return Event.ONBLUR;
+                       case "change": return Event.ONCHANGE;
+                       case "click": return Event.ONCLICK;
+                       case "dblclick": return Event.ONDBLCLICK;
+                       case "focus": return Event.ONFOCUS;
+                       case "keydown": return Event.ONKEYDOWN;
+                       case "keypress": return Event.ONKEYPRESS;
+                       case "keyup": return Event.ONKEYUP;
+                       case "load": return Event.ONLOAD;
+                       case "losecapture": return Event.ONLOSECAPTURE;
+                       case "mousedown": return Event.ONMOUSEDOWN;
+                       case "mousemove": return Event.ONMOUSEMOVE;
+                       case "mouseout": return Event.ONMOUSEOUT;
+                       case "mouseover": return Event.ONMOUSEUP;
+                       case "mouseup": return Event.ONMOUSEUP;
+                       case "scroll": return Event.ONSCROLL;
+                       case "error": return Event.ONERROR;
+                       case "contextmenu": return Event.ONCONTEXTMENU;
+                       case "abort": return Event.ONABORT;
+                       case "progress": return Event.ONPROGRESS;
+                       case "loadend": return Event.ONLOADEND;
+                       case "loadstart": return Event.ONLOADSTART;
+                       case "dragstart": return Event.ONDRAGSTART;
+                       case "drag": return Event.ONDRAG;
+                       case "dragenter": return Event.ONDRAGENTER;
+                       case "dragleave": return Event.ONDRAGLEAVE;
+                       case "dragover": return Event.ONDRAGOVER;
+                       case "drop": return Event.ONDROP;
+                       case "dragend": return Event.ONDRAGEND;
+                       case "search": return Event.ONSEARCH;
+                       case "submit": return Event.ONSUBMIT;
                      }
                    },
-
   eventGetTypeString: function(event) {
                         return DOM.eventGetType(event);
                       },
-
   eventSetKeyCode: function(evt, key) {
                      evt.keyCode = key;
                    },
-
   eventToString: function(evt) {
                    return evt.toString();
                  },
-
   iframeGetSrc: function(elem) {
                   return elem.src;
                 },
-  // getPageScroll() by quirksmode.com
   getPageScroll: function() {
+                  // getPageScroll() by quirksmode.com
                    var xScroll, yScroll;
                    if (self.pageYOffset) {
                      yScroll = self.pageYOffset;
@@ -701,8 +696,8 @@ var DOM = {
                    }
                    return [xScroll,yScroll];
                  },
-  // Adapted from getPageSize() by quirksmode.com
   getPageHeight: function () {
+                  // Adapted from getPageSize() by quirksmode.com
                    var windowHeight;
                      if (self.innerHeight) { // all except Explorer
                        windowHeight = self.innerHeight;
@@ -1800,7 +1795,7 @@ var CMSObject = Widget.extend({
         }
       }
     }
-  },
+  }
  });
 
 var Label = CMSObject.extend({
