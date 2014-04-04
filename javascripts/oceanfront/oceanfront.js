@@ -558,12 +558,6 @@ var DOM = {
   eventGetButton: function(evt) {
     return evt.button;
   },
-  eventGetClientX: function(evt) {
-    return evt.clientX;
-  },
-  eventGetClientY: function(evt) {
-                     return evt.clientY;
-                   },
   eventGetCtrlKey: function(evt) {
     return evt.ctrlKey;
   },
