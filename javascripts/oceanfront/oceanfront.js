@@ -1584,7 +1584,7 @@ var HTMLTable = Panel.extend({
     delete this.widgetMap[key];
     return true;
   },
-  setWidget: function(row,col,widget) {
+  setWidget: function(row,col,widget,colspan) {
     this.prepareCell(row,col);
     if(widget == null)
       return;
@@ -1593,6 +1593,8 @@ var HTMLTable = Panel.extend({
     var widget_hash = hash(widget);
     var element = widget.getElement();
     DOM.setAttribute(element, "__hash", widget_hash);
+    if(colspan)
+      $(td).attr("colspan", colspan);
     this.widgetMap[widget_hash] = widget;
     this.adopt(widget, td);
   },
@@ -2941,8 +2943,8 @@ var FormGrid = Grid.extend({
       return true;
     }
   },
-  setWidget: function(row,col,widget) {
-    this._super(row,col,widget);
+  setWidget: function(row,col,widget,colspan) {
+    this._super(row,col,widget,colspan);
     // Check if object is a validation object, thus contains a setForm function
     if(widget.setForm) {
       // Save this form pointer for the widget so it can call for messagge bubble
