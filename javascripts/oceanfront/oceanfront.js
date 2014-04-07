@@ -2659,7 +2659,7 @@ var WImage = Widget.extend({
 
 var PAPIBase = Class.extend({
   init: function() {},
-  apiCall: function(link, data, method, success_callback, error_callback, extra_headers) {
+  apiCall: function(link, data, method, success_callback, error_callback, extra_headers, extras) {
     var self = this;
 
     // detect IE CORS transport
@@ -2688,7 +2688,7 @@ var PAPIBase = Class.extend({
         cache: true,
         success: function(res, code, xhr) {
           self.pre_success(res, code, xhr);
-          success_callback(res);
+          success_callback(res, extras);
         },
         error: function(xhr, textStatus, errorThrown) {
           self.pre_error(xhr, textStatus, errorThrown);
@@ -2706,7 +2706,7 @@ var PAPIBase = Class.extend({
         cache: true,
         success: function(res, code, xhr) {
           self.pre_success(res, code, xhr);
-          success_callback(res);
+          success_callback(res, extras);
         },
         error: function(xhr, textStatus, errorThrown) {
           self.pre_error(xhr, textStatus, errorThrown);
