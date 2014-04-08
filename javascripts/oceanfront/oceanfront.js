@@ -1711,12 +1711,12 @@ var CMSObject = Widget.extend({
     if(!this.getElement()) {this.setElement(DOM.createDiv()); }
     this.clickListeners = [];
     this.obj = cmsobj;
+    this.sinkEvents(Event.ONCLICK);
   },
   setupCMSObj: function() {
     //Flag set in common.js
     if(window.CMSAdminMode) {
       var self = this;
-      this.sinkEvents(Event.ONCLICK);
       this.addStyleName("clickable");
 
       if(typeof this.obj === "string") {
@@ -1727,7 +1727,6 @@ var CMSObject = Widget.extend({
         this.obj[2] = tmp[1];
         this.obj[3] = tmp[2];
       }
-      this.sinkEvents(Event.ONCLICK);
       this.setStyleName("clickable");
       this.addClickListener(function(event){
 
