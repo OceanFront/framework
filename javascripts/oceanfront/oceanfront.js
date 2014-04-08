@@ -3132,3 +3132,91 @@ var WidgetLoader = Widget.extend({
             html.img({'class':'widget-loader-spinner','src':'../images/loader.png'}));
   }
 });
+
+var FocusPanel = FlowPanel.extend({
+  init: function() {
+    this._super();
+    this.clickListeners = [];
+    this.focusListeners = [];
+    this.mousedownListeners = [];
+    this.mouseupListeners = [];
+    this.mousemoveListeners = [];
+    this.keyboardListeners = [];
+    this.changeListeners = [];
+    this.sinkEvents(Event.ONCLICK|Event.FOCUSEVENTS|Event.KEYEVENTS|Event.CHANGE|Event.ONMOUSEDOWN|Event.ONMOUSEUP|Event.ONMOUSEMOVE);
+  },
+  addChangeListener: function(listener) {
+    this.changeListeners.push(listener);
+    return this;
+  },
+  addClickListener: function(listener) {
+    this.clickListeners.push(listener);
+    return this;
+  },
+  addFocusListener: function(listener) {
+    this.focusListeners.push(listener);
+    return this;
+  },
+  addKeyboardListener: function(listener) {
+    this.keyboardListeners.push(listener);
+    return this;
+  },
+  addMouseDownListener: function(listener) {
+    this.mousedownListeners.push(listener);
+    return this;
+  },
+  addMouseUpListener: function(listener) {
+    this.mouseupListeners.push(listener);
+    return this;
+  },
+  addMouseMoveListener: function(listener) {
+    this.mousemoveListeners.push(listener);
+    return this;
+  },
+  onBrowserEvent: function(event) {
+    var type = DOM.eventGetType(event);
+    if (type == 'click') {
+      for (var i = 0; i < this.clickListeners.length; i++) {
+        this.clickListeners[i](this, event);
+      }
+    }
+    else if (type == 'blur' || type == 'focus') {
+      for (var i = 0; i < this.focusListeners.length; i++) {
+        this.focusListeners[i](this, event);
+      }
+    }
+    else if (type == 'keydown' || type == 'keypress' || type == 'keyup') {
+      for (var i = 0; i < this.keyboardListeners.length; i++) {
+        this.keyboardListeners[i](this, event);
+      }
+    }
+    else if (type == 'change') {
+      for (var i = 0; i < this.changeListeners.length; i++) {
+        this.changeListeners[i](this, event);
+      }
+    }
+    else if (type == 'mousedown') {
+      for (var i = 0; i < this.mousedownListeners.length; i++) {
+        this.mousedownListeners[i](this, event);
+      }
+    }
+    else if (type == 'mouseup') {
+      for (var i = 0; i < this.mouseupListeners.length; i++) {
+        this.mouseupListeners[i](this, event);
+      }
+    }
+    else if (type == 'mousemove') {
+      for (var i = 0; i < this.mousemoveListeners.length; i++) {
+        this.mousemoveListeners[i](this, event);
+      }
+    }
+  }
+});
+
+var Delimiter = Widget.extend({
+  init: function() {
+    this._super();
+    this.setElement(DOM.createDiv());
+    this.setStyleName("delimiter");
+  }
+});
