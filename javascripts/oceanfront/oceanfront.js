@@ -1206,6 +1206,8 @@ var ButtonBase = FocusWidget.extend({
     return DOM.setInnerText(this.getElement());
   },
   setText: function(text) {
+    if(!text)
+      text = "";
     DOM.setInnerText(this.getElement(), text);
     return this;
   },
@@ -1255,6 +1257,8 @@ var TextBoxBase = FocusWidget.extend({
     return DOM.getAttribute(this.getElement(),"value");
   },
   setText:function(text) {
+    if(!text)
+      text = "";
     DOM.setAttribute(this.getElement(),"value",text);
     return this;
   },
@@ -1418,6 +1422,8 @@ var CheckBox = ButtonBase.extend({
     return DOM.getInnerText(this.labelElement);
   },
   setText: function(text) {
+    if(!text)
+      text = "";
     DOM.setInnerText(this.labelElement,text);
     return this;
   },
@@ -1764,6 +1770,8 @@ var Label = CMSObject.extend({
     return DOM.getInnerText(this.getElement());
   },
   setText: function(text) {
+    if(!text)
+      text = "";
     DOM.setInnerText(this.getElement(),text);
     return this;
   },
