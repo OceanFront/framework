@@ -2986,9 +2986,9 @@ var FormGrid = Grid.extend({
       if(event.type === 'focus' && target.nodeName !== 'BUTTON') {
         if(form.currentBlurItem && target.nodeName === 'INPUT') {
           // Take care of Blured objects that should evaluate
-          // Blur event is not used because it fires before anything else and makes it impossible to NOT validate when needed as below
+          // Blur event is directly not used because it fires before anything else and makes it impossible to NOT validate when needed as below
 
-          // Evaluate simulate blurobject and act if its valid
+          // Sets error bubble if not evaluating
           if(form.currentBlurItem.validate(true)) {
             // If the Blured element evaluates, iterate forward to next focus element
             form.currentBlurItem = target.widget;
