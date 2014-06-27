@@ -1725,7 +1725,7 @@ var CMSObject = Widget.extend({
       var self = this;
       this.addStyleName("clickable");
 
-      if(typeof this.obj === "string") {
+      if(typeof this.obj === "string" && (this.obj.search("<em>") > -1)) {
         var tmp = this.obj.split("(")[1].split(")")[0].split("/");
         this.obj = [];
         this.obj[0] = null;
@@ -1748,7 +1748,7 @@ var CMSObject = Widget.extend({
         } else {
           domain = 'http://localhost:3005/cms/#';
         }
-        
+
         window.open(domain + '/' + appname + '/' + self.obj[1] + '/' + self.obj[2] + '/' + config["LOCALE"] + '/' + self.usage);
       });
     }
