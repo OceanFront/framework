@@ -1739,7 +1739,17 @@ var CMSObject = Widget.extend({
         //TEMP hack before SSL termination is in place:
         config["OCEAN_CMS_CLIENT_URL"] = config["OCEAN_CMS_CLIENT_URL"].replace("https", "http").replace("cms", "cms-lb");
         var appname = (self.obj[3] !== undefined && self.obj[3] !== 'undefined') ? self.obj[3] : config["APP_NAME"];
-        window.open('http://localhost:3005/cms/#/' + appname + '/' + self.obj[1] + '/' + self.obj[2] + '/' + config["LOCALE"] + '/' + self.usage);
+
+        // Open on correct domain
+        var domain = "";
+        if(config && config.OCEAN_API_URL) {
+          // Use master environment to share cms
+          domain = config.OCEAN_API_URL.replace("api", "admin") + '/cms/#';
+        } else {
+          domain = 'http://localhost:3005/cms/#';
+        }
+        
+        window.open(domain + '/' + appname + '/' + self.obj[1] + '/' + self.obj[2] + '/' + config["LOCALE"] + '/' + self.usage);
       });
     }
   },
