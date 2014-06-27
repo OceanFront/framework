@@ -153,10 +153,6 @@ table {
 	margin: auto;
 }
 
-.of-FormGrid button {
-	float: right;
-}
-
 .widget-loader {
 	position: absolute;
 	top: 0;
