@@ -2705,7 +2705,7 @@ var PAPIBase = Class.extend({
         cache: true,
         success: function(res, code, xhr) {
           self.pre_success(res, code, xhr);
-          success_callback(res, extras);
+          success_callback(res, extras, xhr);
         },
         error: function(xhr, textStatus, errorThrown) {
           self.pre_error(xhr, textStatus, errorThrown);
@@ -2723,7 +2723,7 @@ var PAPIBase = Class.extend({
         cache: true,
         success: function(res, code, xhr) {
           self.pre_success(res, code, xhr);
-          success_callback(res, extras);
+          success_callback(res, extras, xhr);
         },
         error: function(xhr, textStatus, errorThrown) {
           self.pre_error(xhr, textStatus, errorThrown);
