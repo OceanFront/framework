@@ -1712,11 +1712,11 @@ var CMSObject = Widget.extend({
     this._super();
     if(!this.getElement()) {this.setElement(DOM.createDiv()); }
     this.obj = cmsobj;
+    this.mouseupListeners = [];
   },
   setupCMSObj: function() {
     // Set up event handling here since most classes that extend CMSObject change the Element
     // So doing this in the init would remove, and replace, the element and therefore the set up listeners on the first element
-    this.mouseupListeners = [];
     this.sinkEvents(Event.ONMOUSEUP);
     //Flag set in common.js
     if(window.CMSAdminMode) {
@@ -1798,11 +1798,28 @@ var Label = CMSObject.extend({
   }
 });
 
+var TextButton = Label.extend({
+  init: function(cmsobj, fn) {
+    this._super(cmsobj);
+    
+    if(Object.prototype.toString.call( cmsobj ) === '[object Array]') {
+      this.setElement(html.div({'class':'clickable textButton'}, cmsobj[0]) );
+    } else {
+      DOM.setInnerText(this.getElement(), cmsobj);
+    }
+    this.setupCMSObj();
+
+    if(fn) {
+      this.addOnMouseUpListener(fn);
+    }
+  }
+});
+
 var Text = Label.extend({
   init: function(cmsobj, wordwrap) {
     this._super(cmsobj, wordwrap);
     
-    if(typeof cmsobj === "object") {
+    if(Object.prototype.toString.call( cmsobj ) === '[object Array]') {
       this.setText(cmsobj[0]);
     } else {
       DOM.setInnerText(this.getElement(),cmsobj);
@@ -1816,7 +1833,7 @@ var Image = Label.extend({
   init: function(cmsobj) {
     this._super(cmsobj);
 
-    if(typeof cmsobj === "object") {
+    if(Object.prototype.toString.call( cmsobj ) === '[object Array]') {
       this.setElement(html.img({'src':cmsobj[0].replace('https','http')}));
     } else {
       DOM.setInnerText(this.getElement(), cmsobj);
@@ -1830,7 +1847,7 @@ var SpriteSheet = Label.extend({
   init: function(cmsobj) {
     this._super(cmsobj);
 
-    if(typeof cmsobj === "object") {
+    if(Object.prototype.toString.call( cmsobj ) === '[object Array]') {
       this.setElement(html.div({}));
       $(this.getElement()).css('background-image', 'url(' + cmsobj[0].replace('https','http') + ')');
     } else {
@@ -1845,7 +1862,7 @@ var SpriteSheetLink = Label.extend({
   init: function(cmsobj) {
     this._super(cmsobj);
 
-    if(typeof cmsobj === "object") {
+    if(Object.prototype.toString.call( cmsobj ) === '[object Array]') {
       this.setElement(html.a({}));
       $(this.getElement()).css('background-image', 'url(' + cmsobj[0].replace('https','http') + ')');
     } else {
@@ -1860,7 +1877,7 @@ var Markdown = Label.extend({
   init: function(cmsobj) {
     this._super(cmsobj, true);
 
-    if(typeof cmsobj === "object") {
+    if(Object.prototype.toString.call( cmsobj ) === '[object Array]') {
       DOM.setInnerHTML(this.getElement(), cmsobj[0]);
     } else {
       DOM.setInnerText(this.getElement(), cmsobj);
@@ -1875,7 +1892,7 @@ var Link = Label.extend({
     this._super(htmlobj);
     
     //obj in this case is supposed to be a complete html a-tag in string format that we convert to a node
-    if(typeof htmlobj === "object") {
+    if(Object.prototype.toString.call( cmsobj ) === '[object Array]') {
       this.setElement($(htmlobj[0])[0]);
     } else {
       var tmp = DOM.createDiv();
@@ -1892,7 +1909,7 @@ var Header1 = Label.extend({
     this._super(cmsobj);
     this.setElement(DOM.createH1());
     
-    if(typeof cmsobj === "object") {
+    if(Object.prototype.toString.call( cmsobj ) === '[object Array]') {
       this.setText(cmsobj[0]);
     } else {
       DOM.setInnerText(this.getElement(),cmsobj);
@@ -1907,7 +1924,7 @@ var Header2 = Label.extend({
     this._super(cmsobj);
     this.setElement(DOM.createH2());
 
-    if(typeof cmsobj === "object") {
+    if(Object.prototype.toString.call( cmsobj ) === '[object Array]') {
       this.setText(cmsobj[0]);
     } else {
       DOM.setInnerText(this.getElement(),cmsobj);
@@ -1922,7 +1939,7 @@ var Header3 = Label.extend({
     this._super(cmsobj);
     this.setElement(DOM.createH3());
     
-    if(typeof cmsobj === "object") {
+    if(Object.prototype.toString.call( cmsobj ) === '[object Array]') {
       this.setText(cmsobj[0]);
     } else {
       DOM.setInnerText(this.getElement(),cmsobj);
