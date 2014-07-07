@@ -789,15 +789,12 @@ var UIObject = Class.extend({
   getStyle: function(name) {
     return DOM.getStyleAttribute(this.getElement(),name);
   },
-
   removeStyleName: function(style) {
     DOM.removeStyleName(this.getElement(), style);
   },
-
   addStyleName: function(style) {
     DOM.addStyleName(this.getElement(), style);
   },
-
   setPrimaryStyleName: function(style) {
     this.setStyleName(this.getElement(), style, false);
   },
@@ -812,7 +809,6 @@ var UIObject = Class.extend({
       DOM.addStyleName(element, style);
     return this;
   },
-
   getStyleName: function() {
     return DOM.getStyleName(this.getElement());
   },
@@ -1715,11 +1711,13 @@ var CMSObject = Widget.extend({
   init: function(cmsobj) {
     this._super();
     if(!this.getElement()) {this.setElement(DOM.createDiv()); }
-    this.clickListeners = [];
     this.obj = cmsobj;
-    this.sinkEvents(Event.ONCLICK);
   },
   setupCMSObj: function() {
+    // Set up event handling here since most classes that extend CMSObject change the Element
+    // So doing this in the init would remove, and replace, the element and therefore the set up listeners on the first element
+    this.mouseupListeners = [];
+    this.sinkEvents(Event.ONMOUSEUP);
     //Flag set in common.js
     if(window.CMSAdminMode) {
       var self = this;
@@ -1734,7 +1732,7 @@ var CMSObject = Widget.extend({
         this.obj[3] = tmp[2];
       }
       this.setStyleName("clickable");
-      this.addClickListener(function(event){
+      this.addOnMouseUpListener(function(event){
 
         //TEMP hack before SSL termination is in place:
         config["OCEAN_CMS_CLIENT_URL"] = config["OCEAN_CMS_CLIENT_URL"].replace("https", "http").replace("cms", "cms-lb");
@@ -1753,23 +1751,19 @@ var CMSObject = Widget.extend({
       });
     }
   },
-  addClickListener: function(listener) {
-    this.clickListeners.push(listener);
+  addOnMouseUpListener: function(listener) {
+    this.mouseupListeners.push(listener);
+    return this;
   },
   onBrowserEvent: function(event) {
     var type = event.type;
-    if(type == 'click') {
-      for(var i=0; i<this.clickListeners.length; i++) {
-        var listener = this.clickListeners[i];
-        if(listener.onClick) {
-          listener.onClick(event);
-        } else {
-          listener(event);
-        }
+    if(type == 'mouseup') {
+      for(var i=0; i<this.mouseupListeners.length; i++) {
+        this.mouseupListeners[i](this, event);      
       }
     }
   }
- });
+});
 
 var Label = CMSObject.extend({
   init: function(cmsobj, wordwrap) {
@@ -2265,11 +2259,11 @@ var ListBox = FocusWidget.extend({
   onBrowserEvent: function(event) {
     if(event.type == 'change') {
       for (var i = 0; i < this.changeListeners.length; i++) {
-	var listener = this.changeListeners[i];
-	if (listener.onChange)
-	  listener.onChange(this,event);
-	else
-	  listener(this, event);
+	       var listener = this.changeListeners[i];
+	       if (listener.onChange)
+	         listener.onChange(this,event);
+	       else
+	         listener(this, event);
       }
     }
   }
