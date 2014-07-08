@@ -3150,12 +3150,12 @@ var WidgetLoader = Widget.extend({
       this.adaptSize();
     }
     // Start animation and finish with showing Loader
-    $('img', this.getElement()).css('-webkit-animation-play-state', 'running');
+    $('img', this.getElement()).css('-webkit-animation-play-state', 'running').css('-moz-animation-play-state', 'running').css('animation-play-state', 'running');
     $(this.getElement()).css('display', 'block');
   },
   hide: function() {
     $(this.getElement()).css('display', 'none');
-    $('img', this.getElement()).css('-webkit-animation-play-state', 'paused');
+    $('img', this.getElement()).css('-webkit-animation-play-state', 'paused').css('-moz-animation-play-state', 'paused').css('animation-play-state', 'paused');
   },
   render: function() {
     return html.div({},
