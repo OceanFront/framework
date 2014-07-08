@@ -2269,9 +2269,11 @@ var ListBox = FocusWidget.extend({
   },
   insertItem: function(item, value, index) {
     DOM.insertListItem(this.getElement(), item, value, index);
+    return this;
   },
   addItem: function(item, value) {
     DOM.insertListItem(this.getElement(), item, value, -1);
+    return this;
   },
   onBrowserEvent: function(event) {
     if(event.type == 'change') {
