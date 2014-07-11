@@ -1892,7 +1892,7 @@ var Link = Label.extend({
     this._super(htmlobj);
     
     //obj in this case is supposed to be a complete html a-tag in string format that we convert to a node
-    if(Object.prototype.toString.call( cmsobj ) === '[object Array]') {
+    if(Object.prototype.toString.call( htmlobj ) === '[object Array]') {
       this.setElement($(htmlobj[0])[0]);
     } else {
       var tmp = DOM.createDiv();
