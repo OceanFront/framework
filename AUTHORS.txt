@@ -1,4 +1,8 @@
-Authors ordered by first contribution:
+Authors:
 
-David Tatti <lespaul80@hotmail.com>
-Lasse Edlund <lassee@kth.se>
+	Lars Rustemeier <lars.rustemeier@google.com>
+	David Tatti <lespaul80@hotmail.com>
+
+Contributors ordered by first contribution:
+
+	Lasse Edlund <lassee@kth.se>
