@@ -1834,7 +1834,7 @@ var Image = Label.extend({
     this._super(cmsobj);
 
     if(Object.prototype.toString.call( cmsobj ) === '[object Array]') {
-      this.setElement(html.img({'src':cmsobj[0].replace('https','http')}));
+      this.setElement(html.img({'src':cmsobj[0]}));
     } else {
       DOM.setInnerText(this.getElement(), cmsobj);
     }
@@ -1849,7 +1849,7 @@ var SpriteSheet = Label.extend({
 
     if(Object.prototype.toString.call( cmsobj ) === '[object Array]') {
       this.setElement(html.div({}));
-      $(this.getElement()).css('background-image', 'url(' + cmsobj[0].replace('https','http') + ')');
+      $(this.getElement()).css('background-image', 'url(' + cmsobj[0] + ')');
     } else {
       DOM.setInnerText(this.getElement(), cmsobj);
     }
@@ -1864,7 +1864,7 @@ var SpriteSheetLink = Label.extend({
 
     if(Object.prototype.toString.call( cmsobj ) === '[object Array]') {
       this.setElement(html.a({}));
-      $(this.getElement()).css('background-image', 'url(' + cmsobj[0].replace('https','http') + ')');
+      $(this.getElement()).css('background-image', 'url(' + cmsobj[0] + ')');
     } else {
       DOM.setInnerText(this.getElement(), cmsobj);
     }
