@@ -1815,6 +1815,35 @@ var TextButton = Label.extend({
   }
 });
 
+var HTMLText = Label.extend({
+  init: function(cmsobj, wordwrap) {
+    this._super(cmsobj, wordwrap);
+    
+    if(Object.prototype.toString.call( cmsobj ) === '[object Array]') {
+      this.setText(cmsobj[0]);
+    } else {
+      DOM.setInnerText(this.getElement(),cmsobj);
+    }
+    this.usage = 'text';
+    this.setupCMSObj();
+  },
+  getText: function() {
+    // Override
+    return DOM.getInnerHTML(this.getElement());
+  },
+  setText: function(text) {
+    // Override
+    if(!text)
+      text = "";
+    DOM.setInnerHTML(this.getElement(),text);
+    return this;
+  },
+  replaceText: function(text) {
+    // Override
+    DOM.setInnerHTML(this.getElement(), text);
+  }
+});
+
 var Text = Label.extend({
   init: function(cmsobj, wordwrap) {
     this._super(cmsobj, wordwrap);
