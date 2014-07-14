@@ -2722,8 +2722,9 @@ var PAPIBase = Class.extend({
     var self = this;
 
     // detect IE CORS transport
-    if($.browser.msie) {
-      // detect IE CORS transport
+    if($.browser.msie && ($.browser.version < 9)) {
+      // detect IE CORS transport for IE older than v9 (IE10 started with XMLHttpRequest)
+      if(console) console.log("IE detected. Changing XDomainRequest object");
       if ('XDomainRequest' in window && window.XDomainRequest !== null) {
         // override default jQuery transport
         jQuery.ajaxSettings.xhr = function() {
