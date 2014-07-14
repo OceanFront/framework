@@ -2791,16 +2791,6 @@ var APIError = Class.extend({
   init: function(xhr) {
     var self = this;
     this.xhr = xhr;
-    if(xhr.responseText !== "" || xhr.responseText !== undefined) {
-      var response = JSON.parse(xhr.responseText);
-      if(response._api_error) {
-        self.errorText = response._api_error;
-      } else {
-        self.errorText = null;
-      }
-    } else {
-      if(console) console.log("Didnt recieve understandable response text!");
-    }
   },
   getStatus: function() {
     return this.xhr.status;
