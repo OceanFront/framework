@@ -1,6 +1,6 @@
 Authors:
 
-	Lars Rustemeier <lars.rustemeier@google.com>
+	Lars Rustemeier
 	David Tatti <lespaul80@hotmail.com>
 
 Contributors ordered by first contribution:
