@@ -5,4 +5,4 @@ Authors:
 
 Contributors ordered by first contribution:
 
-	Lasse Edlund <lassee@kth.se>
+	Lasse Edlund <oceanfront@altai.se>
