@@ -1,5 +1,10 @@
 var CMSObject = Widget.extend({
   init: function(cmsobj, wordwrap) {
+    /*
+    *   cmsobject is the returned object from config js file according to
+    *   [res, context, key, app];
+    *   res is the actual CMS content, rest is self explanitory
+    */
     this._super();
     if(!this.getElement()) {this.setElement(DOM.createDiv()); }
     this.obj = cmsobj;
@@ -26,8 +31,6 @@ var CMSObject = Widget.extend({
       this.setStyleName("clickable");
       this.addOnMouseUpListener(function(event){
 
-        //TEMP hack before SSL termination is in place:
-        config["OCEAN_CMS_CLIENT_URL"] = config["OCEAN_CMS_CLIENT_URL"].replace("https", "http").replace("cms", "cms-lb");
         var appname = (self.obj[3] !== undefined && self.obj[3] !== 'undefined') ? self.obj[3] : config["APP_NAME"];
 
         // Open on correct domain
