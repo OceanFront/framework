@@ -1,10 +1,10 @@
 var CMSObject = Widget.extend({
   init: function(cmsobj, wordwrap) {
     this._super();
-    this.setWordWrap(wordwrap);
     if(!this.getElement()) {this.setElement(DOM.createDiv()); }
     this.obj = cmsobj;
     this.mouseupListeners = [];
+    this.setWordWrap(wordwrap);
   },
   setupCMSObj: function() {
     // Set up event handling here since most classes that extend CMSObject change the Element
@@ -83,7 +83,7 @@ var CMSObject = Widget.extend({
   }
 });
 
-var TextButton = Label.extend({
+var TextButton = CMSObject.extend({
   init: function(cmsobj, fn) {
     this._super(cmsobj);
     
@@ -100,7 +100,7 @@ var TextButton = Label.extend({
   }
 });
 
-var HTMLText = Label.extend({
+var HTMLText = CMSObject.extend({
   init: function(cmsobj, wordwrap) {
     this._super(cmsobj, wordwrap);
     
@@ -129,7 +129,7 @@ var HTMLText = Label.extend({
   }
 });
 
-var Text = Label.extend({
+var Text = CMSObject.extend({
   init: function(cmsobj, wordwrap) {
     this._super(cmsobj, wordwrap);
     
@@ -143,7 +143,7 @@ var Text = Label.extend({
   }
 });
 
-var Image = Label.extend({
+var Image = CMSObject.extend({
   init: function(cmsobj) {
     this._super(cmsobj);
 
@@ -157,7 +157,7 @@ var Image = Label.extend({
   }
 });
 
-var SpriteSheet = Label.extend({
+var SpriteSheet = CMSObject.extend({
   init: function(cmsobj) {
     this._super(cmsobj);
 
@@ -172,7 +172,7 @@ var SpriteSheet = Label.extend({
   }
 });
 
-var SpriteSheetLink = Label.extend({
+var SpriteSheetLink = CMSObject.extend({
   init: function(cmsobj) {
     this._super(cmsobj);
 
@@ -187,7 +187,7 @@ var SpriteSheetLink = Label.extend({
   }
 });
 
-var Markdown = Label.extend({
+var Markdown = CMSObject.extend({
   init: function(cmsobj) {
     this._super(cmsobj, true);
 
@@ -201,7 +201,7 @@ var Markdown = Label.extend({
   }
 });
 
-var Link = Label.extend({
+var Link = CMSObject.extend({
   init: function(htmlobj) {
     this._super(htmlobj);
     
@@ -218,7 +218,7 @@ var Link = Label.extend({
   }
 });
 
-var Header1 = Label.extend({
+var Header1 = CMSObject.extend({
   init: function(cmsobj) {
     this._super(cmsobj);
     this.setElement(DOM.createH1());
@@ -233,7 +233,7 @@ var Header1 = Label.extend({
   }
 });
 
-var Header2 = Label.extend({
+var Header2 = CMSObject.extend({
   init: function(cmsobj) {
     this._super(cmsobj);
     this.setElement(DOM.createH2());
@@ -248,7 +248,7 @@ var Header2 = Label.extend({
   }
 });
 
-var Header3 = Label.extend({
+var Header3 = CMSObject.extend({
   init: function(cmsobj) {
     this._super(cmsobj);
     this.setElement(DOM.createH3());
@@ -264,7 +264,7 @@ var Header3 = Label.extend({
 });
 
 
-var HTML = Label.extend({
+var HTML = CMSObject.extend({
   init: function(html, wordwrap) {
     if(wordwrap == null)
       wordwrap = true;
@@ -280,5 +280,93 @@ var HTML = Label.extend({
   },
   setHTML: function(html) {
     DOM.setInnerHTML(this.getElement(), html);
+  }
+});
+
+var PAPIBase = Class.extend({
+  init: function() {},
+  apiCall: function(link, data, method, success_callback, error_callback, extra_headers, extras) {
+    var self = this;
+
+    // detect IE CORS transport
+    if($.browser.msie && ($.browser.version < 9)) {
+      // detect IE CORS transport for IE older than v9 (IE10 started with XMLHttpRequest)
+      if(console) console.log("IE detected. Changing XDomainRequest object");
+      if ('XDomainRequest' in window && window.XDomainRequest !== null) {
+        // override default jQuery transport
+        jQuery.ajaxSettings.xhr = function() {
+            try { return new XDomainRequest(); }
+            catch(e) { }
+        };
+        // also, override the support check
+        jQuery.support.cors = true;
+      }
+    }
+
+    if(data) {
+      $.ajax(link, {
+        headers: extra_headers,
+        type: method,
+        /*url: link,*/
+        crossDomain: true,
+        dataType: "json",
+        contentType: "application/json; utf-8",
+        data: JSON.stringify(data),
+        cache: true,
+        success: function(res, code, xhr) {
+          self.pre_success(res, code, xhr);
+          success_callback(res, extras, xhr);
+        },
+        error: function(xhr, textStatus, errorThrown) {
+          self.pre_error(xhr, textStatus, errorThrown);
+          if(error_callback) {error_callback(new APIError(xhr));}
+        }
+      });
+    } else {
+      $.ajax(link, {
+        headers: extra_headers,
+        type: method,
+        /*url: link,*/
+        crossDomain: true,
+        dataType: "json",
+        contentType: "application/json; utf-8",
+        cache: true,
+        success: function(res, code, xhr) {
+          self.pre_success(res, code, xhr);
+          success_callback(res, extras, xhr);
+        },
+        error: function(xhr, textStatus, errorThrown) {
+          self.pre_error(xhr, textStatus, errorThrown);
+          if(error_callback) {error_callback(new APIError(xhr));}
+        }
+      });
+    }
+  },
+  pre_success: function(res, code, xhr) {
+    //if(console) console.log(xhr.status + " " + xhr.statusText);
+    //if(console) console.log(code);
+    //if(console) console.log(xhr);
+  },
+  pre_error: function(xhr, textStatus, errorThrown) {
+    if(console) console.log(xhr.status + " " + xhr.statusText);
+    if(console) console.log(xhr);
+    //if (console) console.log(textStatus);
+    //if (console) console.log(errorThrown);
+  }
+});
+
+var APIError = Class.extend({
+  init: function(xhr) {
+    var self = this;
+    this.xhr = xhr;
+  },
+  getStatus: function() {
+    return this.xhr.status;
+  },
+  getErrorText: function() {
+    return this.errorText;
+  },
+  getXHRObject: function() {
+    return this.xhr;
   }
 });

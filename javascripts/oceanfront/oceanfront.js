@@ -1710,6 +1710,7 @@ var Hidden = Widget.extend({
 var Label = Widget.extend({
   init: function(text, wordwrap) {
     this._super();
+    this.setElement(DOM.createDiv());
     this.setWordWrap(wordwrap);
     if(text) {
       this.setText(text);
@@ -2458,94 +2459,6 @@ var WImage = Widget.extend({
       	  listener(this, event);
       }
     }
-  }
-});
-
-var PAPIBase = Class.extend({
-  init: function() {},
-  apiCall: function(link, data, method, success_callback, error_callback, extra_headers, extras) {
-    var self = this;
-
-    // detect IE CORS transport
-    if($.browser.msie && ($.browser.version < 9)) {
-      // detect IE CORS transport for IE older than v9 (IE10 started with XMLHttpRequest)
-      if(console) console.log("IE detected. Changing XDomainRequest object");
-      if ('XDomainRequest' in window && window.XDomainRequest !== null) {
-        // override default jQuery transport
-        jQuery.ajaxSettings.xhr = function() {
-            try { return new XDomainRequest(); }
-            catch(e) { }
-        };
-        // also, override the support check
-        jQuery.support.cors = true;
-      }
-    }
-
-    if(data) {
-      $.ajax(link, {
-        headers: extra_headers,
-        type: method,
-        /*url: link,*/
-        crossDomain: true,
-        dataType: "json",
-        contentType: "application/json; utf-8",
-        data: JSON.stringify(data),
-        cache: true,
-        success: function(res, code, xhr) {
-          self.pre_success(res, code, xhr);
-          success_callback(res, extras, xhr);
-        },
-        error: function(xhr, textStatus, errorThrown) {
-          self.pre_error(xhr, textStatus, errorThrown);
-          if(error_callback) {error_callback(new APIError(xhr));}
-        }
-      });
-    } else {
-      $.ajax(link, {
-        headers: extra_headers,
-        type: method,
-        /*url: link,*/
-        crossDomain: true,
-        dataType: "json",
-        contentType: "application/json; utf-8",
-        cache: true,
-        success: function(res, code, xhr) {
-          self.pre_success(res, code, xhr);
-          success_callback(res, extras, xhr);
-        },
-        error: function(xhr, textStatus, errorThrown) {
-          self.pre_error(xhr, textStatus, errorThrown);
-          if(error_callback) {error_callback(new APIError(xhr));}
-        }
-      });
-    }
-  },
-  pre_success: function(res, code, xhr) {
-    //if(console) console.log(xhr.status + " " + xhr.statusText);
-    //if(console) console.log(code);
-    //if(console) console.log(xhr);
-  },
-  pre_error: function(xhr, textStatus, errorThrown) {
-    if(console) console.log(xhr.status + " " + xhr.statusText);
-    if(console) console.log(xhr);
-    //if (console) console.log(textStatus);
-    //if (console) console.log(errorThrown);
-  }
-});
-
-var APIError = Class.extend({
-  init: function(xhr) {
-    var self = this;
-    this.xhr = xhr;
-  },
-  getStatus: function() {
-    return this.xhr.status;
-  },
-  getErrorText: function() {
-    return this.errorText;
-  },
-  getXHRObject: function() {
-    return this.xhr;
   }
 });
 
