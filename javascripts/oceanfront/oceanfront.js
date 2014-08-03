@@ -2307,11 +2307,12 @@ var DeckPanel = ComplexPanel.extend({
   init: function() {
     this._super();
     this.visibleWidget = null;
+    this.hashIndex = {};
     this.setElement(DOM.createDiv());
     this.setStyleName('of-DeckPanel');
   },
-  add: function(widget) {
-    this.insert(widget, this.getWidgetCount());
+  add: function(widget, hashIndex) {
+    this.insert(widget, this.getWidgetCount(), hashIndex);
   },
   getVisibleWidget: function() {
     return this.getWidgetIndex(this.visibleWidget);
@@ -2325,23 +2326,39 @@ var DeckPanel = ComplexPanel.extend({
   getWidgetIndex: function(child) {
     return this.children.index(child);
   },
-  insert: function(widget, beforeIndex) {
+  insert: function(widget, beforeIndex, hashIndex) {
     if((beforeIndex < 0) || (beforeIndex > this.getWidgetCount()))
       return;
     this._super(widget, this.getElement(), beforeIndex);
-    var child = widget.getElement();
+    if(hashIndex && typeof hashIndex === "string") {
+      // Add hash index
+      this.hashIndex[hashIndex] = beforeIndex;
+    }
+    //var child = widget.getElement();
     //DOM.setStyleAttribute(child, 'width', '100%');
     //DOM.setStyleAttribute(child, 'height', '100%');
     widget.setVisible(false);
   },
   remove: function(widget) {
+    var index = this.getWidgetIndex(widget);
     if(!this._super(widget))
       return;
     if(this.visibleWidget == widget)
       this.visibleWidget = null;
+    // Delete the record in hashIndex if there is any, we need to searc for index value
+    for(var prop in this.hashIndex) {
+      if(this.hashIndex.hasOwnProperty(prop)) {
+        if(this.hashIndex[prop] == index) {
+          delete this.hashIndex[prop];
+        }
+      }
+    }
     return true;
   },
   showWidget: function(index) {
+    if(typeof index === "string") {
+      index = this.hashIndex[index];
+    }
     this.checkIndex(index);
     if(this.visibleWidget != null)
       this.visibleWidget.setVisible(false);
@@ -2359,6 +2376,9 @@ var DeckPanel = ComplexPanel.extend({
   		return;
   	}
     */
+    if(typeof index === "string") {
+      index = this.hashIndex[index];
+    }
     this.checkIndex(index);
   	var self = this;
     if(this.visibleWidget != null) {
