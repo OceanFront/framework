@@ -2358,6 +2358,10 @@ var DeckPanel = ComplexPanel.extend({
   showWidget: function(index) {
     if(typeof index === "string") {
       index = this.hashIndex[index];
+      if(index === undefined) {
+        if(console) console.error("Deckpanel#showWidget bad index string!");
+        return;
+      }
     }
     this.checkIndex(index);
     if(this.visibleWidget != null)
@@ -2378,6 +2382,10 @@ var DeckPanel = ComplexPanel.extend({
     */
     if(typeof index === "string") {
       index = this.hashIndex[index];
+      if(index === undefined) {
+        if(console) console.error("Deckpanel#fadeToWidget bad index string!");
+        return;
+      }
     }
     this.checkIndex(index);
   	var self = this;
