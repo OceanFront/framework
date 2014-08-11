@@ -1,3 +1,9 @@
+/**
+ * Ocean API Extensio module and convenience Classes
+ *
+ * @module extension-ocean
+ */
+
 var CMSObject = Widget.extend({
   init: function(cmsobj, wordwrap) {
     /*

@@ -1,3 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>oceanfront.js</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title=""></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Array.html">Array</a></li>
+            
+                <li><a href="../classes/Class.html">Class</a></li>
+            
+                <li><a href="../classes/html.html">html</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/oceanfront.html">oceanfront</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: oceanfront.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
 ////////////////////////////////////////////////////////////////////
 //                    OceanFront Framework
 //                David Tatti | Lars Rustemeier
@@ -43,16 +137,16 @@
     var _super = this.prototype;
 
     // Instantiate a base class (but only create the instance,
-    // don't run the init constructor)
+    // don&#x27;t run the init constructor)
     initializing = true;
     var prototype = new this();
     initializing = false;
 
     // Copy the properties over onto the new prototype
     for (var name in prop) {
-      // Check if we're overwriting an existing function
-      prototype[name] = typeof prop[name] == "function" &&
-  typeof _super[name] == "function" && fnTest.test(prop[name]) ?
+      // Check if we&#x27;re overwriting an existing function
+      prototype[name] = typeof prop[name] == &quot;function&quot; &amp;&amp;
+  typeof _super[name] == &quot;function&quot; &amp;&amp; fnTest.test(prop[name]) ?
   (function(name, fn){
     return function() {
       var tmp = this._super;
@@ -62,7 +156,7 @@
       this._super = _super[name];
 
       // The method only need to be bound temporarily, so we
-      // remove it when we're done executing
+      // remove it when we&#x27;re done executing
       var ret = fn.apply(this, arguments);
       this._super = tmp;
 
@@ -75,7 +169,7 @@
     // The dummy class constructor
     function Class() {
       // All construction is actually done in the init method
-      if ( !initializing && this.init )
+      if ( !initializing &amp;&amp; this.init )
         this.init.apply(this, arguments);
     }
 
@@ -99,8 +193,8 @@
  *
  * Exposes a recursive functionality to easily build local DOM trees in widgets programmatically
  * Example syntax for 2 nested div-nodes with each 1 set attribute:
- * var tree = html.div{(class:'div1-class'),
- *                    html.div{(id:'innerDiv')}};
+ * var tree = html.div{(class:&#x27;div1-class&#x27;),
+ *                    html.div{(id:&#x27;innerDiv&#x27;)}};
  *
  * Date: Ons 26 Jan 2011 15:35:35 CET
  */
@@ -110,18 +204,18 @@ __stack = undefined;
 /**
  * Exposes a recursive functionality to easily build local DOM trees in widgets programmatically
  * Example syntax for 2 nested div-nodes with each 1 set attribute:
- * var tree = html.div{(class:'div1-class'),
- *                    html.div{(id:'innerDiv')}};
+ * var tree = html.div{(class:&#x27;div1-class&#x27;),
+ *                    html.div{(id:&#x27;innerDiv&#x27;)}};
  *
  * @class html
  * 
  */
 var html = (function() {
   var tags = 
-    ['canvas', 'datalist', 'nav', 'html','head','title','base','meta','link','style','script','noscript','body','div','p','h1','h2','h3','h4','h5','h6','ul','ol','li','dl','dt','dd','address','hr','pre','blockquote','ins','del','a','span','bdo','br','em','strong','dfn','code','samp','kbd','var','cite','abbr','acronym','q','sub','sup','tt','i','b','big','small','object','param','img','map','area','form','label','input','select','optgroup','option','textarea','fieldset','legend','button','table','caption','thead','tfoot','tbody','colgroup','col','tr','th','td','iframe'];
+    [&#x27;canvas&#x27;, &#x27;datalist&#x27;, &#x27;nav&#x27;, &#x27;html&#x27;,&#x27;head&#x27;,&#x27;title&#x27;,&#x27;base&#x27;,&#x27;meta&#x27;,&#x27;link&#x27;,&#x27;style&#x27;,&#x27;script&#x27;,&#x27;noscript&#x27;,&#x27;body&#x27;,&#x27;div&#x27;,&#x27;p&#x27;,&#x27;h1&#x27;,&#x27;h2&#x27;,&#x27;h3&#x27;,&#x27;h4&#x27;,&#x27;h5&#x27;,&#x27;h6&#x27;,&#x27;ul&#x27;,&#x27;ol&#x27;,&#x27;li&#x27;,&#x27;dl&#x27;,&#x27;dt&#x27;,&#x27;dd&#x27;,&#x27;address&#x27;,&#x27;hr&#x27;,&#x27;pre&#x27;,&#x27;blockquote&#x27;,&#x27;ins&#x27;,&#x27;del&#x27;,&#x27;a&#x27;,&#x27;span&#x27;,&#x27;bdo&#x27;,&#x27;br&#x27;,&#x27;em&#x27;,&#x27;strong&#x27;,&#x27;dfn&#x27;,&#x27;code&#x27;,&#x27;samp&#x27;,&#x27;kbd&#x27;,&#x27;var&#x27;,&#x27;cite&#x27;,&#x27;abbr&#x27;,&#x27;acronym&#x27;,&#x27;q&#x27;,&#x27;sub&#x27;,&#x27;sup&#x27;,&#x27;tt&#x27;,&#x27;i&#x27;,&#x27;b&#x27;,&#x27;big&#x27;,&#x27;small&#x27;,&#x27;object&#x27;,&#x27;param&#x27;,&#x27;img&#x27;,&#x27;map&#x27;,&#x27;area&#x27;,&#x27;form&#x27;,&#x27;label&#x27;,&#x27;input&#x27;,&#x27;select&#x27;,&#x27;optgroup&#x27;,&#x27;option&#x27;,&#x27;textarea&#x27;,&#x27;fieldset&#x27;,&#x27;legend&#x27;,&#x27;button&#x27;,&#x27;table&#x27;,&#x27;caption&#x27;,&#x27;thead&#x27;,&#x27;tfoot&#x27;,&#x27;tbody&#x27;,&#x27;colgroup&#x27;,&#x27;col&#x27;,&#x27;tr&#x27;,&#x27;th&#x27;,&#x27;td&#x27;,&#x27;iframe&#x27;];
   var res = {};
 
-  for(var i=0; i<tags.length; i++) {
+  for(var i=0; i&lt;tags.length; i++) {
     var tag = tags[i];
     res[tag] = (function(etag) { return function() {
           var elem = document.createElement(etag);
@@ -133,17 +227,17 @@ var html = (function() {
             start = 1;
             for(var key in arg0) {
               if(arg0.hasOwnProperty(key)) {
-                if(key === 'style') {
-                  var arr = arg0[key].split(";");
-                  for(var i=0;i<arr.length;i++) {
+                if(key === &#x27;style&#x27;) {
+                  var arr = arg0[key].split(&quot;;&quot;);
+                  for(var i=0;i&lt;arr.length;i++) {
                     if(arr[i].length === 0)
                       continue;
-                    var pair = arr[i].split(":");
+                    var pair = arr[i].split(&quot;:&quot;);
                     var name = pair[0], val=pair[1];
-                    //alert(name+":"+val);
+                    //alert(name+&quot;:&quot;+val);
                     try {
                       elem.style[name] = val;
-                    }catch(e) { alert("OUCH!"); }
+                    }catch(e) { alert(&quot;OUCH!&quot;); }
                   }
                 }
                 else
@@ -151,12 +245,12 @@ var html = (function() {
               }
             }
           }
-          for (var i = start; i < arguments.length; i++) {
+          for (var i = start; i &lt; arguments.length; i++) {
             var arg = arguments[i];
             if(arg == undefined)
-              throw "html canvas: undefined argument "+i+", for tag <"+etag+">";  
+              throw &quot;html canvas: undefined argument &quot;+i+&quot;, for tag &lt;&quot;+etag+&quot;&gt;&quot;;  
             if (arg.constructor == Array) {
-              for (var j = 0; j < arg.length; j++) {
+              for (var j = 0; j &lt; arg.length; j++) {
                 elem.appendChild(arg[j]);
               }
             } else if (arg.constructor == String) {
@@ -181,7 +275,7 @@ var html = (function() {
     document.getElementById(id).appendChild(element);
   };
   res.replace = function(parent, replacement) {
-    if(parent.children.length >0)
+    if(parent.children.length &gt;0)
       parent.removeChild(parent.children[0]); 
     this.append(parent, replacement);
   };
@@ -192,13 +286,15 @@ var html = (function() {
     var start = (new Date).getTime();
     thunk();
     var diff = (new Date).getTime() - start;
-    html.append_at(target_id, html.p({'class':'benchmark'},"Time taken: "+diff));
+    html.append_at(target_id, html.p({&#x27;class&#x27;:&#x27;benchmark&#x27;},&quot;Time taken: &quot;+diff));
   };
   return res;
 })();
 
+/* Array convinience functions */
+
 /**
- * Base JavaScript Array class used for extending with convenience functions
+ * Base JavaScript Array class used for extending with convinience functions
  *
  * @class Array
  * 
@@ -211,7 +307,7 @@ var html = (function() {
  * 
  */
 Array.prototype.remove = function(s) {
-  for(var i=0;i<this.length;i++)
+  for(var i=0;i&lt;this.length;i++)
     if(s==this[i]) this.splice(i, 1);
 };
 
@@ -222,7 +318,7 @@ Array.prototype.remove = function(s) {
  * @return {Number} Index value of Object position
  */
 Array.prototype.index = function(obj) {
-  for(var i=0;i<this.length;i++)
+  for(var i=0;i&lt;this.length;i++)
     if(this[i] == obj)
       return i;
   return null;
@@ -256,10 +352,10 @@ function gdispatchEvent(evt) {
   var evt = evt || window.event;
   var listener;
   var curElem = this;
-  while(curElem && !(listener = curElem.__listener)) {
+  while(curElem &amp;&amp; !(listener = curElem.__listener)) {
     curElem = curElem.parentNode;
   }
-  if(curElem && curElem.nodeType != 1)
+  if(curElem &amp;&amp; curElem.nodeType != 1)
     curElem = null;
   if(listener)
     DOM.dispatchEvent(evt, curElem, listener);
@@ -276,17 +372,17 @@ var HashFactoryBase = Class.extend({
 
   },
   setURL: function(appState, obj) {
-    if(console) console.warn("Did not override setURL in HashFactoryBase! Add your app logic in an override!");
+    if(console) console.warn(&quot;Did not override setURL in HashFactoryBase! Add your app logic in an override!&quot;);
   },
   parseURL: function() {
-    if(console) console.warn("Did not override parseURL in HashFactoryBase! Add your app logic in an override!");
+    if(console) console.warn(&quot;Did not override parseURL in HashFactoryBase! Add your app logic in an override!&quot;);
   },
   flowTo: function(appState) {
-    if(console) console.warn("Did not override flowTo in HashFactoryBase! Add your app logic in override!");
+    if(console) console.warn(&quot;Did not override flowTo in HashFactoryBase! Add your app logic in override!&quot;);
   },
   goto: function(appState, obj) {
     // Flow logic for application
-    if(console) console.warn("Did not override goto in HashFactoryBase! Add your app logic in override!");
+    if(console) console.warn(&quot;Did not override goto in HashFactoryBase! Add your app logic in override!&quot;);
   }
 });
 
@@ -294,12 +390,12 @@ var HashFactoryBase = Class.extend({
 // low level dom abstraction
 var DOM = {
   // Constants
-  ALIGN_LEFT:   "left",
-  ALIGN_CENTER: "center",
-  ALIGN_RIGHT:  "right",
-  ALIGN_TOP:    "top",
-  ALIGN_MIDDLE: "middle",
-  ALIGN_BOTTOM: "bottom",
+  ALIGN_LEFT:   &quot;left&quot;,
+  ALIGN_CENTER: &quot;center&quot;,
+  ALIGN_RIGHT:  &quot;right&quot;,
+  ALIGN_TOP:    &quot;top&quot;,
+  ALIGN_MIDDLE: &quot;middle&quot;,
+  ALIGN_BOTTOM: &quot;bottom&quot;,
 
   // KEYMODS
   MODIFIER_ALT:   4,
@@ -314,39 +410,39 @@ var DOM = {
   // Element creation
   createElement:   function(tag) { return document.createElement(tag); },
   createText:      function(text) { return document.createTextNode(text); },
-  createTextArea:  function() { return this.createElement('textarea'); },
-  createDiv:       function() { return this.createElement('div'); },
-  createSpan:      function() { return this.createElement('span'); },
-  createAnchor:    function() { return this.createElement('a'); },
-  createButton:    function() { return this.createElement('button'); },
-  createForm:      function() { return this.createElement('form'); },
-  createImage:     function() { return this.createElement('img'); },
-  createImg:       function() { return this.createElement('img'); },
-  createTable:     function() { return this.createElement('table'); },
-  createTR:        function() { return this.createElement('tr'); },
-  createTD:        function() { return this.createElement('td'); },
-  createTBody:     function() { return this.createElement('tbody'); },
-  createLabel:     function() { return this.createElement('label'); },
-  createSelect:    function() { return this.createElement('select');  },
-  createH1:    function() { return this.createElement('h1');  },
-  createH2:    function() { return this.createElement('h2');  },
-  createH3:    function() { return this.createElement('h3');  },
+  createTextArea:  function() { return this.createElement(&#x27;textarea&#x27;); },
+  createDiv:       function() { return this.createElement(&#x27;div&#x27;); },
+  createSpan:      function() { return this.createElement(&#x27;span&#x27;); },
+  createAnchor:    function() { return this.createElement(&#x27;a&#x27;); },
+  createButton:    function() { return this.createElement(&#x27;button&#x27;); },
+  createForm:      function() { return this.createElement(&#x27;form&#x27;); },
+  createImage:     function() { return this.createElement(&#x27;img&#x27;); },
+  createImg:       function() { return this.createElement(&#x27;img&#x27;); },
+  createTable:     function() { return this.createElement(&#x27;table&#x27;); },
+  createTR:        function() { return this.createElement(&#x27;tr&#x27;); },
+  createTD:        function() { return this.createElement(&#x27;td&#x27;); },
+  createTBody:     function() { return this.createElement(&#x27;tbody&#x27;); },
+  createLabel:     function() { return this.createElement(&#x27;label&#x27;); },
+  createSelect:    function() { return this.createElement(&#x27;select&#x27;);  },
+  createH1:    function() { return this.createElement(&#x27;h1&#x27;);  },
+  createH2:    function() { return this.createElement(&#x27;h2&#x27;);  },
+  createH3:    function() { return this.createElement(&#x27;h3&#x27;);  },
   createInputRadio:function(group) {
-    var element = this.createElement("INPUT");
-    element.type = 'radio';
+    var element = this.createElement(&quot;INPUT&quot;);
+    element.type = &#x27;radio&#x27;;
     element.name = group;
     return element;
   },
   createInputElement: function(type) {
-    var e = this.createElement('input');
+    var e = this.createElement(&#x27;input&#x27;);
     if(!$.browser.msie) {
       e.type = type;
     }
     return e;
   },
-  createInputCheck: function() { return this.createInputElement('checkbox'); },
-  createInputPassword: function() { return this.createInputElement('password'); },
-  createIFrame: function() { return this.createElement('iframe');},
+  createInputCheck: function() { return this.createInputElement(&#x27;checkbox&#x27;); },
+  createInputPassword: function() { return this.createInputElement(&#x27;password&#x27;); },
+  createIFrame: function() { return this.createElement(&#x27;iframe&#x27;);},
 
   // Attributes
   setAttribute: function(element, attribute, value) {
@@ -383,7 +479,7 @@ var DOM = {
   appendChild: function(parent, element) {
     if(parent == null || element == null) {
       if(console)
-        console.error("DOM.appendChild called with null value");
+        console.error(&quot;DOM.appendChild called with null value&quot;);
     } else {
       parent.appendChild(element);
     }
@@ -403,14 +499,14 @@ var DOM = {
   },
   getNextSibling: function(element) {
     var sib = element.nextSibling;
-    while (sib && sib.nodeType != 1) {
+    while (sib &amp;&amp; sib.nodeType != 1) {
       sib = sib.nextSibling;
     }
     return sib ? sib : null;
   },
   getFirstChild: function(element) {
     var child = element.firstChild;
-    while (child && child.nodeType != 1) {
+    while (child &amp;&amp; child.nodeType != 1) {
       child = child.nextSibling;
     }
     return child ? child : null;
@@ -438,10 +534,10 @@ var DOM = {
     return parent ? parent : null;
   },
   insertListItem: function(select, item, value, index) {
-    var option = this.createElement("option");
+    var option = this.createElement(&quot;option&quot;);
     this.setInnerText(option, item);
     if(value != null)
-      this.setAttribute(option, "value", value);
+      this.setAttribute(option, &quot;value&quot;, value);
     if (index == -1)
       this.appendChild(select, option);
     else
@@ -455,37 +551,37 @@ var DOM = {
   sinkEvents: function(element, bits) {
     element.__eventBits = bits;
 
-    element.onclick       = (bits & Event.ONCLICK) ? gdispatchEvent : null;
-    element.ondblclick    = (bits & Event.ONDBLCLICK) ? gdispatchEvent : null;
-    element.onmousedown   = (bits & Event.ONMOUSEDOWN) ? gdispatchEvent : null;
-    element.onmouseup     = (bits & Event.ONMOUSEUP) ? gdispatchEvent : null;
-    element.onmouseover   = (bits & Event.ONMOUSEOVER) ? gdispatchEvent : null;
-    element.onmouseout    = (bits & Event.ONMOUSEOUT) ? gdispatchEvent : null;
-    element.onmousemove   = (bits & Event.ONMOUSEMOVE) ? gdispatchEvent : null;
-    element.onkeydown     = (bits & Event.ONKEYDOWN) ? gdispatchEvent : null;
-    element.onkeypress    = (bits & Event.ONKEYPRESS) ? gdispatchEvent : null;
-    element.onkeyup       = (bits & Event.ONKEYUP) ? gdispatchEvent : null;
-    element.onchange      = (bits & Event.ONCHANGE) ? gdispatchEvent : null;
-    element.onfocus       = (bits & Event.ONFOCUS) ? gdispatchEvent : null;
-    element.onblur        = (bits & Event.ONBLUR) ? gdispatchEvent : null;
-    element.onlosecapture = (bits & Event.ONLOSECAPTURE) ? gdispatchEvent : null;
-    element.onscroll      = (bits & Event.ONSCROLL) ? gdispatchEvent : null;
-    element.onload        = (bits & Event.ONLOAD) ? gdispatchEvent : null;
-    element.onloadstart   = (bits & Event.ONLOADSTART) ? gdispatchEvent : null;
-    element.onloadend     = (bits & Event.ONLOADEND) ? gdispatchEvent : null;
-    element.onerror       = (bits & Event.ONERROR) ? gdispatchEvent : null;
-    element.oncontextmenu = (bits & Event.ONCONTEXTMENU) ? gdispatchEvent : null;
-    element.onabort       = (bits & Event.ONABORT) ? gdispatchEvent : null;
-    element.onprogress    = (bits & Event.ONPROGRESS) ? gdispatchEvent : null;
-    element.ondragstart   = (bits & Event.ONDRAGSTART) ? gdispatchEvent : null;
-    element.ondrag        = (bits & Event.ONDRAG) ? gdispatchEvent : null;
-    element.ondragenter   = (bits & Event.ONDRAGENTER) ? gdispatchEvent : null;
-    element.ondragleave   = (bits & Event.ONDRAGLEAVE) ? gdispatchEvent : null;
-    element.ondragover    = (bits & Event.ONDRAGOVER) ? gdispatchEvent : null;
-    element.ondrop        = (bits & Event.ONDROP) ? gdispatchEvent : null;
-    element.ondragend     = (bits & Event.ONDRAGEND) ? gdispatchEvent : null;
-    element.onsearch      = (bits & Event.ONSEARCH) ? gdispatchEvent : null;
-    element.onsubmit      = (bits & Event.ONSUBMIT) ? gdispatchEvent : null;
+    element.onclick       = (bits &amp; Event.ONCLICK) ? gdispatchEvent : null;
+    element.ondblclick    = (bits &amp; Event.ONDBLCLICK) ? gdispatchEvent : null;
+    element.onmousedown   = (bits &amp; Event.ONMOUSEDOWN) ? gdispatchEvent : null;
+    element.onmouseup     = (bits &amp; Event.ONMOUSEUP) ? gdispatchEvent : null;
+    element.onmouseover   = (bits &amp; Event.ONMOUSEOVER) ? gdispatchEvent : null;
+    element.onmouseout    = (bits &amp; Event.ONMOUSEOUT) ? gdispatchEvent : null;
+    element.onmousemove   = (bits &amp; Event.ONMOUSEMOVE) ? gdispatchEvent : null;
+    element.onkeydown     = (bits &amp; Event.ONKEYDOWN) ? gdispatchEvent : null;
+    element.onkeypress    = (bits &amp; Event.ONKEYPRESS) ? gdispatchEvent : null;
+    element.onkeyup       = (bits &amp; Event.ONKEYUP) ? gdispatchEvent : null;
+    element.onchange      = (bits &amp; Event.ONCHANGE) ? gdispatchEvent : null;
+    element.onfocus       = (bits &amp; Event.ONFOCUS) ? gdispatchEvent : null;
+    element.onblur        = (bits &amp; Event.ONBLUR) ? gdispatchEvent : null;
+    element.onlosecapture = (bits &amp; Event.ONLOSECAPTURE) ? gdispatchEvent : null;
+    element.onscroll      = (bits &amp; Event.ONSCROLL) ? gdispatchEvent : null;
+    element.onload        = (bits &amp; Event.ONLOAD) ? gdispatchEvent : null;
+    element.onloadstart   = (bits &amp; Event.ONLOADSTART) ? gdispatchEvent : null;
+    element.onloadend     = (bits &amp; Event.ONLOADEND) ? gdispatchEvent : null;
+    element.onerror       = (bits &amp; Event.ONERROR) ? gdispatchEvent : null;
+    element.oncontextmenu = (bits &amp; Event.ONCONTEXTMENU) ? gdispatchEvent : null;
+    element.onabort       = (bits &amp; Event.ONABORT) ? gdispatchEvent : null;
+    element.onprogress    = (bits &amp; Event.ONPROGRESS) ? gdispatchEvent : null;
+    element.ondragstart   = (bits &amp; Event.ONDRAGSTART) ? gdispatchEvent : null;
+    element.ondrag        = (bits &amp; Event.ONDRAG) ? gdispatchEvent : null;
+    element.ondragenter   = (bits &amp; Event.ONDRAGENTER) ? gdispatchEvent : null;
+    element.ondragleave   = (bits &amp; Event.ONDRAGLEAVE) ? gdispatchEvent : null;
+    element.ondragover    = (bits &amp; Event.ONDRAGOVER) ? gdispatchEvent : null;
+    element.ondrop        = (bits &amp; Event.ONDROP) ? gdispatchEvent : null;
+    element.ondragend     = (bits &amp; Event.ONDRAGEND) ? gdispatchEvent : null;
+    element.onsearch      = (bits &amp; Event.ONSEARCH) ? gdispatchEvent : null;
+    element.onsubmit      = (bits &amp; Event.ONSUBMIT) ? gdispatchEvent : null;
   },
   setEventListener: function(element, listener) {
     element.__listener = listener;
@@ -510,7 +606,7 @@ var DOM = {
     element.appendChild(this.createText(text));
   },
   getInnerText: function(element) {
-    var text = '', child = element.firstChild;
+    var text = &#x27;&#x27;, child = element.firstChild;
     while (child) {
       if (child.nodeType == 1){
         // 1 == Element node
@@ -549,15 +645,15 @@ var DOM = {
            },
   /* style names */
   setStyleName: function(element, style) {
-    this.setAttribute(element, 'className', style);
+    this.setAttribute(element, &#x27;className&#x27;, style);
   },
   getStyleName: function(element) {
-    return this.getAttribute(element, 'className');
+    return this.getAttribute(element, &#x27;className&#x27;);
   },
   removeStyleName: function(element, style) {
     var names = this.getStyleNames(element);
     names.remove(style);
-    this.setStyleName(element, names.join(' '));
+    this.setStyleName(element, names.join(&#x27; &#x27;));
   },
   addStyleName: function(element, style){
     var curr_style = this.getStyleName(element);
@@ -566,18 +662,18 @@ var DOM = {
       if(curr_style.length == 0 || names.length == 0)
         this.setStyleName(element, style);
       else
-        this.setStyleName(element, curr_style + " " + style);
+        this.setStyleName(element, curr_style + &quot; &quot; + style);
     }
   },
   getStyleNames: function(element) {
-    return this.getStyleName(element).split(' ');
+    return this.getStyleName(element).split(&#x27; &#x27;);
   },
   // FOCUS
   blur: function(elem) {
     elem.blur();
   },
   createFocusable: function() {
-    var e = $doc.createElement("DIV");
+    var e = $doc.createElement(&quot;DIV&quot;);
     e.tabIndex = 0;
     return e;
   },
@@ -646,37 +742,37 @@ var DOM = {
   },
   eventGetTypeInt: function(event) {
     switch (event.type) {
-      case "blur": return Event.ONBLUR;
-      case "change": return Event.ONCHANGE;
-      case "click": return Event.ONCLICK;
-      case "dblclick": return Event.ONDBLCLICK;
-      case "focus": return Event.ONFOCUS;
-      case "keydown": return Event.ONKEYDOWN;
-      case "keypress": return Event.ONKEYPRESS;
-      case "keyup": return Event.ONKEYUP;
-      case "load": return Event.ONLOAD;
-      case "losecapture": return Event.ONLOSECAPTURE;
-      case "mousedown": return Event.ONMOUSEDOWN;
-      case "mousemove": return Event.ONMOUSEMOVE;
-      case "mouseout": return Event.ONMOUSEOUT;
-      case "mouseover": return Event.ONMOUSEUP;
-      case "mouseup": return Event.ONMOUSEUP;
-      case "scroll": return Event.ONSCROLL;
-      case "error": return Event.ONERROR;
-      case "contextmenu": return Event.ONCONTEXTMENU;
-      case "abort": return Event.ONABORT;
-      case "progress": return Event.ONPROGRESS;
-      case "loadend": return Event.ONLOADEND;
-      case "loadstart": return Event.ONLOADSTART;
-      case "dragstart": return Event.ONDRAGSTART;
-      case "drag": return Event.ONDRAG;
-      case "dragenter": return Event.ONDRAGENTER;
-      case "dragleave": return Event.ONDRAGLEAVE;
-      case "dragover": return Event.ONDRAGOVER;
-      case "drop": return Event.ONDROP;
-      case "dragend": return Event.ONDRAGEND;
-      case "search": return Event.ONSEARCH;
-      case "submit": return Event.ONSUBMIT;
+      case &quot;blur&quot;: return Event.ONBLUR;
+      case &quot;change&quot;: return Event.ONCHANGE;
+      case &quot;click&quot;: return Event.ONCLICK;
+      case &quot;dblclick&quot;: return Event.ONDBLCLICK;
+      case &quot;focus&quot;: return Event.ONFOCUS;
+      case &quot;keydown&quot;: return Event.ONKEYDOWN;
+      case &quot;keypress&quot;: return Event.ONKEYPRESS;
+      case &quot;keyup&quot;: return Event.ONKEYUP;
+      case &quot;load&quot;: return Event.ONLOAD;
+      case &quot;losecapture&quot;: return Event.ONLOSECAPTURE;
+      case &quot;mousedown&quot;: return Event.ONMOUSEDOWN;
+      case &quot;mousemove&quot;: return Event.ONMOUSEMOVE;
+      case &quot;mouseout&quot;: return Event.ONMOUSEOUT;
+      case &quot;mouseover&quot;: return Event.ONMOUSEUP;
+      case &quot;mouseup&quot;: return Event.ONMOUSEUP;
+      case &quot;scroll&quot;: return Event.ONSCROLL;
+      case &quot;error&quot;: return Event.ONERROR;
+      case &quot;contextmenu&quot;: return Event.ONCONTEXTMENU;
+      case &quot;abort&quot;: return Event.ONABORT;
+      case &quot;progress&quot;: return Event.ONPROGRESS;
+      case &quot;loadend&quot;: return Event.ONLOADEND;
+      case &quot;loadstart&quot;: return Event.ONLOADSTART;
+      case &quot;dragstart&quot;: return Event.ONDRAGSTART;
+      case &quot;drag&quot;: return Event.ONDRAG;
+      case &quot;dragenter&quot;: return Event.ONDRAGENTER;
+      case &quot;dragleave&quot;: return Event.ONDRAGLEAVE;
+      case &quot;dragover&quot;: return Event.ONDRAGOVER;
+      case &quot;drop&quot;: return Event.ONDROP;
+      case &quot;dragend&quot;: return Event.ONDRAGEND;
+      case &quot;search&quot;: return Event.ONSEARCH;
+      case &quot;submit&quot;: return Event.ONSUBMIT;
     }
   },
   eventGetTypeString: function(event) {
@@ -697,7 +793,7 @@ var DOM = {
     if (self.pageYOffset) {
       yScroll = self.pageYOffset;
       xScroll = self.pageXOffset;
-    } else if (document.documentElement && document.documentElement.scrollTop) {
+    } else if (document.documentElement &amp;&amp; document.documentElement.scrollTop) {
       yScroll = document.documentElement.scrollTop;
       xScroll = document.documentElement.scrollLeft;
     } else if (document.body) {// all other Explorers
@@ -711,7 +807,7 @@ var DOM = {
     var windowHeight;
     if (self.innerHeight) { // all except Explorer
       windowHeight = self.innerHeight;
-    } else if (document.documentElement && document.documentElement.clientHeight) {
+    } else if (document.documentElement &amp;&amp; document.documentElement.clientHeight) {
       windowHeight = document.documentElement.clientHeight;
     } else if (document.body) { // other Explorers
       windowHeight = document.body.clientHeight;
@@ -782,9 +878,9 @@ var NotificationCenter = Class.extend({
   },
   postNotification: function(notificationType, source) {
     var l = this.notificationListeners[notificationType];
-    for(var i=0; i<l.length; i++) {
-      if(l[i]['on'+notificationType]) {
-        l[i]['on'+notificationType](source);
+    for(var i=0; i&lt;l.length; i++) {
+      if(l[i][&#x27;on&#x27;+notificationType]) {
+        l[i][&#x27;on&#x27;+notificationType](source);
       } else { 
         l[i](source);
       }
@@ -818,7 +914,7 @@ var UIObject = Class.extend({
   },
   setAttributes: function(hash) {
     // Physical DOM node attributes
-    if(typeof hash === "object") {
+    if(typeof hash === &quot;object&quot;) {
       for(var obj in hash) {
         $(this.getElement()).attr(obj, hash[obj]);
       }
@@ -829,7 +925,7 @@ var UIObject = Class.extend({
     DOM.setEventListener(this.getElement(), this);
   },
   onBrowserEvent: function(event) {
-    // alert('unhandled event: '+DOM.eventGetType(event));
+    // alert(&#x27;unhandled event: &#x27;+DOM.eventGetType(event));
   },
   adoptTo: function(parent) {
     //DOM.insertChild(parent,this.getElement(),-1);
@@ -869,11 +965,11 @@ var UIObject = Class.extend({
     return DOM.getStyleName(this.getElement());
   },
   setWidth: function(width) {
-    this.setStyle('width',width);
+    this.setStyle(&#x27;width&#x27;,width);
     return this;
   },
   setHeight: function(height) {
-    this.setStyle('height',height);
+    this.setStyle(&#x27;height&#x27;,height);
     return this;
   },
   setSize: function(width, height) {
@@ -881,10 +977,10 @@ var UIObject = Class.extend({
     this.setHeight(height);
   },
   getWidth: function() {
-    return this.getStyle('width');
+    return this.getStyle(&#x27;width&#x27;);
   },
   getHeight: function(height) {
-    return this.getStyle('height');
+    return this.getStyle(&#x27;height&#x27;);
   },
   getAbsoluteLeft: function() {
     return DOM.getAbsoluteLeft(this.getElement());
@@ -893,22 +989,22 @@ var UIObject = Class.extend({
     return DOM.getAbsoluteTop(this.getElement());
   },
   setTitle: function(title) {
-    DOM.setAttribute(this.getElement(), "title", title);
+    DOM.setAttribute(this.getElement(), &quot;title&quot;, title);
   },
   isVisible: function() {
-    return this.getStyle('display') != 'none';
+    return this.getStyle(&#x27;display&#x27;) != &#x27;none&#x27;;
   },
   setVisible: function(bool) {
     if (bool)
-      this.setStyle('display','');
+      this.setStyle(&#x27;display&#x27;,&#x27;&#x27;);
     else
-      this.setStyle('display','none');
+      this.setStyle(&#x27;display&#x27;,&#x27;none&#x27;);
   },
   sinkEvents: function(bits) {
     DOM.sinkEvents(this.getElement(), bits);
   },
   setZindex: function(index) {
-    DOM.setIntStyleAttribute(this.getElement(),'zIndex',index);
+    DOM.setIntStyleAttribute(this.getElement(),&#x27;zIndex&#x27;,index);
     return this;
   }
 });
@@ -927,7 +1023,7 @@ var Widget = UIObject.extend({
     var oldparent = this.parent;
     this.parent = parent;
     if(parent == null) {
-      if((oldparent != null) && (oldparent.attached))
+      if((oldparent != null) &amp;&amp; (oldparent.attached))
 	this.onDetach();
     }
     else if (parent.attached) {
@@ -935,14 +1031,14 @@ var Widget = UIObject.extend({
     }
   },
   removeFromParent: function() {
-    if(this.parent && this.parent['remove'])
+    if(this.parent &amp;&amp; this.parent[&#x27;remove&#x27;])
       this.parent.remove(this);
   },
   getId: function() {
-    return DOM.getAttribute(this.getElement(),'id');
+    return DOM.getAttribute(this.getElement(),&#x27;id&#x27;);
   },
   setId: function(id) {
-    DOM.setAttribute(this.getElement(), 'id', id);
+    DOM.setAttribute(this.getElement(), &#x27;id&#x27;, id);
     return this;
   },
   setLayoutData: function(data) {
@@ -987,7 +1083,7 @@ var Panel = Widget.extend({
     this.children = [];
   },
   clear: function() {
-    for (var i = 0; i < this.children.length; i++) {
+    for (var i = 0; i &lt; this.children.length; i++) {
       // Physical detach
       var elem = this.children[i].getElement();
       DOM.removeChild(DOM.getParent(elem), elem);
@@ -999,11 +1095,11 @@ var Panel = Widget.extend({
     return true;
   },
   doDetachChildren: function() {
-    for(var i=0; i<this.children.length; i++)
+    for(var i=0; i&lt;this.children.length; i++)
       this.children[i].onDetach();
   },
   doAttachChildren: function() {
-    for(var i=0; i<this.children.length; i++)
+    for(var i=0; i&lt;this.children.length; i++)
       this.children[i].onAttach();
   },
   orphan: function(widget) {
@@ -1011,7 +1107,7 @@ var Panel = Widget.extend({
   },
   disown: function(widget) {
     if(widget.getParent() != this)
-      console.error("widget is not a child of this panel");
+      console.error(&quot;widget is not a child of this panel&quot;);
     else {
       var element = widget.getElement();
       widget.setParent(null);
@@ -1023,7 +1119,7 @@ var Panel = Widget.extend({
   adopt:function(widget, container, beforeIndex) {
     if(container) {
       widget.removeFromParent();
-      if(beforeIndex === 0 && container.firstChild) {
+      if(beforeIndex === 0 &amp;&amp; container.firstChild) {
         container.insertBefore(widget.getElement(), container.firstChild);
       } else {
         DOM.appendChild(container, widget.getElement());
@@ -1076,38 +1172,38 @@ var FocusWidget = Widget.extend({
   },
   onBrowserEvent: function(event) {
     var type = DOM.eventGetType(event);
-    if (type == 'click') {
-      for (var i = 0; i < this.clickListeners.length; i++) {
+    if (type == &#x27;click&#x27;) {
+      for (var i = 0; i &lt; this.clickListeners.length; i++) {
         this.clickListeners[i](this, event);
       }
     }
-    else if (type == 'blur' || type == 'focus') {
-      for (var i = 0; i < this.focusListeners.length; i++) {
+    else if (type == &#x27;blur&#x27; || type == &#x27;focus&#x27;) {
+      for (var i = 0; i &lt; this.focusListeners.length; i++) {
         this.focusListeners[i](this, event);
       }
     }
-    else if (type == 'keydown' || type == 'keypress' || type == 'keyup') {
-      for (var i = 0; i < this.keyboardListeners.length; i++) {
+    else if (type == &#x27;keydown&#x27; || type == &#x27;keypress&#x27; || type == &#x27;keyup&#x27;) {
+      for (var i = 0; i &lt; this.keyboardListeners.length; i++) {
         this.keyboardListeners[i](this, event);
       }
     }
-    else if (type == 'change') {
-      for (var i = 0; i < this.changeListeners.length; i++) {
+    else if (type == &#x27;change&#x27;) {
+      for (var i = 0; i &lt; this.changeListeners.length; i++) {
         this.changeListeners[i](this, event);
       }
     }
-    else if (type == 'mousedown') {
-      for (var i = 0; i < this.mousedownListeners.length; i++) {
+    else if (type == &#x27;mousedown&#x27;) {
+      for (var i = 0; i &lt; this.mousedownListeners.length; i++) {
         this.mousedownListeners[i](this, event);
       }
     }
-    else if (type == 'mouseup') {
-      for (var i = 0; i < this.mouseupListeners.length; i++) {
+    else if (type == &#x27;mouseup&#x27;) {
+      for (var i = 0; i &lt; this.mouseupListeners.length; i++) {
         this.mouseupListeners[i](this, event);
       }
     }
-    else if (type == 'mousemove') {
-      for (var i = 0; i < this.mousemoveListeners.length; i++) {
+    else if (type == &#x27;mousemove&#x27;) {
+      for (var i = 0; i &lt; this.mousemoveListeners.length; i++) {
         this.mousemoveListeners[i](this, event);
       }
     }
@@ -1121,11 +1217,11 @@ var SimplePanel = Panel.extend({
       element = DOM.createDiv();
     }
     this.setElement(element);
-    this.setStyleName('of-SimplePanel');
+    this.setStyleName(&#x27;of-SimplePanel&#x27;);
   },
   add: function(widget) {
     if(this.getWidget()){
-      console.error("Simple panel only supports one child");
+      console.error(&quot;Simple panel only supports one child&quot;);
       return;
     }
     this.setWidget(widget);
@@ -1139,7 +1235,7 @@ var SimplePanel = Panel.extend({
     return this.getElement();
   },
   getWidget: function() {
-    if(this.children.length > 0)
+    if(this.children.length &gt; 0)
       return this.children[0];
     else
       return null;
@@ -1220,33 +1316,33 @@ var CellPanel = ComplexPanel.extend({
     return DOM.getParent(widget.getElement());
   },
   setBorderWidth: function(width) {
-    DOM.setAttribute(this.table, 'border', width);
+    DOM.setAttribute(this.table, &#x27;border&#x27;, width);
   },
   setCellHeight: function(widget, height) {
     var td = DOM.getParent(widget.getElement());
-    DOM.setAttribute(td, 'height', height);
+    DOM.setAttribute(td, &#x27;height&#x27;, height);
   },
   setCellHorizontalAlignment: function(widget, align) {
     var td = this.getWidgetTd(widget);
     if (td != null)
-      DOM.setAttribute(td, 'align', align);
+      DOM.setAttribute(td, &#x27;align&#x27;, align);
   },
   setCellVerticalAlignment: function(widget, align) {
     var td = this.getWidgetTd(widget);
     if(td != null)
-      DOM.setStyleAttribute(td, 'verticalAlign', align);
+      DOM.setStyleAttribute(td, &#x27;verticalAlign&#x27;, align);
   },
   setCellWidth: function(widget, width) {
     var td = DOM.getParent(widget.getElement());
-    DOM.setAttribute(td, 'width', width);
+    DOM.setAttribute(td, &#x27;width&#x27;, width);
   },
   setSpacing: function(spacing) {
     this.spacing = spacing;
-    DOM.setAttribute(this.table, 'cellSpacing', spacing);
+    DOM.setAttribute(this.table, &#x27;cellSpacing&#x27;, spacing);
   },
   setPadding: function(padding) {
     this.padding = padding;
-    DOM.setAttribute(this.table, 'cellPadding', padding);
+    DOM.setAttribute(this.table, &#x27;cellPadding&#x27;, padding);
   }
 });
 
@@ -1259,7 +1355,7 @@ var ButtonBase = FocusWidget.extend({
   },
   setText: function(text) {
     if(!text)
-      text = "";
+      text = &quot;&quot;;
     DOM.setInnerText(this.getElement(), text);
     return this;
   },
@@ -1300,18 +1396,18 @@ var TextBoxBase = FocusWidget.extend({
     }
   },
   getName: function() {
-    return DOM.getAttribute(this.getElement(), 'name');
+    return DOM.getAttribute(this.getElement(), &#x27;name&#x27;);
   },
   setName: function(name) {
-    DOM.setAttribute(this.getElement(), 'name', name);
+    DOM.setAttribute(this.getElement(), &#x27;name&#x27;, name);
   },
   getText:function() {
-    return DOM.getAttribute(this.getElement(),"value");
+    return DOM.getAttribute(this.getElement(),&quot;value&quot;);
   },
   setText:function(text) {
     if(!text)
-      text = "";
-    DOM.setAttribute(this.getElement(),"value",text);
+      text = &quot;&quot;;
+    DOM.setAttribute(this.getElement(),&quot;value&quot;,text);
     return this;
   },
   getSelectedText: function() {
@@ -1322,7 +1418,7 @@ var TextBoxBase = FocusWidget.extend({
   },
   selectAll: function() {
     var length = this.getText().length;
-    if(length > 0)
+    if(length &gt; 0)
       this.setSelectionRange(0,length);
   },
   setSelectionRange:function(start,length) {
@@ -1330,16 +1426,16 @@ var TextBoxBase = FocusWidget.extend({
   },
   onBrowserEvent: function(event) {
 	 var type = event.type;
-	 if(type == 'change') {
-  		for (var i = 0; i < this.changeListeners.length; i++) {
+	 if(type == &#x27;change&#x27;) {
+  		for (var i = 0; i &lt; this.changeListeners.length; i++) {
   			var listener = this.changeListeners[i];
   			if (listener.onChange)
     				listener.onChange(this,event);
   			else
     				listener(this, event);
     		}
-  	} else if(type == 'search') {
-      for (var i = 0; i < this.searchListeners.length; i++) {
+  	} else if(type == &#x27;search&#x27;) {
+      for (var i = 0; i &lt; this.searchListeners.length; i++) {
           this.searchListeners[i](this, event);
         }
     } else {
@@ -1367,10 +1463,10 @@ var ValidationBoxBase = TextBoxBase.extend({
   },
   validate: function(showBubble) {
     // We can only show Bubble if we got a form pointer
-    if(this.validationFn && this.form) {
+    if(this.validationFn &amp;&amp; this.form) {
       var valid = this.validationFn();
       if(!valid) {
-        // Show error and supply form pointer so we can use it's bubble
+        // Show error and supply form pointer so we can use it&#x27;s bubble
         if(showBubble) {
           this.form.showErrorOnWidget(this);
         }
@@ -1380,8 +1476,8 @@ var ValidationBoxBase = TextBoxBase.extend({
         this.form.clearBubbleOnWidget(this);
       }
       return valid;
-    } else if (this.validationFn && !this.form) {
-      // Just validate since this object doesn't belong to a form, and cant show any bubble either
+    } else if (this.validationFn &amp;&amp; !this.form) {
+      // Just validate since this object doesn&#x27;t belong to a form, and cant show any bubble either
       return this.validationFn();
     } else {
       return false;
@@ -1391,19 +1487,19 @@ var ValidationBoxBase = TextBoxBase.extend({
 
 var TextBox = ValidationBoxBase.extend({
   init: function(fn) {
-    this._super(DOM.createInputElement('text'), fn);
+    this._super(DOM.createInputElement(&#x27;text&#x27;), fn);
   }
 });
 
 var SearchBox = ValidationBoxBase.extend({
   init: function(fn) {
-    this._super(DOM.createInputElement('search'), fn);
+    this._super(DOM.createInputElement(&#x27;search&#x27;), fn);
   }
 });
 
 var FileBox = ValidationBoxBase.extend({
   init: function(fn) {
-    this._super(DOM.createInputElement('file'), fn);
+    this._super(DOM.createInputElement(&#x27;file&#x27;), fn);
   }
 });
 
@@ -1411,9 +1507,9 @@ var AbsolutePanel = ComplexPanel.extend({
   init: function() {
     this._super();
     this.setElement(DOM.createDiv());
-    DOM.setStyleAttribute(this.getElement(), 'position', 'relative');
-    DOM.setStyleAttribute(this.getElement(), 'overflow', 'hidden');
-    this.setStyleName('of-AbsolutePanel');
+    DOM.setStyleAttribute(this.getElement(), &#x27;position&#x27;, &#x27;relative&#x27;);
+    DOM.setStyleAttribute(this.getElement(), &#x27;overflow&#x27;, &#x27;hidden&#x27;);
+    this.setStyleName(&#x27;of-AbsolutePanel&#x27;);
   },
   add: function(widget, left, top) {
     this._super(widget, this.getElement());
@@ -1423,28 +1519,28 @@ var AbsolutePanel = ComplexPanel.extend({
   setWidgetPosition: function(widget, left, top) {
     this.checkWidgetParent(widget);
     var h = widget.getElement();
-    if((left == -1) && (top == -1)) {
-      DOM.setStyleAttribute(h, 'left', '');
-      DOM.setStyleAttribute(h, 'top', '');
-      DOM.setStyleAttribute(h, 'position' ,'static');
+    if((left == -1) &amp;&amp; (top == -1)) {
+      DOM.setStyleAttribute(h, &#x27;left&#x27;, &#x27;&#x27;);
+      DOM.setStyleAttribute(h, &#x27;top&#x27;, &#x27;&#x27;);
+      DOM.setStyleAttribute(h, &#x27;position&#x27; ,&#x27;static&#x27;);
     }
     else {
-      DOM.setStyleAttribute(h, 'position', 'absolute');
-      DOM.setStyleAttribute(h, 'left', left + 'px');
-      DOM.setStyleAttribute(h, 'top', top + 'px');
+      DOM.setStyleAttribute(h, &#x27;position&#x27;, &#x27;absolute&#x27;);
+      DOM.setStyleAttribute(h, &#x27;left&#x27;, left + &#x27;px&#x27;);
+      DOM.setStyleAttribute(h, &#x27;top&#x27;, top + &#x27;px&#x27;);
     }
   },
   getWidgetLeft: function(widget) {
     this.checkWidgetParent(widget);
-    return DOM.getIntAttribute(widget.getElement(), 'offsetLeft');
+    return DOM.getIntAttribute(widget.getElement(), &#x27;offsetLeft&#x27;);
   },
   getWidgetTop: function(widget) {
     this.checkWidgetParent(widget);
-    return DOM.getIntAttribute(widget.getElement(), 'offsetTop');
+    return DOM.getIntAttribute(widget.getElement(), &#x27;offsetTop&#x27;);
   },
   checkWidgetParent: function(widget) {
     if(widget.getParent() != this)
-      console.error("Widget must be a child of this panel");
+      console.error(&quot;Widget must be a child of this panel&quot;);
   }
 });
 
@@ -1475,7 +1571,7 @@ var CheckBox = ButtonBase.extend({
   },
   setText: function(text) {
     if(!text)
-      text = "";
+      text = &quot;&quot;;
     DOM.setInnerText(this.labelElement,text);
     return this;
   },
@@ -1486,10 +1582,10 @@ var CheckBox = ButtonBase.extend({
     DOM.setInnerHTML(this.labelElement,html);
   },
   setWordWrap: function(wrap) {
-    var style = 'normal';
+    var style = &#x27;normal&#x27;;
     if(!wrap)
-      style = 'nowrap';
-    DOM.setStyleAttribute(this.getElement(), 'whiteSpace', style);
+      style = &#x27;nowrap&#x27;;
+    DOM.setStyleAttribute(this.getElement(), &#x27;whiteSpace&#x27;, style);
 
   }
 });
@@ -1507,7 +1603,7 @@ var CellFormatter = Class.extend({
     return DOM.getChild(this.outer.rowFormatter.getRow(this.outer.getBodyElement(), row), column);
   },
   getStyleName: function(row, column) {
-    return DOM.getAttribute(this.getElement(row, column), "className");
+    return DOM.getAttribute(this.getElement(row, column), &quot;className&quot;);
   },
   isVisible: function(row, column) {
     var element = this.getElement(row, column);
@@ -1523,25 +1619,25 @@ var CellFormatter = Class.extend({
   },
   setWidth: function(row, column, width) {
     this.outer.prepareCell(row, column);
-    DOM.setStyleAttribute(this.getCellElement(this.outer.getBodyElement(), row, column), "width", width);
+    DOM.setStyleAttribute(this.getCellElement(this.outer.getBodyElement(), row, column), &quot;width&quot;, width);
   },
   setHeight: function(row, column, height) {
     this.outer.prepareCell(row, column);
     var element = this.getCellElement(this.outer.getBodyElement(), row, column);
-    DOM.setStyleAttribute(element, "height", height);
+    DOM.setStyleAttribute(element, &quot;height&quot;, height);
   },
   setHorizontalAlignment: function(row, column, align) {
     this.outer.prepareCell(row, column);
     var element = this.getCellElement(this.outer.getBodyElement(), row, column);
-    DOM.setAttribute(element, "align", align);
+    DOM.setAttribute(element, &quot;align&quot;, align);
   },
   setStyleName: function(row, column, styleName) {
     this.outer.prepareCell(row, column);
-    this.setAttr(row, column, "className", styleName);
+    this.setAttr(row, column, &quot;className&quot;, styleName);
   },
   setVerticalAlignment: function(row, column, align) {
     this.outer.prepareCell(row, column);
-    DOM.setStyleAttribute(this.getCellElement(this.outer.getBodyElement(), row, column), "verticalAlign", align);
+    DOM.setStyleAttribute(this.getCellElement(this.outer.getBodyElement(), row, column), &quot;verticalAlign&quot;, align);
   },
   setVisible: function(row, column, visible) {
     var element = this.ensureElement(row, column);
@@ -1550,10 +1646,10 @@ var CellFormatter = Class.extend({
   setWordWrap: function(row, column, wrap) {
     this.outer.prepareCell(row, column);
     if(wrap)
-      wrap_str = "";
+      wrap_str = &quot;&quot;;
     else
-      wrap_str = "nowrap";
-    DOM.setStyleAttribute(this.getElement(row, column), "whiteSpace", wrap_str);
+      wrap_str = &quot;nowrap&quot;;
+    DOM.setStyleAttribute(this.getElement(row, column), &quot;whiteSpace&quot;, wrap_str);
   },
   getCellElement: function(table, row, col) {
     var out = table.rows[row].cells[col];
@@ -1601,9 +1697,9 @@ var HTMLTable = Panel.extend({
   	var type = DOM.eventGetType(event);
     //IE fix if
     event.target = (event.target) ? event.target : event.srcElement;
-    if(type === 'click' || type === 'keypress' || type === 'focus' || type === 'blur' || type === 'mouseover') {
+    if(type === &#x27;click&#x27; || type === &#x27;keypress&#x27; || type === &#x27;focus&#x27; || type === &#x27;blur&#x27; || type === &#x27;mouseover&#x27;) {
       DOM.eventCancelBubble(event,true);
-      for(var i=0; i<this.tableListeners.length; i++) {
+      for(var i=0; i&lt;this.tableListeners.length; i++) {
         this.tableListeners[i](this,event);
       }
     }
@@ -1617,7 +1713,7 @@ var HTMLTable = Panel.extend({
       this.removeWidget(widget);
       return true;
     }
-    DOM.setInnerHTML(td,'');
+    DOM.setInnerHTML(td,&#x27;&#x27;);
     return false;
   },
   cleanCell: function(row,col) {
@@ -1626,7 +1722,7 @@ var HTMLTable = Panel.extend({
     return td;
   },
   getWidget: function(elem) {
-  	var widget_hash = DOM.getAttribute(elem, '__hash');
+  	var widget_hash = DOM.getAttribute(elem, &#x27;__hash&#x27;);
   	return this.widgetMap[widget_hash];
   },
   removeWidget: function(widget) {
@@ -1638,7 +1734,7 @@ var HTMLTable = Panel.extend({
     var elem = widget.getElement();
     DOM.removeChild(DOM.getParent(elem), elem);
     // Logical detach.
-    var key = DOM.getAttribute(elem, '__hash');
+    var key = DOM.getAttribute(elem, &#x27;__hash&#x27;);
     delete this.widgetMap[key];
     return true;
   },
@@ -1650,9 +1746,9 @@ var HTMLTable = Panel.extend({
     var td = this.cleanCell(row,col);
     var widget_hash = hash(widget);
     var element = widget.getElement();
-    DOM.setAttribute(element, "__hash", widget_hash);
+    DOM.setAttribute(element, &quot;__hash&quot;, widget_hash);
     if(colspan)
-      $(td).attr("colspan", colspan);
+      $(td).attr(&quot;colspan&quot;, colspan);
     this.widgetMap[widget_hash] = widget;
     this.adopt(widget, td);
   },
@@ -1666,7 +1762,7 @@ var HTMLTable = Panel.extend({
     return this.bodyElement;
   },
   setBorderWidth: function(width) {
-    DOM.setAttribute(this.tableElement, "border", width);
+    DOM.setAttribute(this.tableElement, &quot;border&quot;, width);
   },
   getCellFormatter: function() {
     return this.cellFormatter;
@@ -1675,10 +1771,10 @@ var HTMLTable = Panel.extend({
     return this.rowFormatter;
   },
   setCellPadding: function(padding) {
-    DOM.setAttribute(this.tableElement, "cellPadding", padding);
+    DOM.setAttribute(this.tableElement, &quot;cellPadding&quot;, padding);
   },
   setCellSpacing: function(spacing) {
-    DOM.setAttribute(this.tableElement, "cellSpacing", spacing);
+    DOM.setAttribute(this.tableElement, &quot;cellSpacing&quot;, spacing);
   },
   addTableListener: function(listener) {
     this.tableListeners.push(listener);
@@ -1720,7 +1816,7 @@ var HTMLTable = Panel.extend({
 	return DOM.eventGetTarget(event);
   },
   getEventTargetWidget: function(event) {
-    var hash = DOM.getAttribute(this.getEventTargetCell(event),"__hash");
+    var hash = DOM.getAttribute(this.getEventTargetCell(event),&quot;__hash&quot;);
     return this.widgetMap[hash];
   } 
 });
@@ -1728,38 +1824,38 @@ var HTMLTable = Panel.extend({
 var Hidden = Widget.extend({
   init: function(name, value) {
     this._super();
-    var element = DOM.createElement('input');
+    var element = DOM.createElement(&#x27;input&#x27;);
     this.setElement(element);
-    DOM.setAttribute(element, 'type', 'hidden');
+    DOM.setAttribute(element, &#x27;type&#x27;, &#x27;hidden&#x27;);
     if(name)
       this.setName(name);
     if(value)
       this.setValue(value);
   },
   getDefaultValue: function() {
-    return DOM.getAttribute(this.getElement(), 'defaultValue');
+    return DOM.getAttribute(this.getElement(), &#x27;defaultValue&#x27;);
   },
   getName: function() {
-    return DOM.getAttribute(this.getElement(), 'name');
+    return DOM.getAttribute(this.getElement(), &#x27;name&#x27;);
   },
   getValue: function() {
-    return DOM.getAttribute(this.getElement(), 'value');
+    return DOM.getAttribute(this.getElement(), &#x27;value&#x27;);
   },
   setDefaultValue: function(defaultValue) {
-    DOM.setAttribute(this.getElement(), 'defaultValue', defaultValue);
+    DOM.setAttribute(this.getElement(), &#x27;defaultValue&#x27;, defaultValue);
   },
   setName: function(name) {
     if (!name) {
-      console.error('name can not be null!');
+      console.error(&#x27;name can not be null!&#x27;);
     } else if(name.length == 0) {
-      console.error('name can not be empty');
+      console.error(&#x27;name can not be empty&#x27;);
     }
     else {
-      DOM.setAttribute(this.getElement(), 'name', name);
+      DOM.setAttribute(this.getElement(), &#x27;name&#x27;, name);
     }
   },
   setValue: function(value) {
-    DOM.setAttribute(this.getElement(), 'value', value);
+    DOM.setAttribute(this.getElement(), &#x27;value&#x27;, value);
   }
 });
 
@@ -1777,7 +1873,7 @@ var Label = Widget.extend({
   },
   setText: function(text) {
     if(!text)
-      text = "";
+      text = &quot;&quot;;
     DOM.setInnerText(this.getElement(),text);
     return this;
   },
@@ -1785,10 +1881,10 @@ var Label = Widget.extend({
     DOM.setInnerHTML(this.getElement(), text);
   },
   setWordWrap: function(wrap) {
-    var style = 'normal';
+    var style = &#x27;normal&#x27;;
     if(!wrap)
-      style = 'nowrap';
-    DOM.setStyleAttribute(this.getElement(), 'whiteSpace', style);
+      style = &#x27;nowrap&#x27;;
+    DOM.setStyleAttribute(this.getElement(), &#x27;whiteSpace&#x27;, style);
 
   },
   getHorizontalAlignment: function() {
@@ -1796,7 +1892,7 @@ var Label = Widget.extend({
   },
   setHorizontalAlignment: function(align) {
     this.horizontalAlign = align;
-    DOM.setStyleAttribute(this.getElement(), 'textAlign', align);
+    DOM.setStyleAttribute(this.getElement(), &#x27;textAlign&#x27;, align);
   }
 });
 
@@ -1804,7 +1900,7 @@ var FlowPanel = ComplexPanel.extend({
   init: function() {
     this._super();
     this.setElement(DOM.createDiv());
-    //this.setStyleName('of-FlowPanel');
+    //this.setStyleName(&#x27;of-FlowPanel&#x27;);
   },
   add: function(widget) {
     this._super(widget, this.getElement());
@@ -1833,7 +1929,7 @@ var ValidationGroup = FlowPanel.extend({
   add: function(widget) {
     this._super(widget, this.getElement());
 
-    // If a validation object save it's reference
+    // If a validation object save it&#x27;s reference
     if(widget.validationObject) {
       this.group.push(widget);
     }
@@ -1849,10 +1945,10 @@ var ValidationGroup = FlowPanel.extend({
   },
   validate: function(showBubble) {
     // We can only show Bubble if we got a form pointer
-    if(this.validationFn && this.form) {
+    if(this.validationFn &amp;&amp; this.form) {
       var valid = this.validationFn();
       if(!valid) {
-        // Show error and supply form pointer so we can use it's bubble
+        // Show error and supply form pointer so we can use it&#x27;s bubble
         if(showBubble) {
           this.form.showErrorOnWidget(this);
         }
@@ -1862,8 +1958,8 @@ var ValidationGroup = FlowPanel.extend({
         this.form.clearBubbleOnWidget(this);
       }
       return valid;
-    } else if (this.validationFn && !this.form) {
-      // Just validate since this object doesn't belong to a form, and cant show any bubble either
+    } else if (this.validationFn &amp;&amp; !this.form) {
+      // Just validate since this object doesn&#x27;t belong to a form, and cant show any bubble either
       return this.validationFn();
     } else {
       return false;
@@ -1893,18 +1989,18 @@ var FocusPanel = FlowPanel.extend({
   },
   onBrowserEvent: function(event) {
     var type = DOM.eventGetType(event);
-    if (type == 'click') {
-      for (var i = 0; i < this.clickListeners.length; i++) {
+    if (type == &#x27;click&#x27;) {
+      for (var i = 0; i &lt; this.clickListeners.length; i++) {
         this.clickListeners[i](this, event);
       }
     }
-    else if (type == 'blur' || type == 'focus') {
-      for (var i = 0; i < this.focusListeners.length; i++) {
+    else if (type == &#x27;blur&#x27; || type == &#x27;focus&#x27;) {
+      for (var i = 0; i &lt; this.focusListeners.length; i++) {
         this.focusListeners[i](this, event);
       }
     }
-    else if (type == 'keydown' || type == 'keypress' || type == 'keyup') {
-      for (var i = 0; i < this.keyboardListeners.length; i++) {
+    else if (type == &#x27;keydown&#x27; || type == &#x27;keypress&#x27; || type == &#x27;keyup&#x27;) {
+      for (var i = 0; i &lt; this.keyboardListeners.length; i++) {
         this.keyboardListeners[i](this, event);
       }
     }
@@ -1916,8 +2012,8 @@ var VerticalPanel = CellPanel.extend({
     this._super();
     this.hAlign = DOM.ALIGN_LEFT;
     this.vAlign = DOM.ALIGN_TOP;
-    DOM.setAttribute(this.getTable(), 'cellSpacing', '0');
-    DOM.setAttribute(this.getTable(), 'cellPadding', '0');
+    DOM.setAttribute(this.getTable(), &#x27;cellSpacing&#x27;, &#x27;0&#x27;);
+    DOM.setAttribute(this.getTable(), &#x27;cellPadding&#x27;, &#x27;0&#x27;);
   },
   add: function(widget) {
     this.insert(widget, this.getWidgetCount());
@@ -1982,36 +2078,36 @@ var ScrollPanel = SimplePanel.extend({
     this.ensureVisibleImpl(scroll, element);
   },
   getScrollPosition: function() {
-    return DOM.getAttribute(this.getElement(), 'scrollTop');
+    return DOM.getAttribute(this.getElement(), &#x27;scrollTop&#x27;);
   },
   getHorizontalScrollPosition: function() {
-    return DOM.getAttribute(this.getElement(), 'scrollLeft');
+    return DOM.getAttribute(this.getElement(), &#x27;scrollLeft&#x27;);
   },
   onBrowserEvent: function(event) {
     var type = event.type;
-    if(type == 'scroll') {
-      for(var i=0; i<this.scrollListeners.length; i++)
+    if(type == &#x27;scroll&#x27;) {
+      for(var i=0; i&lt;this.scrollListeners.length; i++)
 	this.scrollListeners[i].onScroll(this, this.getHorizontalScrollPosition(), this.getScrollPosition());
     }
   },
   setAlwaysShowScrollBars: function(alwaysShow) {
-    var value = 'scroll';
+    var value = &#x27;scroll&#x27;;
     if(!alwaysShow)
-      value = 'auto';
-    DOM.setStyleAttribute(this.getElement(), 'overflow', value);
+      value = &#x27;auto&#x27;;
+    DOM.setStyleAttribute(this.getElement(), &#x27;overflow&#x27;, value);
   },
   setScrollPosition: function(position) {
-    DOM.setAttribute(this.getElement(), 'scrollTop', position);
+    DOM.setAttribute(this.getElement(), &#x27;scrollTop&#x27;, position);
   },
   setHorizontalScrollPosition: function(position) {
-    DOM.setAttribute(this.getElement(), 'scrollLeft', position);
+    DOM.setAttribute(this.getElement(), &#x27;scrollLeft&#x27;, position);
   },
   ensureVisibleImpl: function(scroll, element) {
     if (!e)
       return;
     var item = element;
     var realOffset = 0;
-    while (item && (item != scroll)) {
+    while (item &amp;&amp; (item != scroll)) {
       realOffset += item.offsetTop;
       item = item.offsetParent;
     }
@@ -2022,19 +2118,19 @@ var ScrollPanel = SimplePanel.extend({
 var TextArea = TextBoxBase.extend({
   init: function() {
     this._super(DOM.createTextArea());
-    this.setStyleName('wtr-TextArea');
+    this.setStyleName(&#x27;wtr-TextArea&#x27;);
   },
   getCharacterWidth: function() {
-    return DOM.getAttribute(this.getElement(), 'cols');
+    return DOM.getAttribute(this.getElement(), &#x27;cols&#x27;);
   },
   getVisibleLines: function() {
-    return DOM.getAttribute(this.getElement(), 'rows');
+    return DOM.getAttribute(this.getElement(), &#x27;rows&#x27;);
   },
   setVisibleLines: function(lines) {
-    DOM.setAttribute(this.getElement(), 'rows', lines);
+    DOM.setAttribute(this.getElement(), &#x27;rows&#x27;, lines);
   },
   setCharacterWidth: function(width) {
-    DOM.setAttribute(this.getElement(), 'cols', width);
+    DOM.setAttribute(this.getElement(), &#x27;cols&#x27;, width);
   }
 });
 
@@ -2046,7 +2142,7 @@ var RootPanel = AbsolutePanel.extend({
     this._super();
     if(!element)
 		  element = this.getBodyElement();
-  	else if(typeof(element) === 'string')
+  	else if(typeof(element) === &#x27;string&#x27;)
   		element = DOM.getElementById(element);
     this.setElement(element);
     this.onAttach();
@@ -2060,7 +2156,7 @@ var RadioButton = CheckBox.extend({
   init: function(group, label, asHTML) {
     this._super();
     this.initElement(DOM.createInputRadio(group));
-    this.setStyleName('of-RadioButton');
+    this.setStyleName(&#x27;of-RadioButton&#x27;);
     if(label != null) {
       if (asHTML == true)
       	this.setHTML(label);
@@ -2082,21 +2178,21 @@ var ListBox = FocusWidget.extend({
     this.changeListeners.push(listener);
   },
   getSelectedIndex: function() {
-    return DOM.getAttribute(this.getElement(), "selectedIndex");
+    return DOM.getAttribute(this.getElement(), &quot;selectedIndex&quot;);
   },
   getValue: function(index) {
     var option = DOM.getChild(this.getElement(), index);
-    return DOM.getAttribute(option, "value");
+    return DOM.getAttribute(option, &quot;value&quot;);
   },
   getSelectedValue: function() {
     var index = this.getSelectedIndex();
     return this.getValue(index);
   },
   getVisibleItemCount: function() {
-    return DOM.getAttribute(this.getElement(), "size");
+    return DOM.getAttribute(this.getElement(), &quot;size&quot;);
   },
   setVisibleItemCount: function(count) {
-    DOM.setAttribute(this.getElement(), "size", count);
+    DOM.setAttribute(this.getElement(), &quot;size&quot;, count);
   },
   insertItem: function(item, value, index) {
     DOM.insertListItem(this.getElement(), item, value, index);
@@ -2107,8 +2203,8 @@ var ListBox = FocusWidget.extend({
     return this;
   },
   onBrowserEvent: function(event) {
-    if(event.type == 'change') {
-      for (var i = 0; i < this.changeListeners.length; i++) {
+    if(event.type == &#x27;change&#x27;) {
+      for (var i = 0; i &lt; this.changeListeners.length; i++) {
 	       var listener = this.changeListeners[i];
 	       if (listener.onChange)
 	         listener.onChange(this,event);
@@ -2128,8 +2224,8 @@ var HorizontalPanel = CellPanel.extend({
     this.tableRow = DOM.createTR();
     DOM.appendChild(this.getBody(), this.tableRow);
 
-    DOM.setAttribute(this.getTable(), 'cellSpacing', '0');
-    DOM.setAttribute(this.getTable(), 'cellPadding', '0');
+    DOM.setAttribute(this.getTable(), &#x27;cellSpacing&#x27;, &#x27;0&#x27;);
+    DOM.setAttribute(this.getTable(), &#x27;cellPadding&#x27;, &#x27;0&#x27;);
   },
   add: function(widget) {
     this.insert(widget, this.getWidgetCount());
@@ -2182,10 +2278,10 @@ var IFrame = Widget.extend({
       this.setURL(url);
   },
   getURL: function() {
-    return DOM.getAttribute(this.getElement(),'src');
+    return DOM.getAttribute(this.getElement(),&#x27;src&#x27;);
   },
   setURL: function(url) {
-    DOM.setAttribute(this.getElement(),'src',url);
+    DOM.setAttribute(this.getElement(),&#x27;src&#x27;,url);
     return this;
   }
 });
@@ -2196,19 +2292,19 @@ var FlexCellFormatter = CellFormatter.extend({
   },
 
   getColSpan: function(row, column) {
-    return DOM.getAttribute(this.getElement(row, column), "colSpan");
+    return DOM.getAttribute(this.getElement(row, column), &quot;colSpan&quot;);
   },
 
   getRowSpan: function(row, column) {
-    return DOM.getAttribute(this.getElement(row, column), "rowSpan");
+    return DOM.getAttribute(this.getElement(row, column), &quot;rowSpan&quot;);
   },
 
   setColSpan: function(row, column, colSpan) {
-    DOM.setAttribute(this.ensureElement(row, column), "colSpan", colSpan);
+    DOM.setAttribute(this.ensureElement(row, column), &quot;colSpan&quot;, colSpan);
   },
 
   setRowSpan: function(row, column, rowSpan) {
-    DOM.setAttribute(this.ensureElement(row, column), "rowSpan", rowSpan);
+    DOM.setAttribute(this.ensureElement(row, column), &quot;rowSpan&quot;, rowSpan);
   }
 
 });
@@ -2216,7 +2312,7 @@ var FlexCellFormatter = CellFormatter.extend({
 var PasswordTextBox = TextBoxBase.extend({
   init: function() {
     this._super(DOM.createInputPassword());
-    this.setStyleName('wtr-PasswordTextBox');
+    this.setStyleName(&#x27;wtr-PasswordTextBox&#x27;);
   }
 });
 
@@ -2245,24 +2341,24 @@ var Grid = HTMLTable.extend({
     //this.numCols = 0
     //this.numRows = 0
     this.create(rows,cols);
-    this.setStyleName('of-Grid');
+    this.setStyleName(&#x27;of-Grid&#x27;);
   },
   createCell: function() {
     var td = this._super();
-    DOM.setInnerHTML(td, "&nbsp");
+    DOM.setInnerHTML(td, &quot;&amp;nbsp&quot;);
     return td;
   },
   create: function(rows,cols) {
-    for(var i=0; i<rows; i++) {
+    for(var i=0; i&lt;rows; i++) {
       this.insertRow(i);
-      for(var j=0; j<cols; j++) {
+      for(var j=0; j&lt;cols; j++) {
         this.insertCell(i,j);
       }
     }
   },
   setHeader: function(pos, name) {
     var label = new Label(name);
-    label.setStyleName("table-header");
+    label.setStyleName(&quot;table-header&quot;);
     this.setWidget(0, pos, label);
   }
 });
@@ -2282,7 +2378,7 @@ var RowFormatter = Class.extend({
   },
 
   getStyleName: function(row) {
-    return DOM.getAttribute(this.getElement(row), "className");
+    return DOM.getAttribute(this.getElement(row), &quot;className&quot;);
   },
 
   isVisible: function(row) {
@@ -2295,11 +2391,11 @@ var RowFormatter = Class.extend({
 
   setStyleName: function(row, styleName) {
     var elem = this.ensureElement(row);
-    DOM.setAttribute(elem, "className", styleName);
+    DOM.setAttribute(elem, &quot;className&quot;, styleName);
   },
 
   setVerticalAlign: function(row, align) {
-    DOM.setStyleAttribute(this.ensureElement(row), "verticalAlign", align);
+    DOM.setStyleAttribute(this.ensureElement(row), &quot;verticalAlign&quot;, align);
   },
 
   setVisible: function(row, visible) {
@@ -2342,11 +2438,11 @@ var HTMLPanel = ComplexPanel.extend({
   },
   createUniqueId: function() {
     HTMLPanel_uid += 1;
-    return "HTMLPanel_"+HTMLPanel_uid;
+    return &quot;HTMLPanel_&quot;+HTMLPanel_uid;
   },
   getElementById: function(element, id) {
-    var element_id = DOM.getAttribute(element, "id");
-    if((element_id != null) && (element_id == id))
+    var element_id = DOM.getAttribute(element, &quot;id&quot;);
+    if((element_id != null) &amp;&amp; (element_id == id))
       return element;
     var child = DOM.getFirstChild(element);
     while(child != null) {
@@ -2365,7 +2461,7 @@ var DeckPanel = ComplexPanel.extend({
     this.visibleWidget = null;
     this.hashIndex = {};
     this.setElement(DOM.createDiv());
-    this.setStyleName('of-DeckPanel');
+    this.setStyleName(&#x27;of-DeckPanel&#x27;);
   },
   add: function(widget, hashIndex) {
     this.insert(widget, this.getWidgetCount(), hashIndex);
@@ -2383,16 +2479,16 @@ var DeckPanel = ComplexPanel.extend({
     return this.children.index(child);
   },
   insert: function(widget, beforeIndex, hashIndex) {
-    if((beforeIndex < 0) || (beforeIndex > this.getWidgetCount()))
+    if((beforeIndex &lt; 0) || (beforeIndex &gt; this.getWidgetCount()))
       return;
     this._super(widget, this.getElement(), beforeIndex);
-    if(hashIndex && typeof hashIndex === "string") {
+    if(hashIndex &amp;&amp; typeof hashIndex === &quot;string&quot;) {
       // Add hash index
       this.hashIndex[hashIndex] = beforeIndex;
     }
     //var child = widget.getElement();
-    //DOM.setStyleAttribute(child, 'width', '100%');
-    //DOM.setStyleAttribute(child, 'height', '100%');
+    //DOM.setStyleAttribute(child, &#x27;width&#x27;, &#x27;100%&#x27;);
+    //DOM.setStyleAttribute(child, &#x27;height&#x27;, &#x27;100%&#x27;);
     widget.setVisible(false);
   },
   remove: function(widget) {
@@ -2412,10 +2508,10 @@ var DeckPanel = ComplexPanel.extend({
     return true;
   },
   showWidget: function(index) {
-    if(typeof index === "string") {
+    if(typeof index === &quot;string&quot;) {
       index = this.hashIndex[index];
       if(index === undefined) {
-        if(console) console.error("Deckpanel#showWidget bad index string!");
+        if(console) console.error(&quot;Deckpanel#showWidget bad index string!&quot;);
         return;
       }
     }
@@ -2436,10 +2532,10 @@ var DeckPanel = ComplexPanel.extend({
   		return;
   	}
     */
-    if(typeof index === "string") {
+    if(typeof index === &quot;string&quot;) {
       index = this.hashIndex[index];
       if(index === undefined) {
-        if(console) console.error("Deckpanel#fadeToWidget bad index string!");
+        if(console) console.error(&quot;Deckpanel#fadeToWidget bad index string!&quot;);
         return;
       }
     }
@@ -2463,8 +2559,8 @@ var DeckPanel = ComplexPanel.extend({
   	}
   },
   checkIndex: function(index) {
-    if((index < 0) || (index >= this.getWidgetCount()))
-      console.error('Deckpanel#checkIndex bad index');
+    if((index &lt; 0) || (index &gt;= this.getWidgetCount()))
+      console.error(&#x27;Deckpanel#checkIndex bad index&#x27;);
   }
 });
 
@@ -2474,7 +2570,7 @@ var Button = ButtonBase.extend({
     this.setHTML(html);
     if(listener)
       this.addClickListener(listener);
-    this.setStyleName('of-Button');
+    this.setStyleName(&#x27;of-Button&#x27;);
   }
 });
 
@@ -2490,14 +2586,14 @@ var WImage = Widget.extend({
   },
   reload: function() {
     var url = this.getUrl();
-    var sp = url.split("#");
-    this.setUrl(sp[0]+ '#' + (new Date()).getTime());
+    var sp = url.split(&quot;#&quot;);
+    this.setUrl(sp[0]+ &#x27;#&#x27; + (new Date()).getTime());
   },
   getUrl: function() {
-    return DOM.getAttribute(this.getElement(), "src");
+    return DOM.getAttribute(this.getElement(), &quot;src&quot;);
   },
   setUrl: function(url) {
-    DOM.setAttribute(this.getElement(), "src", url);
+    DOM.setAttribute(this.getElement(), &quot;src&quot;, url);
   },
   addClickListener: function(listener) {
     this.clickListeners.push(listener);
@@ -2510,8 +2606,8 @@ var WImage = Widget.extend({
   },
   onBrowserEvent: function(event) {
     var type = event.type;
-    if (type == 'click') {
-      for (var i = 0; i < this.clickListeners.length; i++) {
+    if (type == &#x27;click&#x27;) {
+      for (var i = 0; i &lt; this.clickListeners.length; i++) {
       	var listener = this.clickListeners[i];
       	if (listener.onLoad)
       	  listener.onClick(this,event);
@@ -2519,14 +2615,14 @@ var WImage = Widget.extend({
       	  listener(this, event);
       }
     }
-    else if (type == 'mousedown' || type == 'mouseup' || type == 'mousemove' || type == 'mouseover' || type == 'mouseout') {
-      for (var i = 0; i < this.mouseListeners.length; i++) {
+    else if (type == &#x27;mousedown&#x27; || type == &#x27;mouseup&#x27; || type == &#x27;mousemove&#x27; || type == &#x27;mouseover&#x27; || type == &#x27;mouseout&#x27;) {
+      for (var i = 0; i &lt; this.mouseListeners.length; i++) {
       	var listener = this.mouseListeners[i];
       	listener(this, event);
       }
     }
-    else if (type == 'load') {
-      for (var i = 0; i < this.loadListeners.length; i++) {
+    else if (type == &#x27;load&#x27;) {
+      for (var i = 0; i &lt; this.loadListeners.length; i++) {
       	var listener = this.loadListeners[i];
       	if (listener.onLoad)
       	  listener.onLoad(this,event);
@@ -2534,8 +2630,8 @@ var WImage = Widget.extend({
       	  listener(this, event);
       }
     }
-    else if (type == 'error') {
-      for (var i = 0; i < this.loadListeners.length; i++) {
+    else if (type == &#x27;error&#x27;) {
+      for (var i = 0; i &lt; this.loadListeners.length; i++) {
       	var listener = this.loadListeners[i];
       	if (listener.onError)
       	  listener.onError(this,event);
@@ -2550,7 +2646,7 @@ var MenuPane = FlowPanel.extend({
   init: function() {
     this._super();
     this.setElement(this.render());
-    this.setPrimaryStyleName('of-MenuPane');
+    this.setPrimaryStyleName(&#x27;of-MenuPane&#x27;);
     this.menuItems = {};
     this.defaultMenuItemName = null;
     this.currentActiveItem = null;
@@ -2563,19 +2659,19 @@ var MenuPane = FlowPanel.extend({
   },
   setActive: function(id) {
     var item = this.getMenuItemById(id);
-    if(item && item.onClick) {
+    if(item &amp;&amp; item.onClick) {
       item.onClick();
       this.currentActiveItem = item;
     } else {
-      if(console) console.warn("Could not find any MenuItem to activate!");
+      if(console) console.warn(&quot;Could not find any MenuItem to activate!&quot;);
     }
   },
   setActiveSubMenu: function(id) {
-    if(this.currentActiveItem && this.currentActiveItem.getSubMenu) {
+    if(this.currentActiveItem &amp;&amp; this.currentActiveItem.getSubMenu) {
       var submenu = this.currentActiveItem.getSubMenu();
       submenu.setActive(id);
     } else {
-      if(console) console.warn("No current active Item, couldn't set any active submenu item");
+      if(console) console.warn(&quot;No current active Item, couldn&#x27;t set any active submenu item&quot;);
     }
   },
   getMenuItemById: function(id) {
@@ -2614,7 +2710,7 @@ var MenuItemBase = FocusWidget.extend({
       this.parent.clearActive();
       this.setActive(true);
     }
-    if(!evt && this.action) {
+    if(!evt &amp;&amp; this.action) {
       // manually trigger, so trigger action for complete click cycle
       this.action();
     }
@@ -2622,10 +2718,10 @@ var MenuItemBase = FocusWidget.extend({
   setActive: function(bool) {
     this.active = bool;
     if(this.active) {
-      DOM.addStyleName(this.getElement(), "active");
+      DOM.addStyleName(this.getElement(), &quot;active&quot;);
     }
     else
-      DOM.removeStyleName(this.getElement(), "active");
+      DOM.removeStyleName(this.getElement(), &quot;active&quot;);
   },
   render: function() {
     // subclass resp
@@ -2638,7 +2734,7 @@ var MenuItem = MenuItemBase.extend({
     this._super(name, fn, flowCommand, id);
     this.subMenu = null;
     this.setStyleName(stylename);
-    this.setStyleName('btn clickable');
+    this.setStyleName(&#x27;btn clickable&#x27;);
   },
   setSubMenu: function(menu) {
     this.subMenu = menu;
@@ -2647,8 +2743,8 @@ var MenuItem = MenuItemBase.extend({
     return this.subMenu;
   },
   render: function() {
-    return html.li({'id':"menu-item-"+this.id.toLowerCase()},
-        html.a({'class':'btntxt', 'href':this.href}, this.name));
+    return html.li({&#x27;id&#x27;:&quot;menu-item-&quot;+this.id.toLowerCase()},
+        html.a({&#x27;class&#x27;:&#x27;btntxt&#x27;, &#x27;href&#x27;:this.href}, this.name));
   }
 });
 
@@ -2673,7 +2769,7 @@ var FormGrid = Grid.extend({
     this.validationObjects = [];
 
     this.render();
-    this.setStyleName("of-FormGrid");
+    this.setStyleName(&quot;of-FormGrid&quot;);
   },
   addOnSave: function(fn) {
     // Add onSave function to be executed whenever the whole form is valid
@@ -2690,15 +2786,15 @@ var FormGrid = Grid.extend({
   onBrowserEvent: function(event) {
     this._super(event);
     var type = DOM.eventGetType(event);
-    if (type == 'submit') {
-      for (var i = 0; i < this.submitListeners.length; i++) {
+    if (type == &#x27;submit&#x27;) {
+      for (var i = 0; i &lt; this.submitListeners.length; i++) {
         this.submitListeners[i](this, event);
       }
     }
   },
   clearAll: function() {
     // Clear values, errors and focus
-    var slask = $('input', this.getElement()).val("");
+    var slask = $(&#x27;input&#x27;, this.getElement()).val(&quot;&quot;);
     this.clearErrors();
     this.currentBlurItem = null;
   },
@@ -2720,8 +2816,8 @@ var FormGrid = Grid.extend({
   validateForm: function() {
     // Get all type of Validation objects and assemble a list (array) of the ones with error
     var errorInputs = [];
-    if(console) console.log("Validate form");
-    for(var i=0; i<this.validationObjects.length; i++) {
+    if(console) console.log(&quot;Validate form&quot;);
+    for(var i=0; i&lt;this.validationObjects.length; i++) {
       if(!this.validationObjects[i].validate()) {
         errorInputs.push(this.validationObjects[i]);
       }
@@ -2742,15 +2838,15 @@ var FormGrid = Grid.extend({
       // Save this form pointer for the widget so it can call for messagge bubble
       widget.setForm(this);
       this.validationObjects.push(widget);
-    } else if($('button', widget.getElement()).length > 0) {
+    } else if($(&#x27;button&#x27;, widget.getElement()).length &gt; 0) {
       // Check if widget is a container for buttons or a button, thus validation buttons
       // Make their cell span over all columns for centering
-      $(widget.getElement().parentElement).attr('colspan', "100");
+      $(widget.getElement().parentElement).attr(&#x27;colspan&#x27;, &quot;100&quot;);
       // Get table row, parent is cell
       var tr = widget.getElement().parentElement.parentElement;
       // Remove all child cells except with colspan on
-      for(var i=0;i<tr.childNodes.length;i++) {
-        if($(tr.childNodes[i]).attr('colspan')) {
+      for(var i=0;i&lt;tr.childNodes.length;i++) {
+        if($(tr.childNodes[i]).attr(&#x27;colspan&#x27;)) {
           return;
         } else {
           DOM.removeChild(tr, tr.childNodes[i]);
@@ -2765,11 +2861,11 @@ var FormGrid = Grid.extend({
     this.bubble = new MessageBubble(this);
     DOM.appendChild(this.getElement(), this.bubble.getElement());
 
-    // Setup basic evaluation behavior logic for the form and it's underlying valuation objects
+    // Setup basic evaluation behavior logic for the form and it&#x27;s underlying valuation objects
     this.addTableListener(function(form, event) {
       var target = event.target;
-      if(event.type === 'focus' && target.nodeName !== 'BUTTON') {
-        if(form.currentBlurItem && target.nodeName === 'INPUT') {
+      if(event.type === &#x27;focus&#x27; &amp;&amp; target.nodeName !== &#x27;BUTTON&#x27;) {
+        if(form.currentBlurItem &amp;&amp; target.nodeName === &#x27;INPUT&#x27;) {
           // Take care of Blured objects that should evaluate
           // Blur event is directly not used because it fires before anything else and makes it impossible to NOT validate when needed as below
 
@@ -2784,15 +2880,15 @@ var FormGrid = Grid.extend({
           form.currentBlurItem = target.widget;
         }
         
-      } else if(event.type === 'click' && $(target).attr('name') === 'save') {
+      } else if(event.type === &#x27;click&#x27; &amp;&amp; $(target).attr(&#x27;name&#x27;) === &#x27;save&#x27;) {
         // Validate whole form because user wants to submit/save it
         if(form.validateForm()) {
           self.onSaveFn(form, event);
         } else {
           // Not valid form
-          if(console) console.log("Not valid form");
+          if(console) console.log(&quot;Not valid form&quot;);
         }
-      } else if(event.type === 'click' && $(target).attr('name') === 'cancel') {
+      } else if(event.type === &#x27;click&#x27; &amp;&amp; $(target).attr(&#x27;name&#x27;) === &#x27;cancel&#x27;) {
         // No validation since user want to Cancel
         self.onCancelFn(form,event);
       }
@@ -2803,23 +2899,23 @@ var FormGrid = Grid.extend({
 var MessageBubble = FlowPanel.extend({
   init: function(form) {
     this._super();
-    this.setStyleName("message-bubble");
+    this.setStyleName(&quot;message-bubble&quot;);
     this.render();
     this.form = form;
     this.currentWidget = null;
-    $(this.getElement()).css("display", "none");
+    $(this.getElement()).css(&quot;display&quot;, &quot;none&quot;);
   },
   showErrorOnWidget: function(widget) {
     var self = this;
     if(!widget.getElement()) {
-      console.warn("Tried to show message bubble without supplying a element to show for!!");
+      console.warn(&quot;Tried to show message bubble without supplying a element to show for!!&quot;);
       return;
     }
     // Position Bubble to element and make it visible
     this._positionBubble(widget);
 
     // Animate Bubble
-    // With animation keyframe it's always played when you set display:block
+    // With animation keyframe it&#x27;s always played when you set display:block
     // Add replay of animation here if you want to if bubble already is shown (aka same error on same input continously)
 
   },
@@ -2830,14 +2926,14 @@ var MessageBubble = FlowPanel.extend({
     var itemOffset = $(element).offset();
     var formOffset = $(this.form.getElement()).offset();
     // This if-statement is just to not show bubble if everything is zero. And that happens in rare cases
-    // when Blur/Focus fires on the grid when it's going between visible/not visible
-    if(!(itemOffset.top === 0 && itemOffset.left === 0 && formOffset.top === 0 && formOffset.left === 0)) {
+    // when Blur/Focus fires on the grid when it&#x27;s going between visible/not visible
+    if(!(itemOffset.top === 0 &amp;&amp; itemOffset.left === 0 &amp;&amp; formOffset.top === 0 &amp;&amp; formOffset.left === 0)) {
 
       // Position bubble correctly to widget
-      this.setText($(element).attr('errormessage'));
-      $(this.getElement()).css('top', itemOffset.top - formOffset.top + height + 5);
-      $(this.getElement()).css('left', itemOffset.left - formOffset.left);
-      $(this.getElement()).css('display', 'block');
+      this.setText($(element).attr(&#x27;errormessage&#x27;));
+      $(this.getElement()).css(&#x27;top&#x27;, itemOffset.top - formOffset.top + height + 5);
+      $(this.getElement()).css(&#x27;left&#x27;, itemOffset.left - formOffset.left);
+      $(this.getElement()).css(&#x27;display&#x27;, &#x27;block&#x27;);
       this.currentWidget = widget;
 
       var hideTimer = setTimeout(function() {
@@ -2846,26 +2942,26 @@ var MessageBubble = FlowPanel.extend({
     }
   },
   isHidden: function() {
-    return $(this.getElement()).css('display') === "none" ? true : false;
+    return $(this.getElement()).css(&#x27;display&#x27;) === &quot;none&quot; ? true : false;
   },
   hide: function(widget) {
     if(widget) {
       if(widget == this.currentWidget) {
-        $(this.getElement()).css("display", "none");
+        $(this.getElement()).css(&quot;display&quot;, &quot;none&quot;);
       }
     } else {
-      $(this.getElement()).css("display", "none");
+      $(this.getElement()).css(&quot;display&quot;, &quot;none&quot;);
     }
   },
   setText: function(text) {
     this.label.setText(text);
   },
   render: function() {
-    this.label = new Label("", true);
+    this.label = new Label(&quot;&quot;, true);
     var arrow = new SimplePanel();
     
-    arrow.setStyleName("message-bubble-arrow");
-    this.label.setStyleName("message-bubble-text");
+    arrow.setStyleName(&quot;message-bubble-arrow&quot;);
+    this.label.setStyleName(&quot;message-bubble-text&quot;);
 
     this.add(arrow);
     this.add(this.label);
@@ -2876,8 +2972,8 @@ var WidgetLoader = Widget.extend({
   init: function() {
     this._super();
     this.setElement(this.render());
-    this.setStyleName("widget-loader");
-    this.setStyle('display', 'none');
+    this.setStyleName(&quot;widget-loader&quot;);
+    this.setStyle(&#x27;display&#x27;, &#x27;none&#x27;);
 
     this.parentWidth = null;
     this.parentHeight = null;
@@ -2887,41 +2983,41 @@ var WidgetLoader = Widget.extend({
     var parentheight = $(this.getElement().parentElement).height();
     var parentwidth = $(this.getElement().parentElement).width();
     if(parentheight === 0)
-      parentheight = '100%';
+      parentheight = &#x27;100%&#x27;;
     
     // Expand height to fill parent
     $(this.getElement()).height(parentheight);
     // Position spinner
-    if(typeof parentheight === "number") {
-      $('img', this.getElement()).css('top', parseInt(parentheight/2 - 20));
+    if(typeof parentheight === &quot;number&quot;) {
+      $(&#x27;img&#x27;, this.getElement()).css(&#x27;top&#x27;, parseInt(parentheight/2 - 20));
     } else {
-      $('img', this.getElement()).css('top', '45%');
+      $(&#x27;img&#x27;, this.getElement()).css(&#x27;top&#x27;, &#x27;45%&#x27;);
     }
-    if(typeof parentwidth === "number" && parentwidth > 0) {
-      $('img', this.getElement()).css('left', parseInt(parentwidth/2 - 20));
+    if(typeof parentwidth === &quot;number&quot; &amp;&amp; parentwidth &gt; 0) {
+      $(&#x27;img&#x27;, this.getElement()).css(&#x27;left&#x27;, parseInt(parentwidth/2 - 20));
     } else {
-      $('img', this.getElement()).css('left', '40%');
+      $(&#x27;img&#x27;, this.getElement()).css(&#x27;left&#x27;, &#x27;40%&#x27;);
     }
 
     this.parentWidth = parentwidth;
     this.parentHeight = parentheight;
   },
   show: function(adapt) {
-    if(adapt || !this.parentHeight && !this.parentWidth) {
+    if(adapt || !this.parentHeight &amp;&amp; !this.parentWidth) {
       // Basically only adapt first time
       this.adaptSize();
     }
     // Start animation and finish with showing Loader
-    $('img', this.getElement()).css('-webkit-animation-play-state', 'running').css('-moz-animation-play-state', 'running').css('animation-play-state', 'running');
-    $(this.getElement()).css('display', 'block');
+    $(&#x27;img&#x27;, this.getElement()).css(&#x27;-webkit-animation-play-state&#x27;, &#x27;running&#x27;).css(&#x27;-moz-animation-play-state&#x27;, &#x27;running&#x27;).css(&#x27;animation-play-state&#x27;, &#x27;running&#x27;);
+    $(this.getElement()).css(&#x27;display&#x27;, &#x27;block&#x27;);
   },
   hide: function() {
-    $(this.getElement()).css('display', 'none');
-    $('img', this.getElement()).css('-webkit-animation-play-state', 'paused').css('-moz-animation-play-state', 'paused').css('animation-play-state', 'paused');
+    $(this.getElement()).css(&#x27;display&#x27;, &#x27;none&#x27;);
+    $(&#x27;img&#x27;, this.getElement()).css(&#x27;-webkit-animation-play-state&#x27;, &#x27;paused&#x27;).css(&#x27;-moz-animation-play-state&#x27;, &#x27;paused&#x27;).css(&#x27;animation-play-state&#x27;, &#x27;paused&#x27;);
   },
   render: function() {
     return html.div({},
-            html.img({'class':'widget-loader-spinner','src':'../images/loader.png'}));
+            html.img({&#x27;class&#x27;:&#x27;widget-loader-spinner&#x27;,&#x27;src&#x27;:&#x27;../images/loader.png&#x27;}));
   }
 });
 
@@ -2967,38 +3063,38 @@ var FocusPanel = FlowPanel.extend({
   },
   onBrowserEvent: function(event) {
     var type = DOM.eventGetType(event);
-    if (type == 'click') {
-      for (var i = 0; i < this.clickListeners.length; i++) {
+    if (type == &#x27;click&#x27;) {
+      for (var i = 0; i &lt; this.clickListeners.length; i++) {
         this.clickListeners[i](this, event);
       }
     }
-    else if (type == 'blur' || type == 'focus') {
-      for (var i = 0; i < this.focusListeners.length; i++) {
+    else if (type == &#x27;blur&#x27; || type == &#x27;focus&#x27;) {
+      for (var i = 0; i &lt; this.focusListeners.length; i++) {
         this.focusListeners[i](this, event);
       }
     }
-    else if (type == 'keydown' || type == 'keypress' || type == 'keyup') {
-      for (var i = 0; i < this.keyboardListeners.length; i++) {
+    else if (type == &#x27;keydown&#x27; || type == &#x27;keypress&#x27; || type == &#x27;keyup&#x27;) {
+      for (var i = 0; i &lt; this.keyboardListeners.length; i++) {
         this.keyboardListeners[i](this, event);
       }
     }
-    else if (type == 'change') {
-      for (var i = 0; i < this.changeListeners.length; i++) {
+    else if (type == &#x27;change&#x27;) {
+      for (var i = 0; i &lt; this.changeListeners.length; i++) {
         this.changeListeners[i](this, event);
       }
     }
-    else if (type == 'mousedown') {
-      for (var i = 0; i < this.mousedownListeners.length; i++) {
+    else if (type == &#x27;mousedown&#x27;) {
+      for (var i = 0; i &lt; this.mousedownListeners.length; i++) {
         this.mousedownListeners[i](this, event);
       }
     }
-    else if (type == 'mouseup') {
-      for (var i = 0; i < this.mouseupListeners.length; i++) {
+    else if (type == &#x27;mouseup&#x27;) {
+      for (var i = 0; i &lt; this.mouseupListeners.length; i++) {
         this.mouseupListeners[i](this, event);
       }
     }
-    else if (type == 'mousemove') {
-      for (var i = 0; i < this.mousemoveListeners.length; i++) {
+    else if (type == &#x27;mousemove&#x27;) {
+      for (var i = 0; i &lt; this.mousemoveListeners.length; i++) {
         this.mousemoveListeners[i](this, event);
       }
     }
@@ -3009,6 +3105,26 @@ var Delimiter = Widget.extend({
   init: function() {
     this._super();
     this.setElement(DOM.createDiv());
-    this.setStyleName("delimiter");
+    this.setStyleName(&quot;delimiter&quot;);
   }
 });
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

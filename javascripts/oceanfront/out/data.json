@@ -1,0 +1,134 @@
+{
+    "project": {},
+    "files": {
+        "oceanfront.js": {
+            "name": "oceanfront.js",
+            "modules": {
+                "oceanfront": 1
+            },
+            "classes": {
+                "Class": 1,
+                "html": 1,
+                "Array": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "oceanfront": {
+            "name": "oceanfront",
+            "submodules": {},
+            "classes": {
+                "Class": 1,
+                "html": 1,
+                "Array": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "oceanfront.js",
+            "line": 202,
+            "description": "OceanFront framework"
+        }
+    },
+    "classes": {
+        "Class": {
+            "name": "Class",
+            "shortname": "Class",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "oceanfront",
+            "namespace": "",
+            "file": "oceanfront.js",
+            "line": 22,
+            "description": "Base Class object that takes care of inheritence"
+        },
+        "html": {
+            "name": "html",
+            "shortname": "html",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "oceanfront",
+            "namespace": "",
+            "file": "oceanfront.js",
+            "line": 110,
+            "description": "Exposes a recursive functionality to easily build local DOM trees in widgets programmatically\nExample syntax for 2 nested div-nodes with each 1 set attribute:\nvar tree = html.div{(class:'div1-class'),\n                   html.div{(id:'innerDiv')}};"
+        },
+        "Array": {
+            "name": "Array",
+            "shortname": "Array",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "oceanfront",
+            "namespace": "",
+            "file": "oceanfront.js",
+            "line": 202,
+            "description": "Base JavaScript Array class used for extending with convinience functions"
+        }
+    },
+    "classitems": [
+        {
+            "file": "oceanfront.js",
+            "line": 34,
+            "description": "Does the inheritance and makes sure ._super() fires on the right step",
+            "itemtype": "method",
+            "name": "extend",
+            "class": "Class",
+            "module": "oceanfront"
+        },
+        {
+            "file": "oceanfront.js",
+            "line": 209,
+            "description": "Removes a object in the Array on arbitrary position",
+            "itemtype": "method",
+            "name": "remove",
+            "class": "Array",
+            "module": "oceanfront"
+        },
+        {
+            "file": "oceanfront.js",
+            "line": 220,
+            "description": "Returns the index position of the object in Array",
+            "itemtype": "method",
+            "name": "index",
+            "return": {
+                "description": "Index value of Object position",
+                "type": "Number"
+            },
+            "class": "Array",
+            "module": "oceanfront"
+        },
+        {
+            "file": "oceanfront.js",
+            "line": 233,
+            "description": "Inserts Object at position i in the Array",
+            "itemtype": "method",
+            "name": "insert",
+            "params": [
+                {
+                    "name": "i",
+                    "description": "Index position to insert Object at",
+                    "type": "Number"
+                },
+                {
+                    "name": "obj",
+                    "description": "Object to insert at index i",
+                    "type": "Object"
+                }
+            ],
+            "class": "Array",
+            "module": "oceanfront"
+        }
+    ],
+    "warnings": []
+}
