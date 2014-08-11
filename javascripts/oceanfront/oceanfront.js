@@ -242,6 +242,12 @@ Array.prototype.insert = function(i,obj) {
 
 next_hash_id = 0;
 
+/**
+ * Convenience function used for setting a unique hash id on DOM nodes with memory pointer to Widgets
+ *
+ * @class hash
+ * 
+ */
 function hash(obj) {
   if (obj == null) return null;
   if (obj.$H) return obj.$H;
@@ -252,6 +258,12 @@ function hash(obj) {
   return obj.$H;
 }
 
+/**
+ * Convenience function used to dispatch events to Widgets
+ *
+ * @class gdispathEvent
+ * 
+ */
 function gdispatchEvent(evt) {
   var evt = evt || window.event;
   var listener;
@@ -292,6 +304,14 @@ var HashFactoryBase = Class.extend({
 
 
 // low level dom abstraction
+
+/**
+ * LowLevel DOM abastraction used by the framework as an interface for operations
+ * Should not be used when building apps, then use the html function instead
+ *
+ * @class DOM
+ * 
+ */
 var DOM = {
   // Constants
   ALIGN_LEFT:   "left",
@@ -306,37 +326,195 @@ var DOM = {
   MODIFIER_CTRL:  2,
   MODIFIER_SHIFT: 1,
 
-
+  /**
+   * Inserts Object at position i in the Array
+   *
+   * @method dispatchEvent
+   * @param event {Event} Event to be fired
+   * @param element {Element} DOM Element object currently not used
+   * @param listener {Object} Widget object that implemented onBrowserEvent(event) method
+   * 
+   */
   dispatchEvent: function(event, element, listener) {
     listener.onBrowserEvent(event);
   },
 
-  // Element creation
+  /**
+   * Returns an arbitrary DOM node
+   *
+   * @method createElement
+   * @param tag {String} DOM Element name
+   * @return {Element} Created DOM node element
+   * 
+   */
   createElement:   function(tag) { return document.createElement(tag); },
+  /**
+   * Returns a Text DOM node and inserts text
+   *
+   * @method createText
+   * @param text {String} Text to be inserted in DOM node
+   * @return {Element} Created DOM node element
+   * 
+   */
   createText:      function(text) { return document.createTextNode(text); },
+  /**
+   * Returns a Text Area DOM node
+   *
+   * @method createTextArea
+   * @return {Element} Created DOM node element
+   * 
+   */
   createTextArea:  function() { return this.createElement('textarea'); },
+  /**
+   * Returns a DIV DOM node
+   *
+   * @method createDiv
+   * @return {Element} Created DOM node element
+   * 
+   */
   createDiv:       function() { return this.createElement('div'); },
+  /**
+   * Returns a SPAN DOM node
+   *
+   * @method createSpan
+   * @return {Element} Created DOM node element
+   * 
+   */
   createSpan:      function() { return this.createElement('span'); },
+  /**
+   * Returns a A DOM node
+   *
+   * @method createAnchor
+   * @return {Element} Created DOM node element
+   * 
+   */
   createAnchor:    function() { return this.createElement('a'); },
+  /**
+   * Returns a BUTTON DOM node
+   *
+   * @method createButton
+   * @return {Element} Created DOM node element
+   * 
+   */
   createButton:    function() { return this.createElement('button'); },
+  /**
+   * Returns a FORM DOM node
+   *
+   * @method createForm 
+   * @return {Element} Created DOM node element
+   * 
+   */
   createForm:      function() { return this.createElement('form'); },
+  /**
+   * Returns a IMG DOM node
+   *
+   * @method createImage 
+   * @return {Element} Created DOM node element
+   * 
+   */
   createImage:     function() { return this.createElement('img'); },
+  /**
+   * Returns a IMG DOM node
+   *
+   * @method createImg 
+   * @return {Element} Created DOM node element
+   * 
+   */
   createImg:       function() { return this.createElement('img'); },
+  /**
+   * Returns a TABLE DOM node
+   *
+   * @method createTable 
+   * @return {Element} Created DOM node element
+   * 
+   */
   createTable:     function() { return this.createElement('table'); },
+  /**
+   * Returns a TR DOM node
+   *
+   * @method createTR 
+   * @return {Element} Created DOM node element
+   * 
+   */
   createTR:        function() { return this.createElement('tr'); },
+  /**
+   * Returns a TD DOM node
+   *
+   * @method createTD 
+   * @return {Element} Created DOM node element
+   * 
+   */
   createTD:        function() { return this.createElement('td'); },
+  /**
+   * Returns a TBODY DOM node
+   *
+   * @method createTBody 
+   * @return {Element} Created DOM node element
+   * 
+   */
   createTBody:     function() { return this.createElement('tbody'); },
+  /**
+   * Returns a LABEL DOM node
+   *
+   * @method createLabel 
+   * @return {Element} Created DOM node element
+   * 
+   */
   createLabel:     function() { return this.createElement('label'); },
+  /**
+   * Returns a SELECT DOM node
+   *
+   * @method createSelect 
+   * @return {Element} Created DOM node element
+   * 
+   */
   createSelect:    function() { return this.createElement('select');  },
+  /**
+   * Returns a H1 DOM node
+   *
+   * @method createH1 
+   * @return {Element} Created DOM node element
+   * 
+   */
   createH1:    function() { return this.createElement('h1');  },
+  /**
+   * Returns a H2 DOM node
+   *
+   * @method createH2
+   * @return {Element} Created DOM node element
+   * 
+   */
   createH2:    function() { return this.createElement('h2');  },
+  /**
+   * Returns a H3 DOM node
+   *
+   * @method createH3
+   * @return {Element} Created DOM node element
+   * 
+   */
   createH3:    function() { return this.createElement('h3');  },
+  /**
+   * Returns a INPUT DOM node of type radio with gname as group
+   *
+   * @method createInputRadio
+   * @return {Element} Created DOM node element
+   * @param group {Node object} Group object the radio button should belong to
+   * 
+   */
   createInputRadio:function(group) {
     var element = this.createElement("INPUT");
     element.type = 'radio';
     element.name = group;
     return element;
   },
+  /**
+   * Returns a INPUT DOM node
+   *
+   * @method createInputElement
+   * @param type {String} Value to be set as element.type if not IE
+   * @return {Element} Created DOM node element
+   * 
+   */
   createInputElement: function(type) {
     var e = this.createElement('input');
     if(!$.browser.msie) {
@@ -344,8 +522,29 @@ var DOM = {
     }
     return e;
   },
+  /**
+   * Returns a INPUT DOM node with type as checkbox
+   *
+   * @method createInputCheck
+   * @return {Element} Created DOM node element
+   * 
+   */
   createInputCheck: function() { return this.createInputElement('checkbox'); },
+  /**
+   * Returns a INPUT DOM node with type as password
+   *
+   * @method createInputPassword 
+   * @return {Element} Created DOM node element
+   * 
+   */
   createInputPassword: function() { return this.createInputElement('password'); },
+  /**
+   * Returns a IFRAME DOM node
+   *
+   * @method createIFrame
+   * @return {Element} Created DOM node element
+   * 
+   */
   createIFrame: function() { return this.createElement('iframe');},
 
   // Attributes
