@@ -2565,6 +2565,9 @@ var DeckPanel = ComplexPanel.extend({
     this.insert(widget, this.getWidgetCount(), hashIndex);
   },
   getVisibleWidget: function() {
+    return this.visibleWidget;
+  },
+  getVisibleWidgetIndex: function() {
     return this.getWidgetIndex(this.visibleWidget);
   },
   getWidget: function(index) {
