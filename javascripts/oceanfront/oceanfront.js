@@ -97,11 +97,6 @@
  *
  * Author: Lars Rustemeier 
  *
- * Exposes a recursive functionality to easily build local DOM trees in widgets programmatically
- * Example syntax for 2 nested div-nodes with each 1 set attribute:
- * var tree = html.div{(class:'div1-class'),
- *                    html.div{(id:'innerDiv')}};
- *
  * Date: Ons 26 Jan 2011 15:35:35 CET
  */
 
