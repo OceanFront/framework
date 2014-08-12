@@ -53,6 +53,8 @@
             
                 <li><a href="../classes/html.html">html</a></li>
             
+                <li><a href="../classes/TwoWayHash.html">TwoWayHash</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -198,11 +200,6 @@
  * htmlcanvas JavaScript Library v0.1
  *
  * Author: Lars Rustemeier 
- *
- * Exposes a recursive functionality to easily build local DOM trees in widgets programmatically
- * Example syntax for 2 nested div-nodes with each 1 set attribute:
- * var tree = html.div{(class:&#x27;div1-class&#x27;),
- *                    html.div{(id:&#x27;innerDiv&#x27;)}};
  *
  * Date: Ons 26 Jan 2011 15:35:35 CET
  */
@@ -2664,7 +2661,7 @@ var DeckPanel = ComplexPanel.extend({
   init: function() {
     this._super();
     this.visibleWidget = null;
-    this.hashIndex = {};
+    this.hashIndex = new TwoWayHash();
     this.setElement(DOM.createDiv());
     this.setStyleName(&#x27;of-DeckPanel&#x27;);
   },
@@ -2672,7 +2669,13 @@ var DeckPanel = ComplexPanel.extend({
     this.insert(widget, this.getWidgetCount(), hashIndex);
   },
   getVisibleWidget: function() {
+    return this.visibleWidget;
+  },
+  getVisibleWidgetIndex: function() {
     return this.getWidgetIndex(this.visibleWidget);
+  },
+  getVisibleWidgetHashIndex: function() {
+    return this.hashIndex.getByValue(this.getVisibleWidgetIndex());
   },
   getWidget: function(index) {
     return this.children[index];
@@ -2689,7 +2692,7 @@ var DeckPanel = ComplexPanel.extend({
     this._super(widget, this.getElement(), beforeIndex);
     if(hashIndex &amp;&amp; typeof hashIndex === &quot;string&quot;) {
       // Add hash index
-      this.hashIndex[hashIndex] = beforeIndex;
+      this.hashIndex.add(hashIndex, beforeIndex);
     }
     //var child = widget.getElement();
     //DOM.setStyleAttribute(child, &#x27;width&#x27;, &#x27;100%&#x27;);
@@ -2703,18 +2706,12 @@ var DeckPanel = ComplexPanel.extend({
     if(this.visibleWidget == widget)
       this.visibleWidget = null;
     // Delete the record in hashIndex if there is any, we need to searc for index value
-    for(var prop in this.hashIndex) {
-      if(this.hashIndex.hasOwnProperty(prop)) {
-        if(this.hashIndex[prop] == index) {
-          delete this.hashIndex[prop];
-        }
-      }
-    }
+    this.hashIndex.removeByValue(index);
     return true;
   },
   showWidget: function(index) {
     if(typeof index === &quot;string&quot;) {
-      index = this.hashIndex[index];
+      index = this.hashIndex.get(index);
       if(index === undefined) {
         if(console) console.error(&quot;Deckpanel#showWidget bad index string!&quot;);
         return;
@@ -2738,7 +2735,7 @@ var DeckPanel = ComplexPanel.extend({
   	}
     */
     if(typeof index === &quot;string&quot;) {
-      index = this.hashIndex[index];
+      index = this.hashIndex.get(index);
       if(index === undefined) {
         if(console) console.error(&quot;Deckpanel#fadeToWidget bad index string!&quot;);
         return;
@@ -3311,6 +3308,56 @@ var Delimiter = Widget.extend({
     this._super();
     this.setElement(DOM.createDiv());
     this.setStyleName(&quot;delimiter&quot;);
+  }
+});
+
+/**
+ * Creates a two-way key-value hash.
+ * Keys AND values must be unique.
+ * @module oceanfront
+ * @class TwoWayHash
+ * @constructor
+ */
+var TwoWayHash = Class.extend({
+  init: function() {
+    this.hashIndex = {};
+    this.reverseHashIndex = {};
+  },
+  /**
+   * Add a key value pair to the hash.
+   * @param key the key
+   * @param value the value
+   * @method add
+   */
+  add: function(key, value) {
+    this.hashIndex[key] = value;
+    this.reverseHashIndex[value] = key;
+  },
+  /**
+   * Remove a key value pair indexed on the value.
+   * @param value value index
+   * @method removeByValue
+   */
+  removeByValue: function(value) {
+    var key = this.reverseHashIndex[value];
+    delete this.hashIndex[key];
+    delete this.reverseHashIndex[value];
+  },
+  /**
+   * Get a key value pair.
+   * @param key the key to index on
+   * @method get
+   */
+  get: function(key) {
+    return this.hashIndex[key];
+  },
+  /**
+   * Get a key value pair.
+   * @param value the value to index on.
+   * @method getByValue
+   */
+  getByValue: function(value) {
+    return this.reverseHashIndex[value];
   }
 });
 
