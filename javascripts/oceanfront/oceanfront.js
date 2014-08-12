@@ -3210,7 +3210,7 @@ var Delimiter = Widget.extend({
 /**
  * Creates a two-way key-value hash.
  * Keys AND values must be unique.
- * @module extension-ocean
+ * @module oceanfront
  * @class TwoWayHash
  * @constructor
  */

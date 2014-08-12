@@ -3,7 +3,9 @@
     "files": {
         "extension-ocean.js": {
             "name": "extension-ocean.js",
-            "modules": {},
+            "modules": {
+                "extension-ocean": 1
+            },
             "classes": {},
             "fors": {},
             "namespaces": {}
@@ -11,7 +13,6 @@
         "oceanfront.js": {
             "name": "oceanfront.js",
             "modules": {
-                "extension-ocean": 1,
                 "oceanfront": 1
             },
             "classes": {
@@ -30,20 +31,14 @@
     "modules": {
         "extension-ocean": {
             "name": "extension-ocean",
-            "submodules": {
-                "undefined": 1
-            },
-            "classes": {
-                "DOM": 1,
-                "TwoWayHash": 1
-            },
+            "submodules": {},
+            "classes": {},
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "oceanfront.js",
-            "line": 3210,
-            "description": "Creates a two-way key-value hash.\nKeys AND values must be unique.",
-            "is_constructor": 1
+            "file": "extension-ocean.js",
+            "line": 1,
+            "description": "Ocean API Extensio module and convenience Classes"
         },
         "oceanfront": {
             "name": "oceanfront",
@@ -53,14 +48,17 @@
                 "html": 1,
                 "Array": 1,
                 "hash": 1,
-                "gdispathEvent": 1
+                "gdispathEvent": 1,
+                "DOM": 1,
+                "TwoWayHash": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
             "file": "oceanfront.js",
-            "line": 256,
-            "description": "OceanFront framework"
+            "line": 3210,
+            "description": "OceanFront framework",
+            "is_constructor": 1
         }
     },
     "classes": {
@@ -142,7 +140,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "extension-ocean",
+            "module": "oceanfront",
             "namespace": "",
             "file": "oceanfront.js",
             "line": 303,
@@ -156,7 +154,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "extension-ocean",
+            "module": "oceanfront",
             "namespace": "",
             "file": "oceanfront.js",
             "line": 3210,
@@ -599,7 +597,7 @@
             "itemtype": "method",
             "name": "add",
             "class": "TwoWayHash",
-            "module": "extension-ocean"
+            "module": "oceanfront"
         },
         {
             "file": "oceanfront.js",
@@ -614,7 +612,7 @@
             "itemtype": "method",
             "name": "removeByValue",
             "class": "TwoWayHash",
-            "module": "extension-ocean"
+            "module": "oceanfront"
         },
         {
             "file": "oceanfront.js",
@@ -629,7 +627,7 @@
             "itemtype": "method",
             "name": "get",
             "class": "TwoWayHash",
-            "module": "extension-ocean"
+            "module": "oceanfront"
         },
         {
             "file": "oceanfront.js",
@@ -644,7 +642,7 @@
             "itemtype": "method",
             "name": "getByValue",
             "class": "TwoWayHash",
-            "module": "extension-ocean"
+            "module": "oceanfront"
         }
     ],
     "warnings": []
