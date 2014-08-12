@@ -2570,6 +2570,15 @@ var DeckPanel = ComplexPanel.extend({
   getVisibleWidgetIndex: function() {
     return this.getWidgetIndex(this.visibleWidget);
   },
+  getVisibleWidgetHashIndex: function() {
+    var index = this.getVisibleWidgetIndex();
+    for(var key in this.hashIndex) {
+      if(this.hashIndex.hasOwnProperty(key) && this.hashIndex[key] === index) {
+        return key
+      }
+    }
+    return null;
+  },
   getWidget: function(index) {
     return this.children[index];
   },
