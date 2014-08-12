@@ -2609,10 +2609,8 @@ var DeckPanel = ComplexPanel.extend({
       this.visibleWidget = null;
     // Delete the record in hashIndex if there is any, we need to searc for index value
     for(var prop in this.hashIndex) {
-      if(this.hashIndex.hasOwnProperty(prop)) {
-        if(this.hashIndex[prop] == index) {
-          delete this.hashIndex[prop];
-        }
+      if(this.hashIndex.hasOwnProperty(prop) && this.hashIndex[prop] == index) {
+        delete this.hashIndex[prop];  
       }
     }
     return true;
