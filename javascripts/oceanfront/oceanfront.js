@@ -2557,7 +2557,7 @@ var DeckPanel = ComplexPanel.extend({
   init: function() {
     this._super();
     this.visibleWidget = null;
-    this.hashIndex = {};
+    this.hashIndex = new TwoWayHash();
     this.setElement(DOM.createDiv());
     this.setStyleName('of-DeckPanel');
   },
@@ -2569,6 +2569,9 @@ var DeckPanel = ComplexPanel.extend({
   },
   getVisibleWidgetIndex: function() {
     return this.getWidgetIndex(this.visibleWidget);
+  },
+  getVisibleWidgetHashIndex: function() {
+    return this.hashIndex.getByValue(this.getVisibleWidgetIndex());
   },
   getWidget: function(index) {
     return this.children[index];
@@ -2585,7 +2588,7 @@ var DeckPanel = ComplexPanel.extend({
     this._super(widget, this.getElement(), beforeIndex);
     if(hashIndex && typeof hashIndex === "string") {
       // Add hash index
-      this.hashIndex[hashIndex] = beforeIndex;
+      this.hashIndex.add(hashIndex, beforeIndex);
     }
     //var child = widget.getElement();
     //DOM.setStyleAttribute(child, 'width', '100%');
@@ -2599,18 +2602,12 @@ var DeckPanel = ComplexPanel.extend({
     if(this.visibleWidget == widget)
       this.visibleWidget = null;
     // Delete the record in hashIndex if there is any, we need to searc for index value
-    for(var prop in this.hashIndex) {
-      if(this.hashIndex.hasOwnProperty(prop)) {
-        if(this.hashIndex[prop] == index) {
-          delete this.hashIndex[prop];
-        }
-      }
-    }
+    this.hashIndex.removeByValue(index);
     return true;
   },
   showWidget: function(index) {
     if(typeof index === "string") {
-      index = this.hashIndex[index];
+      index = this.hashIndex.get(index);
       if(index === undefined) {
         if(console) console.error("Deckpanel#showWidget bad index string!");
         return;
@@ -2634,7 +2631,7 @@ var DeckPanel = ComplexPanel.extend({
   	}
     */
     if(typeof index === "string") {
-      index = this.hashIndex[index];
+      index = this.hashIndex.get(index);
       if(index === undefined) {
         if(console) console.error("Deckpanel#fadeToWidget bad index string!");
         return;
@@ -3207,5 +3204,55 @@ var Delimiter = Widget.extend({
     this._super();
     this.setElement(DOM.createDiv());
     this.setStyleName("delimiter");
+  }
+});
+
+/**
+ * Creates a two-way key-value hash.
+ * Keys AND values must be unique.
+ * @module extension-ocean
+ * @class TwoWayHash
+ * @constructor
+ */
+var TwoWayHash = Class.extend({
+  init: function() {
+    this.hashIndex = {};
+    this.reverseHashIndex = {};
+  },
+  /**
+   * Add a key value pair to the hash.
+   * @param key the key
+   * @param value the value
+   * @method add
+   */
+  add: function(key, value) {
+    this.hashIndex[key] = value;
+    this.reverseHashIndex[value] = key;
+  },
+  /**
+   * Remove a key value pair indexed on the value.
+   * @param value value index
+   * @method removeByValue
+   */
+  removeByValue: function(value) {
+    var key = this.reverseHashIndex[value];
+    delete this.hashIndex[key];
+    delete this.reverseHashIndex[value];
+  },
+  /**
+   * Get a key value pair.
+   * @param key the key to index on
+   * @method get
+   */
+  get: function(key) {
+    return this.hashIndex[key];
+  },
+  /**
+   * Get a key value pair.
+   * @param value the value to index on.
+   * @method getByValue
+   */
+  getByValue: function(value) {
+    return this.reverseHashIndex[value];
   }
 });

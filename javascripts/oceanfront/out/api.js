@@ -4,6 +4,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "Array",
         "Class",
         "DOM",
+        "TwoWayHash",
         "gdispathEvent",
         "hash",
         "html"
@@ -16,7 +17,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "extension-ocean",
             "name": "extension-ocean",
-            "description": "Ocean API Extensio module and convenience Classes"
+            "description": "Creates a two-way key-value hash.\nKeys AND values must be unique."
         },
         {
             "displayName": "oceanfront",

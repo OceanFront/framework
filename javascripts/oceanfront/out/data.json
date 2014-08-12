@@ -3,9 +3,7 @@
     "files": {
         "extension-ocean.js": {
             "name": "extension-ocean.js",
-            "modules": {
-                "extension-ocean": 1
-            },
+            "modules": {},
             "classes": {},
             "fors": {},
             "namespaces": {}
@@ -13,6 +11,7 @@
         "oceanfront.js": {
             "name": "oceanfront.js",
             "modules": {
+                "extension-ocean": 1,
                 "oceanfront": 1
             },
             "classes": {
@@ -21,7 +20,8 @@
                 "Array": 1,
                 "hash": 1,
                 "gdispathEvent": 1,
-                "DOM": 1
+                "DOM": 1,
+                "TwoWayHash": 1
             },
             "fors": {},
             "namespaces": {}
@@ -30,14 +30,20 @@
     "modules": {
         "extension-ocean": {
             "name": "extension-ocean",
-            "submodules": {},
-            "classes": {},
+            "submodules": {
+                "undefined": 1
+            },
+            "classes": {
+                "DOM": 1,
+                "TwoWayHash": 1
+            },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "extension-ocean.js",
-            "line": 1,
-            "description": "Ocean API Extensio module and convenience Classes"
+            "file": "oceanfront.js",
+            "line": 3210,
+            "description": "Creates a two-way key-value hash.\nKeys AND values must be unique.",
+            "is_constructor": 1
         },
         "oceanfront": {
             "name": "oceanfront",
@@ -47,14 +53,13 @@
                 "html": 1,
                 "Array": 1,
                 "hash": 1,
-                "gdispathEvent": 1,
-                "DOM": 1
+                "gdispathEvent": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
             "file": "oceanfront.js",
-            "line": 308,
+            "line": 256,
             "description": "OceanFront framework"
         }
     },
@@ -84,7 +89,7 @@
             "module": "oceanfront",
             "namespace": "",
             "file": "oceanfront.js",
-            "line": 110,
+            "line": 105,
             "description": "Exposes a recursive functionality to easily build local DOM trees in widgets programmatically\nExample syntax for 2 nested div-nodes with each 1 set attribute:\nvar tree = html.div{(class:'div1-class'),\n                   html.div{(id:'innerDiv')}};"
         },
         "Array": {
@@ -98,7 +103,7 @@
             "module": "oceanfront",
             "namespace": "",
             "file": "oceanfront.js",
-            "line": 200,
+            "line": 195,
             "description": "Base JavaScript Array class used for extending with convenience functions"
         },
         "hash": {
@@ -112,7 +117,7 @@
             "module": "oceanfront",
             "namespace": "",
             "file": "oceanfront.js",
-            "line": 245,
+            "line": 240,
             "description": "Convenience function used for setting a unique hash id on DOM nodes with memory pointer to Widgets"
         },
         "gdispathEvent": {
@@ -126,7 +131,7 @@
             "module": "oceanfront",
             "namespace": "",
             "file": "oceanfront.js",
-            "line": 261,
+            "line": 256,
             "description": "Convenience function used to dispatch events to Widgets"
         },
         "DOM": {
@@ -137,11 +142,25 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "oceanfront",
+            "module": "extension-ocean",
             "namespace": "",
             "file": "oceanfront.js",
-            "line": 308,
+            "line": 303,
             "description": "LowLevel DOM abastraction used by the framework as an interface for operations\nShould not be used when building apps, then use the html function instead"
+        },
+        "TwoWayHash": {
+            "name": "TwoWayHash",
+            "shortname": "TwoWayHash",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "extension-ocean",
+            "namespace": "",
+            "file": "oceanfront.js",
+            "line": 3210,
+            "description": "Creates a two-way key-value hash.\nKeys AND values must be unique."
         }
     },
     "classitems": [
@@ -156,7 +175,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 207,
+            "line": 202,
             "description": "Removes a object in the Array on arbitrary position",
             "itemtype": "method",
             "name": "remove",
@@ -165,7 +184,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 218,
+            "line": 213,
             "description": "Returns the index position of the object in Array",
             "itemtype": "method",
             "name": "index",
@@ -178,7 +197,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 231,
+            "line": 226,
             "description": "Inserts Object at position i in the Array",
             "itemtype": "method",
             "name": "insert",
@@ -199,7 +218,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 329,
+            "line": 324,
             "description": "Inserts Object at position i in the Array",
             "itemtype": "method",
             "name": "dispatchEvent",
@@ -225,7 +244,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 342,
+            "line": 337,
             "description": "Returns an arbitrary DOM node",
             "itemtype": "method",
             "name": "createElement",
@@ -245,7 +264,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 351,
+            "line": 346,
             "description": "Returns a Text DOM node and inserts text",
             "itemtype": "method",
             "name": "createText",
@@ -265,7 +284,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 360,
+            "line": 355,
             "description": "Returns a Text Area DOM node",
             "itemtype": "method",
             "name": "createTextArea",
@@ -278,7 +297,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 368,
+            "line": 363,
             "description": "Returns a DIV DOM node",
             "itemtype": "method",
             "name": "createDiv",
@@ -291,7 +310,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 376,
+            "line": 371,
             "description": "Returns a SPAN DOM node",
             "itemtype": "method",
             "name": "createSpan",
@@ -304,7 +323,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 384,
+            "line": 379,
             "description": "Returns a A DOM node",
             "itemtype": "method",
             "name": "createAnchor",
@@ -317,7 +336,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 392,
+            "line": 387,
             "description": "Returns a BUTTON DOM node",
             "itemtype": "method",
             "name": "createButton",
@@ -330,7 +349,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 400,
+            "line": 395,
             "description": "Returns a FORM DOM node",
             "itemtype": "method",
             "name": "createForm",
@@ -343,7 +362,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 408,
+            "line": 403,
             "description": "Returns a IMG DOM node",
             "itemtype": "method",
             "name": "createImage",
@@ -356,7 +375,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 416,
+            "line": 411,
             "description": "Returns a IMG DOM node",
             "itemtype": "method",
             "name": "createImg",
@@ -369,7 +388,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 424,
+            "line": 419,
             "description": "Returns a TABLE DOM node",
             "itemtype": "method",
             "name": "createTable",
@@ -382,7 +401,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 432,
+            "line": 427,
             "description": "Returns a TR DOM node",
             "itemtype": "method",
             "name": "createTR",
@@ -395,7 +414,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 440,
+            "line": 435,
             "description": "Returns a TD DOM node",
             "itemtype": "method",
             "name": "createTD",
@@ -408,7 +427,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 448,
+            "line": 443,
             "description": "Returns a TBODY DOM node",
             "itemtype": "method",
             "name": "createTBody",
@@ -421,7 +440,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 456,
+            "line": 451,
             "description": "Returns a LABEL DOM node",
             "itemtype": "method",
             "name": "createLabel",
@@ -434,7 +453,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 464,
+            "line": 459,
             "description": "Returns a SELECT DOM node",
             "itemtype": "method",
             "name": "createSelect",
@@ -447,7 +466,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 472,
+            "line": 467,
             "description": "Returns a H1 DOM node",
             "itemtype": "method",
             "name": "createH1",
@@ -460,7 +479,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 480,
+            "line": 475,
             "description": "Returns a H2 DOM node",
             "itemtype": "method",
             "name": "createH2",
@@ -473,7 +492,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 488,
+            "line": 483,
             "description": "Returns a H3 DOM node",
             "itemtype": "method",
             "name": "createH3",
@@ -486,7 +505,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 496,
+            "line": 491,
             "description": "Returns a INPUT DOM node of type radio with gname as group",
             "itemtype": "method",
             "name": "createInputRadio",
@@ -506,7 +525,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 510,
+            "line": 505,
             "description": "Returns a INPUT DOM node",
             "itemtype": "method",
             "name": "createInputElement",
@@ -526,7 +545,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 525,
+            "line": 520,
             "description": "Returns a INPUT DOM node with type as checkbox",
             "itemtype": "method",
             "name": "createInputCheck",
@@ -539,7 +558,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 533,
+            "line": 528,
             "description": "Returns a INPUT DOM node with type as password",
             "itemtype": "method",
             "name": "createInputPassword",
@@ -552,7 +571,7 @@
         },
         {
             "file": "oceanfront.js",
-            "line": 541,
+            "line": 536,
             "description": "Returns a IFRAME DOM node",
             "itemtype": "method",
             "name": "createIFrame",
@@ -562,6 +581,70 @@
             },
             "class": "DOM",
             "module": "oceanfront"
+        },
+        {
+            "file": "oceanfront.js",
+            "line": 3222,
+            "description": "Add a key value pair to the hash.",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "the key"
+                },
+                {
+                    "name": "value",
+                    "description": "the value"
+                }
+            ],
+            "itemtype": "method",
+            "name": "add",
+            "class": "TwoWayHash",
+            "module": "extension-ocean"
+        },
+        {
+            "file": "oceanfront.js",
+            "line": 3232,
+            "description": "Remove a key value pair indexed on the value.",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "value index"
+                }
+            ],
+            "itemtype": "method",
+            "name": "removeByValue",
+            "class": "TwoWayHash",
+            "module": "extension-ocean"
+        },
+        {
+            "file": "oceanfront.js",
+            "line": 3242,
+            "description": "Get a key value pair.",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "the key to index on"
+                }
+            ],
+            "itemtype": "method",
+            "name": "get",
+            "class": "TwoWayHash",
+            "module": "extension-ocean"
+        },
+        {
+            "file": "oceanfront.js",
+            "line": 3250,
+            "description": "Get a key value pair.",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "the value to index on."
+                }
+            ],
+            "itemtype": "method",
+            "name": "getByValue",
+            "class": "TwoWayHash",
+            "module": "extension-ocean"
         }
     ],
     "warnings": []
