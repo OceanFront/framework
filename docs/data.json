@@ -1,8 +1,8 @@
 {
     "project": {},
     "files": {
-        "extension-ocean.js": {
-            "name": "extension-ocean.js",
+        "javascripts/oceanfront/extension-ocean.js": {
+            "name": "javascripts/oceanfront/extension-ocean.js",
             "modules": {
                 "extension-ocean": 1
             },
@@ -10,8 +10,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "oceanfront.js": {
-            "name": "oceanfront.js",
+        "javascripts/oceanfront/oceanfront.js": {
+            "name": "javascripts/oceanfront/oceanfront.js",
             "modules": {
                 "oceanfront": 1
             },
@@ -35,7 +35,7 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "extension-ocean.js",
+            "file": "javascripts/oceanfront/extension-ocean.js",
             "line": 1,
             "description": "Ocean API Extensio module and convenience Classes"
         },
@@ -53,8 +53,8 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "oceanfront.js",
-            "line": 308,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 303,
             "description": "OceanFront framework"
         }
     },
@@ -69,7 +69,7 @@
             "extension_for": [],
             "module": "oceanfront",
             "namespace": "",
-            "file": "oceanfront.js",
+            "file": "javascripts/oceanfront/oceanfront.js",
             "line": 22,
             "description": "Base Class object that takes care of inheritence"
         },
@@ -83,8 +83,8 @@
             "extension_for": [],
             "module": "oceanfront",
             "namespace": "",
-            "file": "oceanfront.js",
-            "line": 110,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 105,
             "description": "Exposes a recursive functionality to easily build local DOM trees in widgets programmatically\nExample syntax for 2 nested div-nodes with each 1 set attribute:\nvar tree = html.div{(class:'div1-class'),\n                   html.div{(id:'innerDiv')}};"
         },
         "Array": {
@@ -97,8 +97,8 @@
             "extension_for": [],
             "module": "oceanfront",
             "namespace": "",
-            "file": "oceanfront.js",
-            "line": 200,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 195,
             "description": "Base JavaScript Array class used for extending with convenience functions"
         },
         "hash": {
@@ -111,8 +111,8 @@
             "extension_for": [],
             "module": "oceanfront",
             "namespace": "",
-            "file": "oceanfront.js",
-            "line": 245,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 240,
             "description": "Convenience function used for setting a unique hash id on DOM nodes with memory pointer to Widgets"
         },
         "gdispathEvent": {
@@ -125,8 +125,8 @@
             "extension_for": [],
             "module": "oceanfront",
             "namespace": "",
-            "file": "oceanfront.js",
-            "line": 261,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 256,
             "description": "Convenience function used to dispatch events to Widgets"
         },
         "DOM": {
@@ -139,14 +139,14 @@
             "extension_for": [],
             "module": "oceanfront",
             "namespace": "",
-            "file": "oceanfront.js",
-            "line": 308,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 303,
             "description": "LowLevel DOM abastraction used by the framework as an interface for operations\nShould not be used when building apps, then use the html function instead"
         }
     },
     "classitems": [
         {
-            "file": "oceanfront.js",
+            "file": "javascripts/oceanfront/oceanfront.js",
             "line": 34,
             "description": "Does the inheritance and makes sure ._super() fires on the right step",
             "itemtype": "method",
@@ -155,8 +155,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 207,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 202,
             "description": "Removes a object in the Array on arbitrary position",
             "itemtype": "method",
             "name": "remove",
@@ -164,8 +164,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 218,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 213,
             "description": "Returns the index position of the object in Array",
             "itemtype": "method",
             "name": "index",
@@ -177,8 +177,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 231,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 226,
             "description": "Inserts Object at position i in the Array",
             "itemtype": "method",
             "name": "insert",
@@ -198,8 +198,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 329,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 324,
             "description": "Inserts Object at position i in the Array",
             "itemtype": "method",
             "name": "dispatchEvent",
@@ -224,8 +224,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 342,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 337,
             "description": "Returns an arbitrary DOM node",
             "itemtype": "method",
             "name": "createElement",
@@ -244,8 +244,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 351,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 346,
             "description": "Returns a Text DOM node and inserts text",
             "itemtype": "method",
             "name": "createText",
@@ -264,8 +264,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 360,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 355,
             "description": "Returns a Text Area DOM node",
             "itemtype": "method",
             "name": "createTextArea",
@@ -277,8 +277,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 368,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 363,
             "description": "Returns a DIV DOM node",
             "itemtype": "method",
             "name": "createDiv",
@@ -290,8 +290,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 376,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 371,
             "description": "Returns a SPAN DOM node",
             "itemtype": "method",
             "name": "createSpan",
@@ -303,8 +303,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 384,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 379,
             "description": "Returns a A DOM node",
             "itemtype": "method",
             "name": "createAnchor",
@@ -316,8 +316,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 392,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 387,
             "description": "Returns a BUTTON DOM node",
             "itemtype": "method",
             "name": "createButton",
@@ -329,8 +329,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 400,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 395,
             "description": "Returns a FORM DOM node",
             "itemtype": "method",
             "name": "createForm",
@@ -342,8 +342,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 408,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 403,
             "description": "Returns a IMG DOM node",
             "itemtype": "method",
             "name": "createImage",
@@ -355,8 +355,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 416,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 411,
             "description": "Returns a IMG DOM node",
             "itemtype": "method",
             "name": "createImg",
@@ -368,8 +368,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 424,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 419,
             "description": "Returns a TABLE DOM node",
             "itemtype": "method",
             "name": "createTable",
@@ -381,8 +381,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 432,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 427,
             "description": "Returns a TR DOM node",
             "itemtype": "method",
             "name": "createTR",
@@ -394,8 +394,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 440,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 435,
             "description": "Returns a TD DOM node",
             "itemtype": "method",
             "name": "createTD",
@@ -407,8 +407,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 448,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 443,
             "description": "Returns a TBODY DOM node",
             "itemtype": "method",
             "name": "createTBody",
@@ -420,8 +420,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 456,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 451,
             "description": "Returns a LABEL DOM node",
             "itemtype": "method",
             "name": "createLabel",
@@ -433,8 +433,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 464,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 459,
             "description": "Returns a SELECT DOM node",
             "itemtype": "method",
             "name": "createSelect",
@@ -446,8 +446,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 472,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 467,
             "description": "Returns a H1 DOM node",
             "itemtype": "method",
             "name": "createH1",
@@ -459,8 +459,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 480,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 475,
             "description": "Returns a H2 DOM node",
             "itemtype": "method",
             "name": "createH2",
@@ -472,8 +472,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 488,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 483,
             "description": "Returns a H3 DOM node",
             "itemtype": "method",
             "name": "createH3",
@@ -485,8 +485,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 496,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 491,
             "description": "Returns a INPUT DOM node of type radio with gname as group",
             "itemtype": "method",
             "name": "createInputRadio",
@@ -505,8 +505,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 510,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 505,
             "description": "Returns a INPUT DOM node",
             "itemtype": "method",
             "name": "createInputElement",
@@ -525,8 +525,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 525,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 520,
             "description": "Returns a INPUT DOM node with type as checkbox",
             "itemtype": "method",
             "name": "createInputCheck",
@@ -538,8 +538,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 533,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 528,
             "description": "Returns a INPUT DOM node with type as password",
             "itemtype": "method",
             "name": "createInputPassword",
@@ -551,8 +551,8 @@
             "module": "oceanfront"
         },
         {
-            "file": "oceanfront.js",
-            "line": 541,
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 536,
             "description": "Returns a IFRAME DOM node",
             "itemtype": "method",
             "name": "createIFrame",

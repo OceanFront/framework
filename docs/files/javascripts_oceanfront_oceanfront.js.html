@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>oceanfront.js</title>
+    <title>javascripts/oceanfront/oceanfront.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -96,7 +96,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: oceanfront.js</h1>
+                        <h1 class="file-heading">File: javascripts/oceanfront/oceanfront.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -198,11 +198,6 @@
  * htmlcanvas JavaScript Library v0.1
  *
  * Author: Lars Rustemeier 
- *
- * Exposes a recursive functionality to easily build local DOM trees in widgets programmatically
- * Example syntax for 2 nested div-nodes with each 1 set attribute:
- * var tree = html.div{(class:&#x27;div1-class&#x27;),
- *                    html.div{(id:&#x27;innerDiv&#x27;)}};
  *
  * Date: Ons 26 Jan 2011 15:35:35 CET
  */
@@ -2672,7 +2667,19 @@ var DeckPanel = ComplexPanel.extend({
     this.insert(widget, this.getWidgetCount(), hashIndex);
   },
   getVisibleWidget: function() {
+    return this.visibleWidget;
+  },
+  getVisibleWidgetIndex: function() {
     return this.getWidgetIndex(this.visibleWidget);
+  },
+  getVisibleWidgetHashIndex: function() {
+    var index = this.getVisibleWidgetIndex();
+    for(var key in this.hashIndex) {
+      if(this.hashIndex.hasOwnProperty(key) &amp;&amp; this.hashIndex[key] === index) {
+        return key
+      }
+    }
+    return null;
   },
   getWidget: function(index) {
     return this.children[index];
@@ -2704,10 +2711,8 @@ var DeckPanel = ComplexPanel.extend({
       this.visibleWidget = null;
     // Delete the record in hashIndex if there is any, we need to searc for index value
     for(var prop in this.hashIndex) {
-      if(this.hashIndex.hasOwnProperty(prop)) {
-        if(this.hashIndex[prop] == index) {
-          delete this.hashIndex[prop];
-        }
+      if(this.hashIndex.hasOwnProperty(prop) &amp;&amp; this.hashIndex[prop] == index) {
+        delete this.hashIndex[prop];  
       }
     }
     return true;

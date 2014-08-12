@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>javascripts/oceanfront/extension-ocean.js</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title=""></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Array.html">Array</a></li>
+            
+                <li><a href="../classes/Class.html">Class</a></li>
+            
+                <li><a href="../classes/DOM.html">DOM</a></li>
+            
+                <li><a href="../classes/gdispathEvent.html">gdispathEvent</a></li>
+            
+                <li><a href="../classes/hash.html">hash</a></li>
+            
+                <li><a href="../classes/html.html">html</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/extension-ocean.html">extension-ocean</a></li>
+            
+                <li><a href="../modules/oceanfront.html">oceanfront</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: javascripts/oceanfront/extension-ocean.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/**
+ * Ocean API Extensio module and convenience Classes
+ *
+ * @module extension-ocean
+ */
+
+var CMSObject = Widget.extend({
+  init: function(cmsobj, wordwrap) {
+    /*
+    *   cmsobject is the returned object from config js file according to
+    *   [res, context, key, app];
+    *   res is the actual CMS content, rest is self explanitory
+    */
+    this._super();
+    if(!this.getElement()) {this.setElement(DOM.createDiv()); }
+    this.obj = cmsobj;
+    this.mouseupListeners = [];
+    this.setWordWrap(wordwrap);
+  },
+  setupCMSObj: function() {
+    // Set up event handling here since most classes that extend CMSObject change the Element
+    // So doing this in the init would remove, and replace, the element and therefore the set up listeners on the first element
+    this.sinkEvents(Event.ONMOUSEUP);
+    //Flag set in common.js
+    if(window.CMSAdminMode) {
+      var self = this;
+      this.addStyleName(&quot;clickable&quot;);
+
+      if(typeof this.obj === &quot;string&quot; &amp;&amp; (this.obj.search(&quot;&lt;em&gt;&quot;) &gt; -1)) {
+        var tmp = this.obj.split(&quot;(&quot;)[1].split(&quot;)&quot;)[0].split(&quot;/&quot;);
+        this.obj = [];
+        this.obj[0] = null;
+        this.obj[1] = tmp[0];
+        this.obj[2] = tmp[1];
+        this.obj[3] = tmp[2];
+      }
+      this.setStyleName(&quot;clickable&quot;);
+      this.addOnMouseUpListener(function(event){
+
+        var appname = (self.obj[3] !== undefined &amp;&amp; self.obj[3] !== &#x27;undefined&#x27;) ? self.obj[3] : config[&quot;APP_NAME&quot;];
+
+        // Open on correct domain
+        var domain = &quot;&quot;;
+        if(config &amp;&amp; config.OCEAN_API_URL) {
+          // Use master environment to share cms
+          domain = config.OCEAN_API_URL.replace(&quot;api&quot;, &quot;admin&quot;) + &#x27;/cms/#&#x27;;
+        } else {
+          domain = &#x27;http://localhost:3005/cms/#&#x27;;
+        }
+
+        window.open(domain + &#x27;/&#x27; + appname + &#x27;/&#x27; + self.obj[1] + &#x27;/&#x27; + self.obj[2] + &#x27;/&#x27; + config[&quot;LOCALE&quot;] + &#x27;/&#x27; + self.usage);
+      });
+    }
+  },
+  addOnMouseUpListener: function(listener) {
+    this.mouseupListeners.push(listener);
+    return this;
+  },
+  onBrowserEvent: function(event) {
+    var type = event.type;
+    if(type == &#x27;mouseup&#x27;) {
+      for(var i=0; i&lt;this.mouseupListeners.length; i++) {
+        this.mouseupListeners[i](this, event);      
+      }
+    }
+  },
+  getText: function() {
+    return DOM.getInnerText(this.getElement());
+  },
+  setText: function(text) {
+    if(!text)
+      text = &quot;&quot;;
+    DOM.setInnerText(this.getElement(),text);
+    return this;
+  },
+  replaceText: function(text) {
+    DOM.setInnerHTML(this.getElement(), text);
+  },
+  setWordWrap: function(wrap) {
+    var style = &#x27;normal&#x27;;
+    if(!wrap)
+      style = &#x27;nowrap&#x27;;
+    DOM.setStyleAttribute(this.getElement(), &#x27;whiteSpace&#x27;, style);
+
+  },
+  getHorizontalAlignment: function() {
+    return this.horizontalAlign;
+  },
+  setHorizontalAlignment: function(align) {
+    this.horizontalAlign = align;
+    DOM.setStyleAttribute(this.getElement(), &#x27;textAlign&#x27;, align);
+  }
+});
+
+var TextButton = CMSObject.extend({
+  init: function(cmsobj, fn) {
+    this._super(cmsobj);
+    
+    if(Object.prototype.toString.call( cmsobj ) === &#x27;[object Array]&#x27;) {
+      this.setElement(html.div({&#x27;class&#x27;:&#x27;clickable textButton&#x27;}, cmsobj[0]) );
+    } else {
+      DOM.setInnerText(this.getElement(), cmsobj);
+    }
+    this.setupCMSObj();
+
+    if(fn) {
+      this.addOnMouseUpListener(fn);
+    }
+  }
+});
+
+var HTMLText = CMSObject.extend({
+  init: function(cmsobj, wordwrap) {
+    this._super(cmsobj, wordwrap);
+    
+    if(Object.prototype.toString.call( cmsobj ) === &#x27;[object Array]&#x27;) {
+      this.setText(cmsobj[0]);
+    } else {
+      DOM.setInnerText(this.getElement(),cmsobj);
+    }
+    this.usage = &#x27;text&#x27;;
+    this.setupCMSObj();
+  },
+  getText: function() {
+    // Override
+    return DOM.getInnerHTML(this.getElement());
+  },
+  setText: function(text) {
+    // Override
+    if(!text)
+      text = &quot;&quot;;
+    DOM.setInnerHTML(this.getElement(),text);
+    return this;
+  },
+  replaceText: function(text) {
+    // Override
+    DOM.setInnerHTML(this.getElement(), text);
+  }
+});
+
+var Text = CMSObject.extend({
+  init: function(cmsobj, wordwrap) {
+    this._super(cmsobj, wordwrap);
+    
+    if(Object.prototype.toString.call( cmsobj ) === &#x27;[object Array]&#x27;) {
+      this.setText(cmsobj[0]);
+    } else {
+      DOM.setInnerText(this.getElement(),cmsobj);
+    }
+    this.usage = &#x27;text&#x27;;
+    this.setupCMSObj();
+  }
+});
+
+var Image = CMSObject.extend({
+  init: function(cmsobj) {
+    this._super(cmsobj);
+
+    if(Object.prototype.toString.call( cmsobj ) === &#x27;[object Array]&#x27;) {
+      this.setElement(html.img({&#x27;src&#x27;:cmsobj[0]}));
+    } else {
+      DOM.setInnerText(this.getElement(), cmsobj);
+    }
+    this.usage = &#x27;image&#x27;;
+    this.setupCMSObj();
+  }
+});
+
+var SpriteSheet = CMSObject.extend({
+  init: function(cmsobj) {
+    this._super(cmsobj);
+
+    if(Object.prototype.toString.call( cmsobj ) === &#x27;[object Array]&#x27;) {
+      this.setElement(html.div({}));
+      $(this.getElement()).css(&#x27;background-image&#x27;, &#x27;url(&#x27; + cmsobj[0] + &#x27;)&#x27;);
+    } else {
+      DOM.setInnerText(this.getElement(), cmsobj);
+    }
+    this.usage = &#x27;image&#x27;;
+    this.setupCMSObj();
+  }
+});
+
+var SpriteSheetLink = CMSObject.extend({
+  init: function(cmsobj) {
+    this._super(cmsobj);
+
+    if(Object.prototype.toString.call( cmsobj ) === &#x27;[object Array]&#x27;) {
+      this.setElement(html.a({}));
+      $(this.getElement()).css(&#x27;background-image&#x27;, &#x27;url(&#x27; + cmsobj[0] + &#x27;)&#x27;);
+    } else {
+      DOM.setInnerText(this.getElement(), cmsobj);
+    }
+    this.usage = &#x27;image&#x27;;
+    this.setupCMSObj();
+  }
+});
+
+var Markdown = CMSObject.extend({
+  init: function(cmsobj) {
+    this._super(cmsobj, true);
+
+    if(Object.prototype.toString.call( cmsobj ) === &#x27;[object Array]&#x27;) {
+      DOM.setInnerHTML(this.getElement(), cmsobj[0]);
+    } else {
+      DOM.setInnerText(this.getElement(), cmsobj);
+    }
+    this.usage = &#x27;markdown&#x27;;
+    this.setupCMSObj();
+  }
+});
+
+var Link = CMSObject.extend({
+  init: function(htmlobj) {
+    this._super(htmlobj);
+    
+    //obj in this case is supposed to be a complete html a-tag in string format that we convert to a node
+    if(Object.prototype.toString.call( htmlobj ) === &#x27;[object Array]&#x27;) {
+      this.setElement($(htmlobj[0])[0]);
+    } else {
+      var tmp = DOM.createDiv();
+      DOM.setInnerText(tmp,htmlobj);
+      this.setElement(tmp);
+    }
+    this.usage = &#x27;link&#x27;;
+    this.setupCMSObj();
+  }
+});
+
+var Header1 = CMSObject.extend({
+  init: function(cmsobj) {
+    this._super(cmsobj);
+    this.setElement(DOM.createH1());
+    
+    if(Object.prototype.toString.call( cmsobj ) === &#x27;[object Array]&#x27;) {
+      this.setText(cmsobj[0]);
+    } else {
+      DOM.setInnerText(this.getElement(),cmsobj);
+    }
+    this.usage = &#x27;text&#x27;;
+    this.setupCMSObj();
+  }
+});
+
+var Header2 = CMSObject.extend({
+  init: function(cmsobj) {
+    this._super(cmsobj);
+    this.setElement(DOM.createH2());
+
+    if(Object.prototype.toString.call( cmsobj ) === &#x27;[object Array]&#x27;) {
+      this.setText(cmsobj[0]);
+    } else {
+      DOM.setInnerText(this.getElement(),cmsobj);
+    }
+    this.usage = &#x27;text&#x27;;
+    this.setupCMSObj();
+  }
+});
+
+var Header3 = CMSObject.extend({
+  init: function(cmsobj) {
+    this._super(cmsobj);
+    this.setElement(DOM.createH3());
+    
+    if(Object.prototype.toString.call( cmsobj ) === &#x27;[object Array]&#x27;) {
+      this.setText(cmsobj[0]);
+    } else {
+      DOM.setInnerText(this.getElement(),cmsobj);
+    }
+    this.usage = &#x27;text&#x27;;
+    this.setupCMSObj();
+  }
+});
+
+
+var HTML = CMSObject.extend({
+  init: function(html, wordwrap) {
+    if(wordwrap == null)
+      wordwrap = true;
+    this._super();
+    this.setElement(DOM.createDiv());
+    this.sinkEvents(Event.ONCLICK|Event.MOUSEEVENTS);
+    if(html)
+      this.setHTML(html);
+    this.setWordWrap(wordwrap);
+  },
+  getHTML: function() {
+    return DOM.getInnerHTML(this.getElement());
+  },
+  setHTML: function(html) {
+    DOM.setInnerHTML(this.getElement(), html);
+  }
+});
+
+var PAPIBase = Class.extend({
+  init: function() {},
+  apiCall: function(link, data, method, success_callback, error_callback, extra_headers, extras) {
+    var self = this;
+
+    // detect IE CORS transport
+    if($.browser.msie &amp;&amp; ($.browser.version &lt; 9)) {
+      // detect IE CORS transport for IE older than v9 (IE10 started with XMLHttpRequest)
+      if(console) console.log(&quot;IE detected. Changing XDomainRequest object&quot;);
+      if (&#x27;XDomainRequest&#x27; in window &amp;&amp; window.XDomainRequest !== null) {
+        // override default jQuery transport
+        jQuery.ajaxSettings.xhr = function() {
+            try { return new XDomainRequest(); }
+            catch(e) { }
+        };
+        // also, override the support check
+        jQuery.support.cors = true;
+      }
+    }
+
+    if(data) {
+      $.ajax(link, {
+        headers: extra_headers,
+        type: method,
+        /*url: link,*/
+        crossDomain: true,
+        dataType: &quot;json&quot;,
+        contentType: &quot;application/json; utf-8&quot;,
+        data: JSON.stringify(data),
+        cache: true,
+        success: function(res, code, xhr) {
+          self.pre_success(res, code, xhr);
+          success_callback(res, extras, xhr);
+        },
+        error: function(xhr, textStatus, errorThrown) {
+          self.pre_error(xhr, textStatus, errorThrown);
+          if(error_callback) {error_callback(new APIError(xhr));}
+        }
+      });
+    } else {
+      $.ajax(link, {
+        headers: extra_headers,
+        type: method,
+        /*url: link,*/
+        crossDomain: true,
+        dataType: &quot;json&quot;,
+        contentType: &quot;application/json; utf-8&quot;,
+        cache: true,
+        success: function(res, code, xhr) {
+          self.pre_success(res, code, xhr);
+          success_callback(res, extras, xhr);
+        },
+        error: function(xhr, textStatus, errorThrown) {
+          self.pre_error(xhr, textStatus, errorThrown);
+          if(error_callback) {error_callback(new APIError(xhr));}
+        }
+      });
+    }
+  },
+  pre_success: function(res, code, xhr) {
+    //if(console) console.log(xhr.status + &quot; &quot; + xhr.statusText);
+    //if(console) console.log(code);
+    //if(console) console.log(xhr);
+  },
+  pre_error: function(xhr, textStatus, errorThrown) {
+    if(console) console.log(xhr.status + &quot; &quot; + xhr.statusText);
+    if(console) console.log(xhr);
+    //if (console) console.log(textStatus);
+    //if (console) console.log(errorThrown);
+  }
+});
+
+var APIError = Class.extend({
+  init: function(xhr) {
+    var self = this;
+    this.xhr = xhr;
+  },
+  getStatus: function() {
+    return this.xhr.status;
+  },
+  getErrorText: function() {
+    return this.errorText;
+  },
+  getXHRObject: function() {
+    return this.xhr;
+  }
+});
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
