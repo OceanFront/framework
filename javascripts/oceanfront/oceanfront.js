@@ -193,6 +193,55 @@ var html = (function() {
 })();
 
 /**
+ * Handles detection of Browser
+ * Will be instantiated into global namespace as Browser by the framework
+ *
+ * @class BrowserKlass
+ * 
+ */
+
+var BrowserKlass = Class.extend({
+  init: function() {
+    var result = this.detect();
+    this.name = result.browser;
+    this.version = result.version;
+  },
+  /**
+   * Detects what Browser and version it is
+   *
+   * @method detect
+   * @return {Object} Object returned has properties: browser: "name", version: "number"
+   * 
+   */
+  detect: function() {
+    //var msie = ua.indexOf('MSIE ');
+    //var trident = ua.indexOf('Trident/');
+    // Default string for IE 10
+    // Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)
+
+    // Default string for IE 11
+    // Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko
+
+    var ua = window.navigator.userAgent.toLowerCase();
+
+    var match = /(chrome)[ \/]([\w.]+)/.exec(ua) ||
+        /(webkit)[ \/]([\w.]+)/.exec(ua) ||
+        /(opera)(?:.*version|)[ \/]([\w.]+)/.exec(ua) ||
+        /(msie) ([\w.]+)/.exec(ua) || ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) || [];
+
+        console.log(match);
+
+    return {
+        browser: match[1] || "",
+        version: match[2] || "0"
+    };
+  }
+});
+
+// Execute the Browser object and make it accessible in global name space
+Browser = new BrowserKlass();
+
+/**
  * Base JavaScript Array class used for extending with convenience functions
  *
  * @class Array
@@ -512,7 +561,7 @@ var DOM = {
    */
   createInputElement: function(type) {
     var e = this.createElement('input');
-    if(!$.browser.msie) {
+    if(Browser.name !== "msie") {
       e.type = type;
     }
     return e;
@@ -2635,7 +2684,7 @@ var DeckPanel = ComplexPanel.extend({
     .browser deprecated in jquery 1.9 and above.
     This is to encourage feature checks rather than browser
     TODO: Make tests with IE and make proper changes if it still has problems animating smoothly
-  	if($.browser.msie) {
+  	if(Browser.name == "msie") {
   		this.showWidget(index);
   		return;
   	}

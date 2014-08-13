@@ -43,6 +43,8 @@
             
                 <li><a href="../classes/Array.html">Array</a></li>
             
+                <li><a href="../classes/BrowserKlass.html">BrowserKlass</a></li>
+            
                 <li><a href="../classes/Class.html">Class</a></li>
             
                 <li><a href="../classes/DOM.html">DOM</a></li>
@@ -293,6 +295,55 @@ var html = (function() {
   };
   return res;
 })();
+
+/**
+ * Handles detection of Browser
+ * Will be instantiated into global namespace as Browser by the framework
+ *
+ * @class BrowserKlass
+ * 
+ */
+
+var BrowserKlass = Class.extend({
+  init: function() {
+    var result = this.detect();
+    this.name = result.browser;
+    this.version = result.version;
+  },
+  /**
+   * Detects what Browser and version it is
+   *
+   * @method detect
+   * @return {Object} Object returned has properties: browser: &quot;name&quot;, version: &quot;number&quot;
+   * 
+   */
+  detect: function() {
+    //var msie = ua.indexOf(&#x27;MSIE &#x27;);
+    //var trident = ua.indexOf(&#x27;Trident/&#x27;);
+    // Default string for IE 10
+    // Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)
+
+    // Default string for IE 11
+    // Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko
+
+    var ua = window.navigator.userAgent.toLowerCase();
+
+    var match = /(chrome)[ \/]([\w.]+)/.exec(ua) ||
+        /(webkit)[ \/]([\w.]+)/.exec(ua) ||
+        /(opera)(?:.*version|)[ \/]([\w.]+)/.exec(ua) ||
+        /(msie) ([\w.]+)/.exec(ua) || ua.indexOf(&quot;compatible&quot;) &lt; 0 &amp;&amp; /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) || [];
+
+        console.log(match);
+
+    return {
+        browser: match[1] || &quot;&quot;,
+        version: match[2] || &quot;0&quot;
+    };
+  }
+});
+
+// Execute the Browser object and make it accessible in global name space
+Browser = new BrowserKlass();
 
 /**
  * Base JavaScript Array class used for extending with convenience functions
@@ -614,7 +665,7 @@ var DOM = {
    */
   createInputElement: function(type) {
     var e = this.createElement(&#x27;input&#x27;);
-    if(!$.browser.msie) {
+    if(Browser.name !== &quot;msie&quot;) {
       e.type = type;
     }
     return e;
@@ -2737,7 +2788,7 @@ var DeckPanel = ComplexPanel.extend({
     .browser deprecated in jquery 1.9 and above.
     This is to encourage feature checks rather than browser
     TODO: Make tests with IE and make proper changes if it still has problems animating smoothly
-  	if($.browser.msie) {
+  	if(Browser.name == &quot;msie&quot;) {
   		this.showWidget(index);
   		return;
   	}
