@@ -203,7 +203,21 @@ var html = (function() {
 var BrowserKlass = Class.extend({
   init: function() {
     var result = this.detect();
+    /**
+     * The name of the current browser
+     *
+     * @property name
+     * @type String
+     * 
+     */
     this.name = result.browser;
+    /**
+     * The version of the current browser
+     *
+     * @property version
+     * @type String
+     * 
+     */
     this.version = result.version;
   },
   /**
@@ -214,13 +228,13 @@ var BrowserKlass = Class.extend({
    * 
    */
   detect: function() {
-    //var msie = ua.indexOf('MSIE ');
-    //var trident = ua.indexOf('Trident/');
     // Default string for IE 10
     // Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)
 
     // Default string for IE 11
     // Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko
+
+    // Currently doesnt match Trident
 
     var ua = window.navigator.userAgent.toLowerCase();
 
@@ -228,8 +242,6 @@ var BrowserKlass = Class.extend({
         /(webkit)[ \/]([\w.]+)/.exec(ua) ||
         /(opera)(?:.*version|)[ \/]([\w.]+)/.exec(ua) ||
         /(msie) ([\w.]+)/.exec(ua) || ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) || [];
-
-        console.log(match);
 
     return {
         browser: match[1] || "",
@@ -321,34 +333,6 @@ function gdispatchEvent(evt) {
     DOM.dispatchEvent(evt, curElem, listener);
 }
 
-// HashFactory for handling baking, reading and reaction on URL for the application flow
-// State driven applications are to let SEO crawler find their way with correct links, and let users bookmark important flow states
-var HashFactoryBase = Class.extend({
-  init: function() {
-    //This object handles all the actual flows in application thru set hash bong states
-    //Syntax in URL: exampleApp.se/appname#!state|data
-    //Example: exampleApp.se/hotels#!product|london/hilton/123451
-    var self = this;   
-
-  },
-  setURL: function(appState, obj) {
-    if(console) console.warn("Did not override setURL in HashFactoryBase! Add your app logic in an override!");
-  },
-  parseURL: function() {
-    if(console) console.warn("Did not override parseURL in HashFactoryBase! Add your app logic in an override!");
-  },
-  flowTo: function(appState) {
-    if(console) console.warn("Did not override flowTo in HashFactoryBase! Add your app logic in override!");
-  },
-  goto: function(appState, obj) {
-    // Flow logic for application
-    if(console) console.warn("Did not override goto in HashFactoryBase! Add your app logic in override!");
-  }
-});
-
-
-// low level dom abstraction
-
 /**
  * LowLevel DOM abastraction used by the framework as an interface for operations
  * Should not be used when building apps, then use the html function instead
@@ -358,16 +342,77 @@ var HashFactoryBase = Class.extend({
  */
 var DOM = {
   // Constants
+  /**
+   * Align left styling value
+   *
+   * @property ALIGN_LEFT
+   * @type "String" 
+   * 
+   */
   ALIGN_LEFT:   "left",
+  /**
+   * Align center styling value
+   *
+   * @property ALIGN_CENTER
+   * @type "String" 
+   * 
+   */
   ALIGN_CENTER: "center",
+  /**
+   * Align right styling value
+   *
+   * @property ALIGN_RIGHT
+   * @type "String" 
+   * 
+   */
   ALIGN_RIGHT:  "right",
+  /**
+   * Align top styling value
+   *
+   * @property ALIGN_TOP
+   * @type "String" 
+   * 
+   */
   ALIGN_TOP:    "top",
+  /**
+   * Align middle styling value
+   *
+   * @property ALIGN_MIDDLE
+   * @type "String" 
+   * 
+   */
   ALIGN_MIDDLE: "middle",
+  /**
+   * Align bottom styling value
+   *
+   * @property ALIGN_BOTTOM
+   * @type "String" 
+   * 
+   */
   ALIGN_BOTTOM: "bottom",
-
-  // KEYMODS
+  /**
+   * Modifer integer value for ALT key
+   *
+   * @property MODIFIER_ALT
+   * @type "Number" 
+   * 
+   */
   MODIFIER_ALT:   4,
+  /**
+   * Modifer integer value for CTRL key
+   *
+   * @property MODIFIER_CTRL
+   * @type "Number" 
+   * 
+   */
   MODIFIER_CTRL:  2,
+  /**
+   * Modifer integer value for SHIFT key
+   *
+   * @property MODIFIER_SHIFT
+   * @type "Number" 
+   * 
+   */
   MODIFIER_SHIFT: 1,
 
   /**
@@ -590,25 +635,74 @@ var DOM = {
    * 
    */
   createIFrame: function() { return this.createElement('iframe');},
-
-  // Attributes
+  /**
+   * Sets a attribute value on a element
+   *
+   * @method setAttribute
+   * @param element {Element} DOM element to set attribtue on
+   * @param attribute {String} Attribute name to set on element
+   * @param value {String} The actual attribute value to set
+   * 
+   */
   setAttribute: function(element, attribute, value) {
     element[attribute] = value;
   },
+  /**
+   * Return the attribute value on a element
+   *
+   * @method getAttribute
+   * @param element {Element} DOM element to retrieve attribute from
+   * @param attribute {String} Name of the attribute to recieve value from
+   * @return {String} Value of the attribute on element
+   * 
+   */
   getAttribute: function(element, attribute) {
     return element[attribute];
   },
-  // Style attributes
+  /**
+   * Set CSS style on element
+   *
+   * @method setStyleAttribute
+   * @param element {Element} DOM element to set styling on
+   * @param attribute {String} Styling attribute name
+   * @param value {String} Value of the styling attribute
+   * 
+   */
   setStyleAttribute: function(element, attribute, value) {
     this.setAttribute(element.style,attribute,value);
   },
+  /**
+   * Get CSS style on element
+   *
+   * @method getStyleAttribute
+   * @param element {Element} DOM element to retrieve styling value from
+   * @param attribute {String} Styling name to retrieve value for
+   * @return {String} Value of the styling attribute on element
+   * 
+   */
   getStyleAttribute: function(element, attribute) {
     return this.getAttribute(element.style,attribute);
   },
-  // Tree operations
+  /**
+   * Remove a child element from parent element
+   *
+   * @method removeChild
+   * @param parent {Element} Parent DOM element
+   * @param child {Element} Child DOM element to remove from parent element
+   * 
+   */
   removeChild: function(parent, child) {
     parent.removeChild(child);
   },
+  /**
+   * Inserts a DOM element as a child element to parent element at index/sibling position
+   *
+   * @method insertChild
+   * @param parent {Element} Parent DOM element
+   * @param element {Element} DOM element to insert as child to parent element
+   * @param index {Number} Sibling position to insert element unto parent element at
+   * 
+   */
   insertChild: function(parent, element, index) {
   var count = 0, child = parent.firstChild, before = null;
     while (child) {
@@ -623,6 +717,14 @@ var DOM = {
     }
     parent.insertBefore(element, before);
   },
+  /**
+   * Appends a DOM element unto a parent element as last sibling in the order
+   *
+   * @method appendChild
+   * @param parent {Element} Parent DOM element
+   * @param element {Element} DOM element to insert as last sibling unto parent element
+   * 
+   */
   appendChild: function(parent, element) {
     if(parent == null || element == null) {
       if(console)
@@ -631,6 +733,15 @@ var DOM = {
       parent.appendChild(element);
     }
   },
+  /**
+   * Return child element on a element with specific sibling index
+   *
+   * @method getChild
+   * @param element {Element} DOM element to look for the child at index on
+   * @param index {Number} Childs sibling position
+   * @return {Element} Child element at index position if found, else null
+   * 
+   */
   getChild: function(element,index) {
     var count = 0, child = element.firstChild;
     while (child) {
@@ -644,6 +755,14 @@ var DOM = {
     }
     return null;
   },
+  /**
+   * Returns next sibling element for a element
+   *
+   * @method getNextSibling
+   * @param element {Element} DOM element to look for next sibling
+   * @return {Element} Sibling element if found, else null
+   * 
+   */
   getNextSibling: function(element) {
     var sib = element.nextSibling;
     while (sib && sib.nodeType != 1) {
@@ -651,6 +770,14 @@ var DOM = {
     }
     return sib ? sib : null;
   },
+  /**
+   * Return first child element on a element
+   *
+   * @method getFirstChild
+   * @param element {Element} DOM element to look for a first child element on
+   * @return {Element} First child element if found, else null if no child elements exist
+   * 
+   */
   getFirstChild: function(element) {
     var child = element.firstChild;
     while (child && child.nodeType != 1) {

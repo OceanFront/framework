@@ -56,7 +56,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 352,
+            "line": 336,
             "description": "OceanFront framework"
         }
     },
@@ -114,7 +114,7 @@
             "module": "oceanfront",
             "namespace": "",
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 244,
+            "line": 256,
             "description": "Base JavaScript Array class used for extending with convenience functions"
         },
         "hash": {
@@ -128,7 +128,7 @@
             "module": "oceanfront",
             "namespace": "",
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 289,
+            "line": 301,
             "description": "Convenience function used for setting a unique hash id on DOM nodes with memory pointer to Widgets"
         },
         "gdispathEvent": {
@@ -142,7 +142,7 @@
             "module": "oceanfront",
             "namespace": "",
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 305,
+            "line": 317,
             "description": "Convenience function used to dispatch events to Widgets"
         },
         "DOM": {
@@ -156,7 +156,7 @@
             "module": "oceanfront",
             "namespace": "",
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 352,
+            "line": 336,
             "description": "LowLevel DOM abastraction used by the framework as an interface for operations\nShould not be used when building apps, then use the html function instead"
         }
     },
@@ -172,7 +172,27 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 209,
+            "line": 206,
+            "description": "The name of the current browser",
+            "itemtype": "property",
+            "name": "name",
+            "type": "String",
+            "class": "BrowserKlass",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 214,
+            "description": "The version of the current browser",
+            "itemtype": "property",
+            "name": "version",
+            "type": "String",
+            "class": "BrowserKlass",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 223,
             "description": "Detects what Browser and version it is",
             "itemtype": "method",
             "name": "detect",
@@ -185,7 +205,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 251,
+            "line": 263,
             "description": "Removes a object in the Array on arbitrary position",
             "itemtype": "method",
             "name": "remove",
@@ -194,7 +214,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 262,
+            "line": 274,
             "description": "Returns the index position of the object in Array",
             "itemtype": "method",
             "name": "index",
@@ -207,7 +227,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 275,
+            "line": 287,
             "description": "Inserts Object at position i in the Array",
             "itemtype": "method",
             "name": "insert",
@@ -228,7 +248,97 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 373,
+            "line": 345,
+            "description": "Align left styling value",
+            "itemtype": "property",
+            "name": "ALIGN_LEFT",
+            "type": "\"String\"",
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 353,
+            "description": "Align center styling value",
+            "itemtype": "property",
+            "name": "ALIGN_CENTER",
+            "type": "\"String\"",
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 361,
+            "description": "Align right styling value",
+            "itemtype": "property",
+            "name": "ALIGN_RIGHT",
+            "type": "\"String\"",
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 369,
+            "description": "Align top styling value",
+            "itemtype": "property",
+            "name": "ALIGN_TOP",
+            "type": "\"String\"",
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 377,
+            "description": "Align middle styling value",
+            "itemtype": "property",
+            "name": "ALIGN_MIDDLE",
+            "type": "\"String\"",
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 385,
+            "description": "Align bottom styling value",
+            "itemtype": "property",
+            "name": "ALIGN_BOTTOM",
+            "type": "\"String\"",
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 393,
+            "description": "Modifer integer value for ALT key",
+            "itemtype": "property",
+            "name": "MODIFIER_ALT",
+            "type": "\"Number\"",
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 401,
+            "description": "Modifer integer value for CTRL key",
+            "itemtype": "property",
+            "name": "MODIFIER_CTRL",
+            "type": "\"Number\"",
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 409,
+            "description": "Modifer integer value for SHIFT key",
+            "itemtype": "property",
+            "name": "MODIFIER_SHIFT",
+            "type": "\"Number\"",
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 418,
             "description": "Inserts Object at position i in the Array",
             "itemtype": "method",
             "name": "dispatchEvent",
@@ -254,7 +364,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 386,
+            "line": 431,
             "description": "Returns an arbitrary DOM node",
             "itemtype": "method",
             "name": "createElement",
@@ -274,7 +384,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 395,
+            "line": 440,
             "description": "Returns a Text DOM node and inserts text",
             "itemtype": "method",
             "name": "createText",
@@ -294,7 +404,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 404,
+            "line": 449,
             "description": "Returns a Text Area DOM node",
             "itemtype": "method",
             "name": "createTextArea",
@@ -307,7 +417,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 412,
+            "line": 457,
             "description": "Returns a DIV DOM node",
             "itemtype": "method",
             "name": "createDiv",
@@ -320,7 +430,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 420,
+            "line": 465,
             "description": "Returns a SPAN DOM node",
             "itemtype": "method",
             "name": "createSpan",
@@ -333,7 +443,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 428,
+            "line": 473,
             "description": "Returns a A DOM node",
             "itemtype": "method",
             "name": "createAnchor",
@@ -346,7 +456,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 436,
+            "line": 481,
             "description": "Returns a BUTTON DOM node",
             "itemtype": "method",
             "name": "createButton",
@@ -359,7 +469,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 444,
+            "line": 489,
             "description": "Returns a FORM DOM node",
             "itemtype": "method",
             "name": "createForm",
@@ -372,7 +482,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 452,
+            "line": 497,
             "description": "Returns a IMG DOM node",
             "itemtype": "method",
             "name": "createImage",
@@ -385,7 +495,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 460,
+            "line": 505,
             "description": "Returns a IMG DOM node",
             "itemtype": "method",
             "name": "createImg",
@@ -398,7 +508,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 468,
+            "line": 513,
             "description": "Returns a TABLE DOM node",
             "itemtype": "method",
             "name": "createTable",
@@ -411,7 +521,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 476,
+            "line": 521,
             "description": "Returns a TR DOM node",
             "itemtype": "method",
             "name": "createTR",
@@ -424,7 +534,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 484,
+            "line": 529,
             "description": "Returns a TD DOM node",
             "itemtype": "method",
             "name": "createTD",
@@ -437,7 +547,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 492,
+            "line": 537,
             "description": "Returns a TBODY DOM node",
             "itemtype": "method",
             "name": "createTBody",
@@ -450,7 +560,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 500,
+            "line": 545,
             "description": "Returns a LABEL DOM node",
             "itemtype": "method",
             "name": "createLabel",
@@ -463,7 +573,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 508,
+            "line": 553,
             "description": "Returns a SELECT DOM node",
             "itemtype": "method",
             "name": "createSelect",
@@ -476,7 +586,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 516,
+            "line": 561,
             "description": "Returns a H1 DOM node",
             "itemtype": "method",
             "name": "createH1",
@@ -489,7 +599,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 524,
+            "line": 569,
             "description": "Returns a H2 DOM node",
             "itemtype": "method",
             "name": "createH2",
@@ -502,7 +612,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 532,
+            "line": 577,
             "description": "Returns a H3 DOM node",
             "itemtype": "method",
             "name": "createH3",
@@ -515,7 +625,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 540,
+            "line": 585,
             "description": "Returns a INPUT DOM node of type radio with gname as group",
             "itemtype": "method",
             "name": "createInputRadio",
@@ -535,7 +645,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 554,
+            "line": 599,
             "description": "Returns a INPUT DOM node",
             "itemtype": "method",
             "name": "createInputElement",
@@ -555,7 +665,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 569,
+            "line": 614,
             "description": "Returns a INPUT DOM node with type as checkbox",
             "itemtype": "method",
             "name": "createInputCheck",
@@ -568,7 +678,7 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 577,
+            "line": 622,
             "description": "Returns a INPUT DOM node with type as password",
             "itemtype": "method",
             "name": "createInputPassword",
@@ -581,12 +691,247 @@
         },
         {
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 585,
+            "line": 630,
             "description": "Returns a IFRAME DOM node",
             "itemtype": "method",
             "name": "createIFrame",
             "return": {
                 "description": "Created DOM node element",
+                "type": "Element"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 638,
+            "description": "Sets a attribute value on a element",
+            "itemtype": "method",
+            "name": "setAttribute",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to set attribtue on",
+                    "type": "Element"
+                },
+                {
+                    "name": "attribute",
+                    "description": "Attribute name to set on element",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "The actual attribute value to set",
+                    "type": "String"
+                }
+            ],
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 650,
+            "description": "Return the attribute value on a element",
+            "itemtype": "method",
+            "name": "getAttribute",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to retrieve attribute from",
+                    "type": "Element"
+                },
+                {
+                    "name": "attribute",
+                    "description": "Name of the attribute to recieve value from",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Value of the attribute on element",
+                "type": "String"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 662,
+            "description": "Set CSS style on element",
+            "itemtype": "method",
+            "name": "setStyleAttribute",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to set styling on",
+                    "type": "Element"
+                },
+                {
+                    "name": "attribute",
+                    "description": "Styling attribute name",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "Value of the styling attribute",
+                    "type": "String"
+                }
+            ],
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 674,
+            "description": "Get CSS style on element",
+            "itemtype": "method",
+            "name": "getStyleAttribute",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to retrieve styling value from",
+                    "type": "Element"
+                },
+                {
+                    "name": "attribute",
+                    "description": "Styling name to retrieve value for",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Value of the styling attribute on element",
+                "type": "String"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 686,
+            "description": "Remove a child element from parent element",
+            "itemtype": "method",
+            "name": "removeChild",
+            "params": [
+                {
+                    "name": "parent",
+                    "description": "Parent DOM element",
+                    "type": "Element"
+                },
+                {
+                    "name": "child",
+                    "description": "Child DOM element to remove from parent element",
+                    "type": "Element"
+                }
+            ],
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 697,
+            "description": "Inserts a DOM element as a child element to parent element at index/sibling position",
+            "itemtype": "method",
+            "name": "insertChild",
+            "params": [
+                {
+                    "name": "parent",
+                    "description": "Parent DOM element",
+                    "type": "Element"
+                },
+                {
+                    "name": "element",
+                    "description": "DOM element to insert as child to parent element",
+                    "type": "Element"
+                },
+                {
+                    "name": "index",
+                    "description": "Sibling position to insert element unto parent element at",
+                    "type": "Number"
+                }
+            ],
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 720,
+            "description": "Appends a DOM element unto a parent element as last sibling in the order",
+            "itemtype": "method",
+            "name": "appendChild",
+            "params": [
+                {
+                    "name": "parent",
+                    "description": "Parent DOM element",
+                    "type": "Element"
+                },
+                {
+                    "name": "element",
+                    "description": "DOM element to insert as last sibling unto parent element",
+                    "type": "Element"
+                }
+            ],
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 736,
+            "description": "Return child element on a element with specific sibling index",
+            "itemtype": "method",
+            "name": "getChild",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to look for the child at index on",
+                    "type": "Element"
+                },
+                {
+                    "name": "index",
+                    "description": "Childs sibling position",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Child element at index position if found, else null",
+                "type": "Element"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 758,
+            "description": "Returns next sibling element for a element",
+            "itemtype": "method",
+            "name": "getNextSibling",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to look for next sibling",
+                    "type": "Element"
+                }
+            ],
+            "return": {
+                "description": "Sibling element if found, else null",
+                "type": "Element"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 773,
+            "description": "Return first child element on a element",
+            "itemtype": "method",
+            "name": "getFirstChild",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to look for a first child element on",
+                    "type": "Element"
+                }
+            ],
+            "return": {
+                "description": "First child element if found, else null if no child elements exist",
                 "type": "Element"
             },
             "class": "DOM",
