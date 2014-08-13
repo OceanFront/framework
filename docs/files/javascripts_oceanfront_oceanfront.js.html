@@ -889,6 +889,14 @@ var DOM = {
     }
     return child ? child : null;
   },
+  /**
+   * Returns number of child elements on a element
+   *
+   * @method getChildCount
+   * @param element {Element} DOM element to count number of children on
+   * @return {Number} Number of children on element
+   * 
+   */
   getChildCount: function(element) {
     var count = 0, child = element.firstChild;
     while (child) {
@@ -898,10 +906,26 @@ var DOM = {
     }
     return count;
   },
+  /**
+   * Return element by id
+   *
+   * @method getElementById
+   * @param id {String} DOM elements id name
+   * @return {Element} Return element if found in DOM tree, else null
+   * 
+   */
   getElementById: function(id) {
     var elem = document.getElementById(id);
     return elem ? elem : null;
   },
+  /**
+   * Return parent of DOM element
+   *
+   * @method getParent
+   * @param element {Element} DOM element to retrieve parent of
+   * @return {Element} Parent DOM element if found, else null
+   * 
+   */
   getParent: function(element) {
     var parent = element.parentNode;
     if(parent == null) {
@@ -911,6 +935,16 @@ var DOM = {
       parent = null;
     return parent ? parent : null;
   },
+  /**
+   * Inserts and creates a list item with value at index poisition in list
+   *
+   * @method insertListItem
+   * @param select {Element} List DOM element to insert item into
+   * @param item {String} Name of list item
+   * @param value {String} Value for list item
+   * @param index {Number} Position to insert list item into the list at
+   * 
+   */
   insertListItem: function(select, item, value, index) {
     var option = this.createElement(&quot;option&quot;);
     this.setInnerText(option, item);
@@ -921,11 +955,26 @@ var DOM = {
     else
       this.insertChild(select, option, index);
   },
-  // Events
+  /**
+   * Prevent default propagation of event
+   *
+   * @method eventPreventDefault
+   * @param event {Event} Event to stop default propagation on
+   * 
+   */
   eventPreventDefault: function(event) {
     if(event.preventDefault)
       event.preventDefault();
   },
+  /**
+   * Sinks event on DOM element using a bits code defined by framework for each event
+   * Created properties corresponding to each event on the DOM element for further use by framework
+   *
+   * @method sinkEvents
+   * @param element {Element} DOM element to sink event to
+   * @param bits {Hexcode} Bits code corresponding to the event
+   * 
+   */
   sinkEvents: function(element, bits) {
     element.__eventBits = bits;
 
@@ -961,12 +1010,37 @@ var DOM = {
     element.onsearch      = (bits &amp; Event.ONSEARCH) ? gdispatchEvent : null;
     element.onsubmit      = (bits &amp; Event.ONSUBMIT) ? gdispatchEvent : null;
   },
+  /**
+   * Set event listener on DOM element used by framework to handle events for widgets
+   *
+   * @method setEventListener
+   * @param element {Element} DOM element to set custom event listener to
+   * @param listener {Function} Listener callback function for the event listener
+   * 
+   */
   setEventListener: function(element, listener) {
     element.__listener = listener;
   },
+  /**
+   * Return event type of a event object
+   *
+   * @method eventGetType
+   * @param event {Event} Event object to retrieve type of
+   * @return {String} Type of event
+   * 
+   */
   eventGetType: function(event) {
     return event.type;
   },
+  /**
+   * Set attribute on element with value
+   *
+   * @method setIntStyleAttribute
+   * @param element {Element} DOM element to set the attribute on
+   * @param attribute {String} Name of the attribute to set
+   * @param value {String} Value to set for the attribute on DOM node
+   * 
+   */
   setIntStyleAttribute: function(element, attribute, value) {
     element[attribute] = value;
   },

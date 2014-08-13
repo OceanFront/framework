@@ -936,6 +936,201 @@
             },
             "class": "DOM",
             "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 788,
+            "description": "Returns number of child elements on a element",
+            "itemtype": "method",
+            "name": "getChildCount",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to count number of children on",
+                    "type": "Element"
+                }
+            ],
+            "return": {
+                "description": "Number of children on element",
+                "type": "Number"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 805,
+            "description": "Return element by id",
+            "itemtype": "method",
+            "name": "getElementById",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "DOM elements id name",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Return element if found in DOM tree, else null",
+                "type": "Element"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 817,
+            "description": "Return parent of DOM element",
+            "itemtype": "method",
+            "name": "getParent",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to retrieve parent of",
+                    "type": "Element"
+                }
+            ],
+            "return": {
+                "description": "Parent DOM element if found, else null",
+                "type": "Element"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 834,
+            "description": "Inserts and creates a list item with value at index poisition in list",
+            "itemtype": "method",
+            "name": "insertListItem",
+            "params": [
+                {
+                    "name": "select",
+                    "description": "List DOM element to insert item into",
+                    "type": "Element"
+                },
+                {
+                    "name": "item",
+                    "description": "Name of list item",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "Value for list item",
+                    "type": "String"
+                },
+                {
+                    "name": "index",
+                    "description": "Position to insert list item into the list at",
+                    "type": "Number"
+                }
+            ],
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 854,
+            "description": "Prevent default propagation of event",
+            "itemtype": "method",
+            "name": "eventPreventDefault",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event to stop default propagation on",
+                    "type": "Event"
+                }
+            ],
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 865,
+            "description": "Sinks event on DOM element using a bits code defined by framework for each event\nCreated properties corresponding to each event on the DOM element for further use by framework",
+            "itemtype": "method",
+            "name": "sinkEvents",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to sink event to",
+                    "type": "Element"
+                },
+                {
+                    "name": "bits",
+                    "description": "Bits code corresponding to the event",
+                    "type": "Hexcode"
+                }
+            ],
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 909,
+            "description": "Set event listener on DOM element used by framework to handle events for widgets",
+            "itemtype": "method",
+            "name": "setEventListener",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to set custom event listener to",
+                    "type": "Element"
+                },
+                {
+                    "name": "listener",
+                    "description": "Listener callback function for the event listener",
+                    "type": "Function"
+                }
+            ],
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 920,
+            "description": "Return event type of a event object",
+            "itemtype": "method",
+            "name": "eventGetType",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event object to retrieve type of",
+                    "type": "Event"
+                }
+            ],
+            "return": {
+                "description": "Type of event",
+                "type": "String"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 931,
+            "description": "Set attribute on element with value",
+            "itemtype": "method",
+            "name": "setIntStyleAttribute",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to set the attribute on",
+                    "type": "Element"
+                },
+                {
+                    "name": "attribute",
+                    "description": "Name of the attribute to set",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "Value to set for the attribute on DOM node",
+                    "type": "String"
+                }
+            ],
+            "class": "DOM",
+            "module": "oceanfront"
         }
     ],
     "warnings": []
