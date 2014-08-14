@@ -1131,6 +1131,128 @@
             ],
             "class": "DOM",
             "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 943,
+            "description": "Sets inner HTML on a DOM element",
+            "itemtype": "method",
+            "name": "setInnerHTML",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to set the inner HTML unto",
+                    "type": "Element"
+                },
+                {
+                    "name": "html",
+                    "description": "String of parsable HTML code",
+                    "type": "String"
+                }
+            ],
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 954,
+            "description": "Return the inner HTML code of a DOM element",
+            "itemtype": "method",
+            "name": "getInnerHTML",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to return inner HTML from",
+                    "type": "Element"
+                }
+            ],
+            "return": {
+                "description": "String of HTML code",
+                "type": "String"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 966,
+            "description": "Sets inner Text on a DOM element. Will remove first child if found and replace with a Text Node",
+            "itemtype": "method",
+            "name": "setInnerText",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to set the inner Text unto",
+                    "type": "Element"
+                },
+                {
+                    "name": "text",
+                    "description": "Text to append",
+                    "type": "String"
+                }
+            ],
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 980,
+            "description": "Returns the inner Text of a DOM element. Loops thru children and returns all Inner Text of all children",
+            "itemtype": "method",
+            "name": "getInnerText",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to get inner text from",
+                    "type": "Element"
+                }
+            ],
+            "return": {
+                "description": "All text found on all child elements appended together",
+                "type": "String"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1001,
+            "description": "Returns clientX from an Event",
+            "itemtype": "method",
+            "name": "eventGetClientX",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event to get the value from",
+                    "type": "Event"
+                }
+            ],
+            "return": {
+                "description": "The clientX value on Event",
+                "type": "Number"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1012,
+            "description": "Returns clientY from an Event",
+            "itemtype": "method",
+            "name": "eventGetClientY",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event to get the value from",
+                    "type": "Event"
+                }
+            ],
+            "return": {
+                "description": "The clientY value on Event",
+                "type": "Number"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
         }
     ],
     "warnings": []

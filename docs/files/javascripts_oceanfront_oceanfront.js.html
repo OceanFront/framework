@@ -1044,19 +1044,51 @@ var DOM = {
   setIntStyleAttribute: function(element, attribute, value) {
     element[attribute] = value;
   },
+  /**
+   * Sets inner HTML on a DOM element
+   *
+   * @method setInnerHTML
+   * @param element {Element} DOM element to set the inner HTML unto
+   * @param html {String} String of parsable HTML code
+   * 
+   */
   setInnerHTML: function(element, html) {
     element.innerHTML = html;
   },
+  /**
+   * Return the inner HTML code of a DOM element
+   *
+   * @method getInnerHTML
+   * @param element {Element} DOM element to return inner HTML from
+   * @return {String} String of HTML code
+   * 
+   */
   getInnerHTML: function(element) {
     var ret = element.innerHTML;
     return (ret == null) ? null : ret;
   },
+  /**
+   * Sets inner Text on a DOM element. Will remove first child if found and replace with a Text Node
+   *
+   * @method setInnerText
+   * @param element {Element} DOM element to set the inner Text unto
+   * @param text {String} Text to append
+   * 
+   */
   setInnerText: function(element, text) {
     if(element.firstChild) {
       element.removeChild(element.firstChild);
     }
     element.appendChild(this.createText(text));
   },
+  /**
+   * Returns the inner Text of a DOM element. Loops thru children and returns all Inner Text of all children
+   *
+   * @method getInnerText
+   * @param element {Element} DOM element to get inner text from
+   * @return {String} All text found on all child elements appended together
+   * 
+   */
   getInnerText: function(element) {
     var text = &#x27;&#x27;, child = element.firstChild;
     while (child) {
@@ -1070,9 +1102,25 @@ var DOM = {
     }
     return text;
   },
+  /**
+   * Returns clientX from an Event
+   *
+   * @method eventGetClientX
+   * @param event {Event} Event to get the value from
+   * @return {Number} The clientX value on Event
+   * 
+   */
   eventGetClientX: function(event) {
     return event.clientX;
   },
+  /**
+   * Returns clientY from an Event
+   *
+   * @method eventGetClientY
+   * @param event {Event} Event to get the value from
+   * @return {Number} The clientY value on Event
+   * 
+   */
   eventGetClientY: function(event) {
     return event.clientY;
   },
