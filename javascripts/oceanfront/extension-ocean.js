@@ -373,7 +373,24 @@ var APIError = Class.extend({
     return this.xhr.status;
   },
   getErrorText: function() {
-    return this.errorText;
+    var error_obj = JSON.parse(this.xhr.responseText);
+    var text = "";
+    for(var key in error_obj) {
+      // Each value is a Array with errors in the key-subject
+      // Aggregate them with line break
+      for (var i = 0; i < error_obj[key].length; i++) {
+        if(error_obj[key][i] === "can't be blank") {
+          // Need to include key which says what can't be blank
+          text += key + " " + error_obj[key][i] + "\n";
+        } else {
+          text += error_obj[key][i] + "\n";
+        }
+      }
+    }
+    return text;
+  },
+  getErrorResponse: function() {
+    return JSON.parse(this.xhr.responseText);
   },
   getXHRObject: function() {
     return this.xhr;
