@@ -1195,10 +1195,11 @@ var DOM = {
     element.tabIndex = index;
   },
   /**
-   * 
+   * Returns 1 if one or more keyboard modifiers were used on Event else 0
    *
-   * @method 
-   * @param 
+   * @method getKeyboardModifiers
+   * @param event {Event} Event to check keyboard modifier on
+   * @return {Number} 1 if any modifier used else 0
    * 
    */
   getKeyboardModifiers: function(event) {
@@ -1213,42 +1214,145 @@ var DOM = {
       alt = DOM.MODIFIER_ALT;
     return shift | ctrl | alt;
   },
+  /**
+   * Sets if a Event should cancel bubbling or not
+   *
+   * @method eventCancelBubble
+   * @param evt {Event} Event to set cancel bubble on
+   * @param cancel {Boolean} True to cancel bubbling else false to permit bubbling of event
+   * 
+   */
   eventCancelBubble: function(evt, cancel) {
     evt.cancelBubble = cancel;
   },
+  /**
+   * Returns if Alt key were used on Event
+   *
+   * @method eventGetAltKey
+   * @param evt {Event} Event to check if Alt key were used on
+   * @return {Number} 1 if Alt key were used else 0
+   * 
+   */
   eventGetAltKey: function(evt) {
     return evt.altKey;
   },
+  /**
+   * Returns what mouse button were used on Event
+   *
+   * @method eventGetButton
+   * @param evt {Event} Event to check if any mouse button were used on
+   * @return {Number} 0 = left; 1 = middle; 2 = right - mouse button. For IE8 and earlier: 1 = left; 4 = middle; 2 = right - mouse button
+   * 
+   */
   eventGetButton: function(evt) {
     return evt.button;
   },
+  /**
+   * Returns if Ctrl key were used on Event
+   *
+   * @method eventGetCtrlKey
+   * @param evt {Event} Event to check if Ctrl key were used on
+   * @return {Number} 1 if Ctrl key were used else 0
+   * 
+   */
   eventGetCtrlKey: function(evt) {
     return evt.ctrlKey;
   },
+  /**
+   * Returns the From Element on a onactivate, onfocus, onmouseenter, onmouseleave, onmouseout or onmouseover Event
+   *
+   * @method eventGetFromElement
+   * @param evt {Event} Event to check if from element exist
+   * @return {Element} From element if it exist else null
+   * 
+   */
   eventGetFromElement: function(evt) {
     return evt.fromElement ? evt.fromElement : null;
   },
+  /**
+   * Returns which keyboard key or mouse button was pressed on Event, either which or keyCode attribute on Event
+   *
+   * @method eventGetKeyCode
+   * @param evt {Element} Event to find which key was used on
+   * @return {Number} Numeric key code if which attribute exist eler unicode value of key pressed 
+   * 
+   */
   eventGetKeyCode: function(evt) {
     return evt.which ? evt.which : evt.keyCode;
   },
+  /**
+   * Checks if any key is repeatedly held
+   *
+   * @method eventGetRepeat
+   * @param evt {Event} Event to check
+   * @return {Boolean} True if any key i srepeatedly held for Event else false
+   * 
+   */
   eventGetRepeat: function(evt) {
     return evt.repeat;
   },
+  /**
+   * Returns the horizontal screen coordinate of the mouse for Event
+   *
+   * @method eventGetScreenX
+   * @param evt {Event} Event to check
+   * @return {Number} The horizontal coordinate of mouse pointer
+   * 
+   */
   eventGetScreenX: function(evt) {
     return evt.screenX;
   },
+  /**
+   * Returns the vertical screen coordinate of the mouse for Event
+   *
+   * @method eventGetScreenY
+   * @param evt {Event} Event to check
+   * @return {Number} The vertical coordinate of mouse pointer
+   * 
+   */
   eventGetScreenY: function(evt) {
     return evt.screenY;
   },
+  /**
+   * Returns if Shift key were used on Event
+   *
+   * @method eventGetShiftKey
+   * @param evt {Event} Event to check if Shift key were used on
+   * @return {Number} 1 if Shift key were used else 0
+   * 
+   */
   eventGetShiftKey: function(evt) {
     return evt.shiftKey;
   },
+  /**
+   * Returns target element of Event if any
+   *
+   * @method eventGetTarget
+   * @param evt {Event} Event to check
+   * @return {Element} Target element if any else source element
+   * 
+   */
   eventGetTarget: function(evt) {
     return evt.target ? evt.target : evt.srcElement;
   },
+  /**
+   * Returns related target element if any, used together with mouseover and mouseout events
+   *
+   * @method eventGetToElement
+   * @param evt {Event} Event to check
+   * @return {Element} Element if any else null 
+   * 
+   */
   eventGetToElement: function(evt) {
     return evt.relatedTarget ? evt.relatedTarget : null;
   },
+  /**
+   * 
+   *
+   * @method 
+   * @param 
+   * 
+   */
   eventGetType: function(event) {
     return event.type;
   },
