@@ -653,7 +653,7 @@ var DOM = {
    * @method getAttribute
    * @param element {Element} DOM element to retrieve attribute from
    * @param attribute {String} Name of the attribute to recieve value from
-   * @return {String} Value of the attribute on element
+   * @return {String} String value for the attribute on element
    * 
    */
   getAttribute: function(element, attribute) {
@@ -1020,6 +1020,14 @@ var DOM = {
   eventGetClientY: function(event) {
     return event.clientY;
   },
+  /**
+   * Returns absolute left position value for a DOM element. Sums all parent DOM nodes offset adding the bodys scrollLeft.
+   *
+   * @method getAbsoluteLeft
+   * @param element {Element} DOM element to measure absolute left value for
+   * @return {Number} The absolut left position value
+   * 
+   */
   getAbsoluteLeft: function(element) {
     var left = 0;
     while (element) {
@@ -1028,6 +1036,14 @@ var DOM = {
     }
     return left + document.body.scrollLeft;
   },
+  /**
+   * Returns absolute top position value for a DOM element. Sums all parent DOM nodes offset adding the bodys scrollTop.
+   *
+   * @method getAbsoluteTop
+   * @param element {Element} DOM element to measure absolute top value for
+   * @return {Number} The absolute top position value
+   * 
+   */
   getAbsoluteTop: function(element) {
     var top = 0;
     while (element) {
@@ -1036,21 +1052,61 @@ var DOM = {
     }
     return top + document.body.scrollTop;
   },
+  /**
+   * Compare two DOM elements, returns true if equal else false
+   *
+   * @method compare
+   * @param element1 {Element} First DOM element to compare
+   * @param element2 {Element} Second DOM element to compare
+   * @return {Boolean} True if equal (same elements) else false
+   * 
+   */
   compare: function(element1, element2) {
              return element1 == element2;
            },
-  /* style names */
+  /**
+   * Sets class name value on a DOM element. For several class names use space as delimiter in the style attribute value
+   *
+   * @method setStyleName
+   * @param element {Element} DOM element to set class name on
+   * @param style {String} String value to set as class name
+   * 
+   */
   setStyleName: function(element, style) {
     this.setAttribute(element, 'className', style);
   },
+  /**
+   * Return class name value on a DOM element
+   *
+   * @method getStyleName
+   * @param element {Element} DOM element to return the class name value from
+   * @return {String} String value on DOM elements class name
+   * 
+   */
   getStyleName: function(element) {
     return this.getAttribute(element, 'className');
   },
+  /**
+   * Removes a class name from the DOM elements current class names
+   *
+   * @method removeStyleName
+   * @param element {Element} DOM element to remove a class name from
+   * @param style {String} Class name to remove from DOM element
+   * 
+   */
   removeStyleName: function(element, style) {
     var names = this.getStyleNames(element);
     names.remove(style);
     this.setStyleName(element, names.join(' '));
   },
+  /**
+   * Adds a class name to the current list of class names on DOM element
+   *
+   * @method addStyleName
+   * @param element {Element} DOM element to add the class name to
+   * @param style {String} String value of the class name to add to DOM element
+   * 
+   */
   addStyleName: function(element, style){
     var curr_style = this.getStyleName(element);
     var names = this.getStyleNames(element);
@@ -1061,30 +1117,90 @@ var DOM = {
         this.setStyleName(element, curr_style + " " + style);
     }
   },
+  /**
+   * Returns a array of class names of the DOM element. Requires the class name string value to be set with space as delimiter
+   *
+   * @method getStyleNames
+   * @param element {Element} DOM element to retrieve the class names on
+   * @return {Array} Array with all class names on DOM element
+   * 
+   */
   getStyleNames: function(element) {
     return this.getStyleName(element).split(' ');
   },
-  // FOCUS
-  blur: function(elem) {
-    elem.blur();
+  /**
+   * Fire Blur event on DOM element
+   *
+   * @method blur
+   * @param element {Element} DOM element to fire blur event on
+   * 
+   */
+  blur: function(element) {
+    element.blur();
   },
+  /**
+   * Returns a created DIV element that is set as focused on
+   *
+   * @method createFocusable
+   * @return {Element} DIV element that is set as focused
+   * 
+   */
   createFocusable: function() {
     var e = $doc.createElement("DIV");
     e.tabIndex = 0;
     return e;
   },
+  /**
+   * Fire Focus event on DOM element
+   *
+   * @method focus
+   * @param element {Element} DOM element to fire focus event on
+   * 
+   */
   focus: function(element) {
     element.focus();
   },
+  /**
+   * Returns the tab index on a DOM element
+   *
+   * @method getTabIndex
+   * @param element {Element} DOM element to retrieve tab index from
+   * @return {Number} Tab index on DOM element
+   * 
+   */
   getTabIndex: function(element) {
     return element.tabIndex;
   },
+  /**
+   * Sets a shortcut access key on a DOM element. This varies for browsers what the actual shortcut will be.
+   * See this list for accessing the shortcut access key: http://www.w3schools.com/jsref/prop_html_accesskey.asp
+   *
+   * @method setAccessKey
+   * @param element {Element} DOM element to set access key on
+   * @param key {String} The actual letter character to set as access key
+   * 
+   */
   setAccessKey: function(element, key) {
     element.accessKey = key;
   },
+  /**
+   * Sets tab index on a DOM element
+   *
+   * @method setTabIndex
+   * @param element {Element} DOM element to set tab index
+   * @param index {Number} Tab index value
+   * 
+   */
   setTabIndex: function(element, index) {
     element.tabIndex = index;
   },
+  /**
+   * 
+   *
+   * @method 
+   * @param 
+   * 
+   */
   getKeyboardModifiers: function(event) {
     var shift = 0;
     var ctrl = 0;
