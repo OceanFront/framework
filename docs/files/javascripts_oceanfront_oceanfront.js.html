@@ -55,6 +55,8 @@
             
                 <li><a href="../classes/html.html">html</a></li>
             
+                <li><a href="../classes/Window.html">Window</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -757,7 +759,7 @@ var DOM = {
    * @method getAttribute
    * @param element {Element} DOM element to retrieve attribute from
    * @param attribute {String} Name of the attribute to recieve value from
-   * @return {String} Value of the attribute on element
+   * @return {String} String value for the attribute on element
    * 
    */
   getAttribute: function(element, attribute) {
@@ -1124,6 +1126,14 @@ var DOM = {
   eventGetClientY: function(event) {
     return event.clientY;
   },
+  /**
+   * Returns absolute left position value for a DOM element. Sums all parent DOM nodes offset adding the bodys scrollLeft.
+   *
+   * @method getAbsoluteLeft
+   * @param element {Element} DOM element to measure absolute left value for
+   * @return {Number} The absolut left position value
+   * 
+   */
   getAbsoluteLeft: function(element) {
     var left = 0;
     while (element) {
@@ -1132,6 +1142,14 @@ var DOM = {
     }
     return left + document.body.scrollLeft;
   },
+  /**
+   * Returns absolute top position value for a DOM element. Sums all parent DOM nodes offset adding the bodys scrollTop.
+   *
+   * @method getAbsoluteTop
+   * @param element {Element} DOM element to measure absolute top value for
+   * @return {Number} The absolute top position value
+   * 
+   */
   getAbsoluteTop: function(element) {
     var top = 0;
     while (element) {
@@ -1140,21 +1158,61 @@ var DOM = {
     }
     return top + document.body.scrollTop;
   },
+  /**
+   * Compare two DOM elements, returns true if equal else false
+   *
+   * @method compare
+   * @param element1 {Element} First DOM element to compare
+   * @param element2 {Element} Second DOM element to compare
+   * @return {Boolean} True if equal (same elements) else false
+   * 
+   */
   compare: function(element1, element2) {
              return element1 == element2;
            },
-  /* style names */
+  /**
+   * Sets class name value on a DOM element. For several class names use space as delimiter in the style attribute value
+   *
+   * @method setStyleName
+   * @param element {Element} DOM element to set class name on
+   * @param style {String} String value to set as class name
+   * 
+   */
   setStyleName: function(element, style) {
     this.setAttribute(element, &#x27;className&#x27;, style);
   },
+  /**
+   * Return class name value on a DOM element
+   *
+   * @method getStyleName
+   * @param element {Element} DOM element to return the class name value from
+   * @return {String} String value on DOM elements class name
+   * 
+   */
   getStyleName: function(element) {
     return this.getAttribute(element, &#x27;className&#x27;);
   },
+  /**
+   * Removes a class name from the DOM elements current class names
+   *
+   * @method removeStyleName
+   * @param element {Element} DOM element to remove a class name from
+   * @param style {String} Class name to remove from DOM element
+   * 
+   */
   removeStyleName: function(element, style) {
     var names = this.getStyleNames(element);
     names.remove(style);
     this.setStyleName(element, names.join(&#x27; &#x27;));
   },
+  /**
+   * Adds a class name to the current list of class names on DOM element
+   *
+   * @method addStyleName
+   * @param element {Element} DOM element to add the class name to
+   * @param style {String} String value of the class name to add to DOM element
+   * 
+   */
   addStyleName: function(element, style){
     var curr_style = this.getStyleName(element);
     var names = this.getStyleNames(element);
@@ -1165,30 +1223,91 @@ var DOM = {
         this.setStyleName(element, curr_style + &quot; &quot; + style);
     }
   },
+  /**
+   * Returns a array of class names of the DOM element. Requires the class name string value to be set with space as delimiter
+   *
+   * @method getStyleNames
+   * @param element {Element} DOM element to retrieve the class names on
+   * @return {Array} Array with all class names on DOM element
+   * 
+   */
   getStyleNames: function(element) {
     return this.getStyleName(element).split(&#x27; &#x27;);
   },
-  // FOCUS
-  blur: function(elem) {
-    elem.blur();
+  /**
+   * Fire Blur event on DOM element
+   *
+   * @method blur
+   * @param element {Element} DOM element to fire blur event on
+   * 
+   */
+  blur: function(element) {
+    element.blur();
   },
+  /**
+   * Returns a created DIV element that is set as focused on
+   *
+   * @method createFocusable
+   * @return {Element} DIV element that is set as focused
+   * 
+   */
   createFocusable: function() {
     var e = $doc.createElement(&quot;DIV&quot;);
     e.tabIndex = 0;
     return e;
   },
+  /**
+   * Fire Focus event on DOM element
+   *
+   * @method focus
+   * @param element {Element} DOM element to fire focus event on
+   * 
+   */
   focus: function(element) {
     element.focus();
   },
+  /**
+   * Returns the tab index on a DOM element
+   *
+   * @method getTabIndex
+   * @param element {Element} DOM element to retrieve tab index from
+   * @return {Number} Tab index on DOM element
+   * 
+   */
   getTabIndex: function(element) {
     return element.tabIndex;
   },
+  /**
+   * Sets a shortcut access key on a DOM element. This varies for browsers what the actual shortcut will be.
+   * See this list for accessing the shortcut access key: http://www.w3schools.com/jsref/prop_html_accesskey.asp
+   *
+   * @method setAccessKey
+   * @param element {Element} DOM element to set access key on
+   * @param key {String} The actual letter character to set as access key
+   * 
+   */
   setAccessKey: function(element, key) {
     element.accessKey = key;
   },
+  /**
+   * Sets tab index on a DOM element
+   *
+   * @method setTabIndex
+   * @param element {Element} DOM element to set tab index
+   * @param index {Number} Tab index value
+   * 
+   */
   setTabIndex: function(element, index) {
     element.tabIndex = index;
   },
+  /**
+   * Returns 1 if one or more keyboard modifiers were used on Event else 0
+   *
+   * @method getKeyboardModifiers
+   * @param event {Event} Event to check keyboard modifier on
+   * @return {Number} 1 if any modifier used else 0
+   * 
+   */
   getKeyboardModifiers: function(event) {
     var shift = 0;
     var ctrl = 0;
@@ -1201,45 +1320,159 @@ var DOM = {
       alt = DOM.MODIFIER_ALT;
     return shift | ctrl | alt;
   },
+  /**
+   * Sets if a Event should cancel bubbling or not
+   *
+   * @method eventCancelBubble
+   * @param evt {Event} Event to set cancel bubble on
+   * @param cancel {Boolean} True to cancel bubbling else false to permit bubbling of event
+   * 
+   */
   eventCancelBubble: function(evt, cancel) {
     evt.cancelBubble = cancel;
   },
+  /**
+   * Returns if Alt key were used on Event
+   *
+   * @method eventGetAltKey
+   * @param evt {Event} Event to check if Alt key were used on
+   * @return {Number} 1 if Alt key were used else 0
+   * 
+   */
   eventGetAltKey: function(evt) {
     return evt.altKey;
   },
+  /**
+   * Returns what mouse button were used on Event
+   *
+   * @method eventGetButton
+   * @param evt {Event} Event to check if any mouse button were used on
+   * @return {Number} 0 = left; 1 = middle; 2 = right - mouse button. For IE8 and earlier: 1 = left; 4 = middle; 2 = right - mouse button
+   * 
+   */
   eventGetButton: function(evt) {
     return evt.button;
   },
+  /**
+   * Returns if Ctrl key were used on Event
+   *
+   * @method eventGetCtrlKey
+   * @param evt {Event} Event to check if Ctrl key were used on
+   * @return {Number} 1 if Ctrl key were used else 0
+   * 
+   */
   eventGetCtrlKey: function(evt) {
     return evt.ctrlKey;
   },
+  /**
+   * Returns the From Element on a onactivate, onfocus, onmouseenter, onmouseleave, onmouseout or onmouseover Event
+   *
+   * @method eventGetFromElement
+   * @param evt {Event} Event to check if from element exist
+   * @return {Element} From element if it exist else null
+   * 
+   */
   eventGetFromElement: function(evt) {
     return evt.fromElement ? evt.fromElement : null;
   },
+  /**
+   * Returns which keyboard key or mouse button was pressed on Event, either which or keyCode attribute on Event
+   *
+   * @method eventGetKeyCode
+   * @param evt {Element} Event to find which key was used on
+   * @return {Number} Numeric key code if which attribute exist eler unicode value of key pressed 
+   * 
+   */
   eventGetKeyCode: function(evt) {
     return evt.which ? evt.which : evt.keyCode;
   },
+  /**
+   * Checks if any key is repeatedly held
+   *
+   * @method eventGetRepeat
+   * @param evt {Event} Event to check
+   * @return {Boolean} True if any key i srepeatedly held for Event else false
+   * 
+   */
   eventGetRepeat: function(evt) {
     return evt.repeat;
   },
+  /**
+   * Returns the horizontal screen coordinate of the mouse for Event
+   *
+   * @method eventGetScreenX
+   * @param evt {Event} Event to check
+   * @return {Number} The horizontal coordinate of mouse pointer
+   * 
+   */
   eventGetScreenX: function(evt) {
     return evt.screenX;
   },
+  /**
+   * Returns the vertical screen coordinate of the mouse for Event
+   *
+   * @method eventGetScreenY
+   * @param evt {Event} Event to check
+   * @return {Number} The vertical coordinate of mouse pointer
+   * 
+   */
   eventGetScreenY: function(evt) {
     return evt.screenY;
   },
+  /**
+   * Returns if Shift key were used on Event
+   *
+   * @method eventGetShiftKey
+   * @param evt {Event} Event to check if Shift key were used on
+   * @return {Number} 1 if Shift key were used else 0
+   * 
+   */
   eventGetShiftKey: function(evt) {
     return evt.shiftKey;
   },
+  /**
+   * Returns target element of Event if any
+   *
+   * @method eventGetTarget
+   * @param evt {Event} Event to check
+   * @return {Element} Target element if any else source element
+   * 
+   */
   eventGetTarget: function(evt) {
     return evt.target ? evt.target : evt.srcElement;
   },
+  /**
+   * Returns related target element if any, used together with mouseover and mouseout events
+   *
+   * @method eventGetToElement
+   * @param evt {Event} Event to check
+   * @return {Element} Element if any else null 
+   * 
+   */
   eventGetToElement: function(evt) {
     return evt.relatedTarget ? evt.relatedTarget : null;
   },
+  /**
+   * Returns the type of an Event
+   *
+   * @method eventGetType
+   * @param event {Event} Event to determine typ of
+   * @return {String} Type of Event
+   * 
+   */
   eventGetType: function(event) {
     return event.type;
   },
+  /**
+   * Returns framework code for a Events type. All codes are defined in the global object Event in framework.
+   * All this is done because the framework has its own handling of Event to take better control and make it easier
+   * to stop propagation and let events bubble in widgets.
+   *
+   * @method eventGetTypeInt 
+   * @param event {Event} Event to determine framework type code for
+   * @return {Number} Code corresponding to Events type in framework
+   * 
+   */
   eventGetTypeInt: function(event) {
     switch (event.type) {
       case &quot;blur&quot;: return Event.ONBLUR;
@@ -1275,18 +1508,57 @@ var DOM = {
       case &quot;submit&quot;: return Event.ONSUBMIT;
     }
   },
+  /**
+   * Returns an Events type. Same as eventGetType. Separated for future needs
+   *
+   * @method eventGetType
+   * @param event {Event} Event to check type of
+   * @return {String} Type of Event
+   * 
+   */
   eventGetTypeString: function(event) {
     return DOM.eventGetType(event);
   },
+  /**
+   * Sets key code on a Event
+   *
+   * @method eventSetKeyCode
+   * @param evt {Event} Event to set key code on
+   * @param key {Number} Code to set as key code on Event
+   * 
+   */
   eventSetKeyCode: function(evt, key) {
     evt.keyCode = key;
   },
+  /**
+   * Returns Event as a string
+   *
+   * @method eventToString
+   * @param evt {Event} Event to stringify
+   * @return {String} Resulting string of Event
+   * 
+   */
   eventToString: function(evt) {
     return evt.toString();
   },
+  /**
+   * Returns source of a iframe Element. Does not currently check that Element is a iframe
+   *
+   * @method iframeGetSrc
+   * @param elem {Element} Element assumed to be an iframe
+   * @return {String} Source attribute on Element
+   * 
+   */
   iframeGetSrc: function(elem) {
     return elem.src;
   },
+  /**
+   * Returns an Array of current x-y page scroll values
+   *
+   * @method getPageScroll
+   * @return {Array} Current [xScroll, yScroll] values
+   * 
+   */
   getPageScroll: function() {
     // getPageScroll() by quirksmode.com
     var xScroll, yScroll;
@@ -1302,6 +1574,13 @@ var DOM = {
     }
     return [xScroll,yScroll];
   },
+  /**
+   * Returns current window height value
+   *
+   * @method getPageHeight
+   * @return {Number} Current window height value
+   * 
+   */
   getPageHeight: function () {
   // Adapted from getPageSize() by quirksmode.com
     var windowHeight;
@@ -1316,13 +1595,34 @@ var DOM = {
   }
 };
 
+/**
+ * Window object with convenience functions
+ *
+ * @class Window
+ * 
+ */
+
 var Window = {
+  /**
+   * Returns current window height
+   *
+   * @method getClientHeight
+   * @return {Number} Current window height value
+   * 
+   */
   getClientHeight: function() {
     if (window.innerHeight)
       return window.innerHeight;
     else
       return document.body.clientHeight;
   },
+  /**
+   * Returns current window width
+   *
+   * @method getClientWidth
+   * @return {Number} Current window width value
+   * 
+   */
   getClientWidth: function() {
     if (window.innerWidth)
       return window.innerWidth;

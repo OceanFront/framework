@@ -55,6 +55,8 @@
             
                 <li><a href="../classes/html.html">html</a></li>
             
+                <li><a href="../classes/Window.html">Window</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -477,7 +479,24 @@ var APIError = Class.extend({
     return this.xhr.status;
   },
   getErrorText: function() {
-    return this.errorText;
+    var error_obj = JSON.parse(this.xhr.responseText);
+    var text = &quot;&quot;;
+    for(var key in error_obj) {
+      // Each value is a Array with errors in the key-subject
+      // Aggregate them with line break
+      for (var i = 0; i &lt; error_obj[key].length; i++) {
+        if(error_obj[key][i] === &quot;can&#x27;t be blank&quot;) {
+          // Need to include key which says what can&#x27;t be blank
+          text += key + &quot; &quot; + error_obj[key][i] + &quot;\n&quot;;
+        } else {
+          text += error_obj[key][i] + &quot;\n&quot;;
+        }
+      }
+    }
+    return text;
+  },
+  getErrorResponse: function() {
+    return JSON.parse(this.xhr.responseText);
   },
   getXHRObject: function() {
     return this.xhr;

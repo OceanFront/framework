@@ -1347,15 +1347,26 @@ var DOM = {
     return evt.relatedTarget ? evt.relatedTarget : null;
   },
   /**
-   * 
+   * Returns the type of an Event
    *
-   * @method 
-   * @param 
+   * @method eventGetType
+   * @param event {Event} Event to determine typ of
+   * @return {String} Type of Event
    * 
    */
   eventGetType: function(event) {
     return event.type;
   },
+  /**
+   * Returns framework code for a Events type. All codes are defined in the global object Event in framework.
+   * All this is done because the framework has its own handling of Event to take better control and make it easier
+   * to stop propagation and let events bubble in widgets.
+   *
+   * @method eventGetTypeInt 
+   * @param event {Event} Event to determine framework type code for
+   * @return {Number} Code corresponding to Events type in framework
+   * 
+   */
   eventGetTypeInt: function(event) {
     switch (event.type) {
       case "blur": return Event.ONBLUR;
@@ -1391,18 +1402,57 @@ var DOM = {
       case "submit": return Event.ONSUBMIT;
     }
   },
+  /**
+   * Returns an Events type. Same as eventGetType. Separated for future needs
+   *
+   * @method eventGetType
+   * @param event {Event} Event to check type of
+   * @return {String} Type of Event
+   * 
+   */
   eventGetTypeString: function(event) {
     return DOM.eventGetType(event);
   },
+  /**
+   * Sets key code on a Event
+   *
+   * @method eventSetKeyCode
+   * @param evt {Event} Event to set key code on
+   * @param key {Number} Code to set as key code on Event
+   * 
+   */
   eventSetKeyCode: function(evt, key) {
     evt.keyCode = key;
   },
+  /**
+   * Returns Event as a string
+   *
+   * @method eventToString
+   * @param evt {Event} Event to stringify
+   * @return {String} Resulting string of Event
+   * 
+   */
   eventToString: function(evt) {
     return evt.toString();
   },
+  /**
+   * Returns source of a iframe Element. Does not currently check that Element is a iframe
+   *
+   * @method iframeGetSrc
+   * @param elem {Element} Element assumed to be an iframe
+   * @return {String} Source attribute on Element
+   * 
+   */
   iframeGetSrc: function(elem) {
     return elem.src;
   },
+  /**
+   * Returns an Array of current x-y page scroll values
+   *
+   * @method getPageScroll
+   * @return {Array} Current [xScroll, yScroll] values
+   * 
+   */
   getPageScroll: function() {
     // getPageScroll() by quirksmode.com
     var xScroll, yScroll;
@@ -1418,6 +1468,13 @@ var DOM = {
     }
     return [xScroll,yScroll];
   },
+  /**
+   * Returns current window height value
+   *
+   * @method getPageHeight
+   * @return {Number} Current window height value
+   * 
+   */
   getPageHeight: function () {
   // Adapted from getPageSize() by quirksmode.com
     var windowHeight;
@@ -1432,13 +1489,34 @@ var DOM = {
   }
 };
 
+/**
+ * Window object with convenience functions
+ *
+ * @class Window
+ * 
+ */
+
 var Window = {
+  /**
+   * Returns current window height
+   *
+   * @method getClientHeight
+   * @return {Number} Current window height value
+   * 
+   */
   getClientHeight: function() {
     if (window.innerHeight)
       return window.innerHeight;
     else
       return document.body.clientHeight;
   },
+  /**
+   * Returns current window width
+   *
+   * @method getClientWidth
+   * @return {Number} Current window width value
+   * 
+   */
   getClientWidth: function() {
     if (window.innerWidth)
       return window.innerWidth;

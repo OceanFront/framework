@@ -5,6 +5,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "BrowserKlass",
         "Class",
         "DOM",
+        "Window",
         "gdispathEvent",
         "hash",
         "html"

@@ -22,7 +22,8 @@
                 "Array": 1,
                 "hash": 1,
                 "gdispathEvent": 1,
-                "DOM": 1
+                "DOM": 1,
+                "Window": 1
             },
             "fors": {},
             "namespaces": {}
@@ -50,13 +51,14 @@
                 "Array": 1,
                 "hash": 1,
                 "gdispathEvent": 1,
-                "DOM": 1
+                "DOM": 1,
+                "Window": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
             "file": "javascripts/oceanfront/oceanfront.js",
-            "line": 336,
+            "line": 1492,
             "description": "OceanFront framework"
         }
     },
@@ -158,6 +160,20 @@
             "file": "javascripts/oceanfront/oceanfront.js",
             "line": 336,
             "description": "LowLevel DOM abastraction used by the framework as an interface for operations\nShould not be used when building apps, then use the html function instead"
+        },
+        "Window": {
+            "name": "Window",
+            "shortname": "Window",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "oceanfront",
+            "namespace": "",
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1492,
+            "description": "Window object with convenience functions"
         }
     },
     "classitems": [
@@ -747,7 +763,7 @@
                 }
             ],
             "return": {
-                "description": "Value of the attribute on element",
+                "description": "String value for the attribute on element",
                 "type": "String"
             },
             "class": "DOM",
@@ -1252,6 +1268,715 @@
                 "type": "Number"
             },
             "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1023,
+            "description": "Returns absolute left position value for a DOM element. Sums all parent DOM nodes offset adding the bodys scrollLeft.",
+            "itemtype": "method",
+            "name": "getAbsoluteLeft",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to measure absolute left value for",
+                    "type": "Element"
+                }
+            ],
+            "return": {
+                "description": "The absolut left position value",
+                "type": "Number"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1039,
+            "description": "Returns absolute top position value for a DOM element. Sums all parent DOM nodes offset adding the bodys scrollTop.",
+            "itemtype": "method",
+            "name": "getAbsoluteTop",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to measure absolute top value for",
+                    "type": "Element"
+                }
+            ],
+            "return": {
+                "description": "The absolute top position value",
+                "type": "Number"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1055,
+            "description": "Compare two DOM elements, returns true if equal else false",
+            "itemtype": "method",
+            "name": "compare",
+            "params": [
+                {
+                    "name": "element1",
+                    "description": "First DOM element to compare",
+                    "type": "Element"
+                },
+                {
+                    "name": "element2",
+                    "description": "Second DOM element to compare",
+                    "type": "Element"
+                }
+            ],
+            "return": {
+                "description": "True if equal (same elements) else false",
+                "type": "Boolean"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1067,
+            "description": "Sets class name value on a DOM element. For several class names use space as delimiter in the style attribute value",
+            "itemtype": "method",
+            "name": "setStyleName",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to set class name on",
+                    "type": "Element"
+                },
+                {
+                    "name": "style",
+                    "description": "String value to set as class name",
+                    "type": "String"
+                }
+            ],
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1078,
+            "description": "Return class name value on a DOM element",
+            "itemtype": "method",
+            "name": "getStyleName",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to return the class name value from",
+                    "type": "Element"
+                }
+            ],
+            "return": {
+                "description": "String value on DOM elements class name",
+                "type": "String"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1089,
+            "description": "Removes a class name from the DOM elements current class names",
+            "itemtype": "method",
+            "name": "removeStyleName",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to remove a class name from",
+                    "type": "Element"
+                },
+                {
+                    "name": "style",
+                    "description": "Class name to remove from DOM element",
+                    "type": "String"
+                }
+            ],
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1102,
+            "description": "Adds a class name to the current list of class names on DOM element",
+            "itemtype": "method",
+            "name": "addStyleName",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to add the class name to",
+                    "type": "Element"
+                },
+                {
+                    "name": "style",
+                    "description": "String value of the class name to add to DOM element",
+                    "type": "String"
+                }
+            ],
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1120,
+            "description": "Returns a array of class names of the DOM element. Requires the class name string value to be set with space as delimiter",
+            "itemtype": "method",
+            "name": "getStyleNames",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to retrieve the class names on",
+                    "type": "Element"
+                }
+            ],
+            "return": {
+                "description": "Array with all class names on DOM element",
+                "type": "Array"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1131,
+            "description": "Fire Blur event on DOM element",
+            "itemtype": "method",
+            "name": "blur",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to fire blur event on",
+                    "type": "Element"
+                }
+            ],
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1141,
+            "description": "Returns a created DIV element that is set as focused on",
+            "itemtype": "method",
+            "name": "createFocusable",
+            "return": {
+                "description": "DIV element that is set as focused",
+                "type": "Element"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1153,
+            "description": "Fire Focus event on DOM element",
+            "itemtype": "method",
+            "name": "focus",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to fire focus event on",
+                    "type": "Element"
+                }
+            ],
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1163,
+            "description": "Returns the tab index on a DOM element",
+            "itemtype": "method",
+            "name": "getTabIndex",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to retrieve tab index from",
+                    "type": "Element"
+                }
+            ],
+            "return": {
+                "description": "Tab index on DOM element",
+                "type": "Number"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1174,
+            "description": "Sets a shortcut access key on a DOM element. This varies for browsers what the actual shortcut will be.\nSee this list for accessing the shortcut access key: http://www.w3schools.com/jsref/prop_html_accesskey.asp",
+            "itemtype": "method",
+            "name": "setAccessKey",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to set access key on",
+                    "type": "Element"
+                },
+                {
+                    "name": "key",
+                    "description": "The actual letter character to set as access key",
+                    "type": "String"
+                }
+            ],
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1186,
+            "description": "Sets tab index on a DOM element",
+            "itemtype": "method",
+            "name": "setTabIndex",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "DOM element to set tab index",
+                    "type": "Element"
+                },
+                {
+                    "name": "index",
+                    "description": "Tab index value",
+                    "type": "Number"
+                }
+            ],
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1197,
+            "description": "Returns 1 if one or more keyboard modifiers were used on Event else 0",
+            "itemtype": "method",
+            "name": "getKeyboardModifiers",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event to check keyboard modifier on",
+                    "type": "Event"
+                }
+            ],
+            "return": {
+                "description": "1 if any modifier used else 0",
+                "type": "Number"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1217,
+            "description": "Sets if a Event should cancel bubbling or not",
+            "itemtype": "method",
+            "name": "eventCancelBubble",
+            "params": [
+                {
+                    "name": "evt",
+                    "description": "Event to set cancel bubble on",
+                    "type": "Event"
+                },
+                {
+                    "name": "cancel",
+                    "description": "True to cancel bubbling else false to permit bubbling of event",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1228,
+            "description": "Returns if Alt key were used on Event",
+            "itemtype": "method",
+            "name": "eventGetAltKey",
+            "params": [
+                {
+                    "name": "evt",
+                    "description": "Event to check if Alt key were used on",
+                    "type": "Event"
+                }
+            ],
+            "return": {
+                "description": "1 if Alt key were used else 0",
+                "type": "Number"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1239,
+            "description": "Returns what mouse button were used on Event",
+            "itemtype": "method",
+            "name": "eventGetButton",
+            "params": [
+                {
+                    "name": "evt",
+                    "description": "Event to check if any mouse button were used on",
+                    "type": "Event"
+                }
+            ],
+            "return": {
+                "description": "0 = left; 1 = middle; 2 = right - mouse button. For IE8 and earlier: 1 = left; 4 = middle; 2 = right - mouse button",
+                "type": "Number"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1250,
+            "description": "Returns if Ctrl key were used on Event",
+            "itemtype": "method",
+            "name": "eventGetCtrlKey",
+            "params": [
+                {
+                    "name": "evt",
+                    "description": "Event to check if Ctrl key were used on",
+                    "type": "Event"
+                }
+            ],
+            "return": {
+                "description": "1 if Ctrl key were used else 0",
+                "type": "Number"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1261,
+            "description": "Returns the From Element on a onactivate, onfocus, onmouseenter, onmouseleave, onmouseout or onmouseover Event",
+            "itemtype": "method",
+            "name": "eventGetFromElement",
+            "params": [
+                {
+                    "name": "evt",
+                    "description": "Event to check if from element exist",
+                    "type": "Event"
+                }
+            ],
+            "return": {
+                "description": "From element if it exist else null",
+                "type": "Element"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1272,
+            "description": "Returns which keyboard key or mouse button was pressed on Event, either which or keyCode attribute on Event",
+            "itemtype": "method",
+            "name": "eventGetKeyCode",
+            "params": [
+                {
+                    "name": "evt",
+                    "description": "Event to find which key was used on",
+                    "type": "Element"
+                }
+            ],
+            "return": {
+                "description": "Numeric key code if which attribute exist eler unicode value of key pressed",
+                "type": "Number"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1283,
+            "description": "Checks if any key is repeatedly held",
+            "itemtype": "method",
+            "name": "eventGetRepeat",
+            "params": [
+                {
+                    "name": "evt",
+                    "description": "Event to check",
+                    "type": "Event"
+                }
+            ],
+            "return": {
+                "description": "True if any key i srepeatedly held for Event else false",
+                "type": "Boolean"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1294,
+            "description": "Returns the horizontal screen coordinate of the mouse for Event",
+            "itemtype": "method",
+            "name": "eventGetScreenX",
+            "params": [
+                {
+                    "name": "evt",
+                    "description": "Event to check",
+                    "type": "Event"
+                }
+            ],
+            "return": {
+                "description": "The horizontal coordinate of mouse pointer",
+                "type": "Number"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1305,
+            "description": "Returns the vertical screen coordinate of the mouse for Event",
+            "itemtype": "method",
+            "name": "eventGetScreenY",
+            "params": [
+                {
+                    "name": "evt",
+                    "description": "Event to check",
+                    "type": "Event"
+                }
+            ],
+            "return": {
+                "description": "The vertical coordinate of mouse pointer",
+                "type": "Number"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1316,
+            "description": "Returns if Shift key were used on Event",
+            "itemtype": "method",
+            "name": "eventGetShiftKey",
+            "params": [
+                {
+                    "name": "evt",
+                    "description": "Event to check if Shift key were used on",
+                    "type": "Event"
+                }
+            ],
+            "return": {
+                "description": "1 if Shift key were used else 0",
+                "type": "Number"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1327,
+            "description": "Returns target element of Event if any",
+            "itemtype": "method",
+            "name": "eventGetTarget",
+            "params": [
+                {
+                    "name": "evt",
+                    "description": "Event to check",
+                    "type": "Event"
+                }
+            ],
+            "return": {
+                "description": "Target element if any else source element",
+                "type": "Element"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1338,
+            "description": "Returns related target element if any, used together with mouseover and mouseout events",
+            "itemtype": "method",
+            "name": "eventGetToElement",
+            "params": [
+                {
+                    "name": "evt",
+                    "description": "Event to check",
+                    "type": "Event"
+                }
+            ],
+            "return": {
+                "description": "Element if any else null",
+                "type": "Element"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1349,
+            "description": "Returns the type of an Event",
+            "itemtype": "method",
+            "name": "eventGetType",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event to determine typ of",
+                    "type": "Event"
+                }
+            ],
+            "return": {
+                "description": "Type of Event",
+                "type": "String"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1360,
+            "description": "Returns framework code for a Events type. All codes are defined in the global object Event in framework.\nAll this is done because the framework has its own handling of Event to take better control and make it easier\nto stop propagation and let events bubble in widgets.",
+            "itemtype": "method",
+            "name": "eventGetTypeInt",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event to determine framework type code for",
+                    "type": "Event"
+                }
+            ],
+            "return": {
+                "description": "Code corresponding to Events type in framework",
+                "type": "Number"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1405,
+            "description": "Returns an Events type. Same as eventGetType. Separated for future needs",
+            "itemtype": "method",
+            "name": "eventGetType",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "Event to check type of",
+                    "type": "Event"
+                }
+            ],
+            "return": {
+                "description": "Type of Event",
+                "type": "String"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1416,
+            "description": "Sets key code on a Event",
+            "itemtype": "method",
+            "name": "eventSetKeyCode",
+            "params": [
+                {
+                    "name": "evt",
+                    "description": "Event to set key code on",
+                    "type": "Event"
+                },
+                {
+                    "name": "key",
+                    "description": "Code to set as key code on Event",
+                    "type": "Number"
+                }
+            ],
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1427,
+            "description": "Returns Event as a string",
+            "itemtype": "method",
+            "name": "eventToString",
+            "params": [
+                {
+                    "name": "evt",
+                    "description": "Event to stringify",
+                    "type": "Event"
+                }
+            ],
+            "return": {
+                "description": "Resulting string of Event",
+                "type": "String"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1438,
+            "description": "Returns source of a iframe Element. Does not currently check that Element is a iframe",
+            "itemtype": "method",
+            "name": "iframeGetSrc",
+            "params": [
+                {
+                    "name": "elem",
+                    "description": "Element assumed to be an iframe",
+                    "type": "Element"
+                }
+            ],
+            "return": {
+                "description": "Source attribute on Element",
+                "type": "String"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1449,
+            "description": "Returns an Array of current x-y page scroll values",
+            "itemtype": "method",
+            "name": "getPageScroll",
+            "return": {
+                "description": "Current [xScroll, yScroll] values",
+                "type": "Array"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1471,
+            "description": "Returns current window height value",
+            "itemtype": "method",
+            "name": "getPageHeight",
+            "return": {
+                "description": "Current window height value",
+                "type": "Number"
+            },
+            "class": "DOM",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1500,
+            "description": "Returns current window height",
+            "itemtype": "method",
+            "name": "getClientHeight",
+            "return": {
+                "description": "Current window height value",
+                "type": "Number"
+            },
+            "class": "Window",
+            "module": "oceanfront"
+        },
+        {
+            "file": "javascripts/oceanfront/oceanfront.js",
+            "line": 1513,
+            "description": "Returns current window width",
+            "itemtype": "method",
+            "name": "getClientWidth",
+            "return": {
+                "description": "Current window width value",
+                "type": "Number"
+            },
+            "class": "Window",
             "module": "oceanfront"
         }
     ],
