@@ -101,6 +101,7 @@ var TextButton = CMSObject.extend({
     } else {
       DOM.setInnerText(this.getElement(), cmsobj);
     }
+    this.usage = 'text';
     this.setupCMSObj();
 
     if(fn) {
