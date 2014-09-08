@@ -66,8 +66,8 @@ table {
 }
 .absolute {position: absolute;}
 
-.left   { float:left; }
-.right  { float:right; }
+.left   { float:left !important; }
+.right  { float:right !important; }
 .clear-left { clear: left;}
 .clear-right { clear: right;}
 .clear-both { clear: both;}
@@ -78,9 +78,9 @@ table {
 .show, .block   { display: block; }
 
 .align-justify  { text-align:justify; } 
-.align-left     { text-align:left; } 
-.align-center   { text-align:center; } 
-.align-right    { text-align:right; } 
+.align-left     { text-align:left !important; } 
+.align-center   { text-align:center !important; } 
+.align-right    { text-align:right !important; } 
 
 .valign-baseline      { vertical-align: baseline   ; }
 .valign-sub           { vertical-align: sub        ; }
