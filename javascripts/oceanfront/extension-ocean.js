@@ -188,10 +188,17 @@ var ImageButton = CMSObject.extend({
     this.obj_normal = cmsobj
     this.mouseupListeners = [];
 
-    if(Object.prototype.toString.call( cmstext ) === '[object Array]' && 
+    // Allow cmstext to be = "" if no text is desired
+    if(Object.prototype.toString.call( cmstext ) === '[object Array]'  && 
        Object.prototype.toString.call( cmsobj ) === '[object Array]') {
 
-      var node = html.div({'class':'clickable'}, cmstext[0]);
+      var node = html.div({'class':'clickable textButton'}, cmstext[0]);
+      DOM.setStyleAttribute(node,'background-image','url("'+cmsobj[0]+'")');
+
+      this.setElement(node);
+    } else if(typeof cmstext === "string"  && 
+      Object.prototype.toString.call( cmsobj ) === '[object Array]') {
+      var node = html.div({'class':'clickable textButton'}, cmstext);
       DOM.setStyleAttribute(node,'background-image','url("'+cmsobj[0]+'")');
 
       this.setElement(node);
