@@ -880,6 +880,7 @@ var DOM = {
     element.onmouseup     = (bits & Event.ONMOUSEUP) ? gdispatchEvent : null;
     element.onmouseover   = (bits & Event.ONMOUSEOVER) ? gdispatchEvent : null;
     element.onmouseout    = (bits & Event.ONMOUSEOUT) ? gdispatchEvent : null;
+    element.onmouseenter  = (bits & Event.ONMOUSEENTER) ? gdispatchEvent : null;
     element.onmousemove   = (bits & Event.ONMOUSEMOVE) ? gdispatchEvent : null;
     element.onkeydown     = (bits & Event.ONKEYDOWN) ? gdispatchEvent : null;
     element.onkeypress    = (bits & Event.ONKEYPRESS) ? gdispatchEvent : null;
@@ -1382,7 +1383,8 @@ var DOM = {
       case "mousedown": return Event.ONMOUSEDOWN;
       case "mousemove": return Event.ONMOUSEMOVE;
       case "mouseout": return Event.ONMOUSEOUT;
-      case "mouseover": return Event.ONMOUSEUP;
+      case "mouseover": return Event.ONMOUSEOVER;
+      case "mouseenter": return Event.ONMOUSEENTER;
       case "mouseup": return Event.ONMOUSEUP;
       case "scroll": return Event.ONSCROLL;
       case "error": return Event.ONERROR;
@@ -1549,6 +1551,7 @@ var Event = {
   ONMOUSEMOVE:    0x00040,
   ONMOUSEOUT:     0x00020,
   ONMOUSEOVER:    0x00010,
+  ONMOUSEENTER:   0x00011,
   ONMOUSEUP:      0x00008,
   ONSCROLL:       0x04000,
   ONDRAGSTART:    0x40000,

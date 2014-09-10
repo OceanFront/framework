@@ -180,6 +180,84 @@ var CMSPanelObject = FlowPanel.extend({
   }
 });
 
+var ImageButton = CMSObject.extend({
+  init: function(cmstext, cmsobj, fn) {
+    this._super();
+    if(!this.getElement()) {this.setElement(DOM.createDiv()); }
+    this.obj = cmstext;
+    this.obj_normal = cmsobj
+    this.mouseupListeners = [];
+
+    if(Object.prototype.toString.call( cmstext ) === '[object Array]' && 
+       Object.prototype.toString.call( cmsobj ) === '[object Array]') {
+
+      var node = html.div({'class':'clickable'}, cmstext[0]);
+      DOM.setStyleAttribute(node,'background-image','url("'+cmsobj[0]+'")');
+
+      this.setElement(node);
+    } else {
+      DOM.setInnerText(this.getElement(), cmsobj);
+    }
+
+    this.setupCMSObj();
+
+    if(fn) {
+      this.addOnMouseUpListener(fn);
+    }
+  },
+  setupCMSObj: function() {
+    // Set up event handling here since most classes that extend CMSObject change the Element
+    // So doing this in the init would remove, and replace, the element and therefore the set up listeners on the first element
+    this.sinkEvents(Event.ONMOUSEUP);
+    //Flag set in common.js
+    if(window.CMSAdminMode) {
+      var self = this;
+      this.addStyleName("clickable");
+
+      // Show only 1 of the <em> tags out of 4
+
+      if(typeof this.obj === "string" && (this.obj.search("<em>") > -1)) {
+        var tmp = this.obj.split("(")[1].split(")")[0].split("/");
+        this.obj = [];
+        this.obj[0] = null;
+        this.obj[1] = tmp[0];
+        this.obj[2] = tmp[1];
+        this.obj[3] = tmp[2];
+      }
+      if(typeof this.obj_normal === "string" && (this.obj_normal.search("<em>") > -1)) {
+        var tmp = this.obj_normal.split("(")[1].split(")")[0].split("/");
+        this.obj_normal = [];
+        this.obj_normal[0] = null;
+        this.obj_normal[1] = tmp[0];
+        this.obj_normal[2] = tmp[1];
+        this.obj_normal[3] = tmp[2];
+      }
+
+      this.setStyleName("clickable");
+      this.addOnMouseUpListener(function(event){
+        // Open window for each cms object
+
+        // Open on correct domain
+        var domain = "";
+        if(config && config.OCEAN_API_URL) {
+          // Use master environment to share cms
+          domain = config.OCEAN_API_URL.replace("api", "admin") + '/cms/#';
+        } else {
+          domain = 'http://localhost:3005/cms/#';
+        }
+
+        // Text
+        var appname = (self.obj[3] !== undefined && self.obj[3] !== 'undefined') ? self.obj[3] : config["APP_NAME"];
+        window.open(domain + '/' + appname + '/' + self.obj[1] + '/' + self.obj[2] + '/' + config["LOCALE"] + '/' + "text");
+
+        // Image for normal
+        var appname = (self.obj_normal[3] !== undefined && self.obj_normal[3] !== 'undefined') ? self.obj_normal[3] : config["APP_NAME"];
+        window.open(domain + '/' + appname + '/' + self.obj_normal[1] + '/' + self.obj_normal[2] + '/' + config["LOCALE"] + '/' + "image");
+      });
+    }
+  }
+});
+
 var TextButton = CMSObject.extend({
   init: function(cmsobj, fn) {
     this._super(cmsobj);
