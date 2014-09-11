@@ -1575,11 +1575,13 @@ var NotificationCenter = Class.extend({
   },
   postNotification: function(notificationType, source) {
     var l = this.notificationListeners[notificationType];
-    for(var i=0; i<l.length; i++) {
-      if(l[i]['on'+notificationType]) {
-        l[i]['on'+notificationType](source);
-      } else { 
-        l[i](source);
+    if(l) {
+      for(var i=0; i<l.length; i++) {
+        if(l[i]['on'+notificationType]) {
+          l[i]['on'+notificationType](source);
+        } else { 
+          l[i](source);
+        }
       }
     }
   },
