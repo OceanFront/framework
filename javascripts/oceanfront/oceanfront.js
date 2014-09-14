@@ -3402,26 +3402,27 @@ var MenuPane = FlowPanel.extend({
 });
 
 var MenuItemBase = FocusWidget.extend({
-  init: function(name,action,href, id) {
-    this.href = href; // type: [[state1, state2, ..], obj];
-    this.name = name;
-    this.id = id;
-    this.action = action;
+  init: function(name, fn, stylename) {
+    this.name = name || "";
+    this.stylename = stylename || "";
+    this.callback = fn;
     this._super(this.render());
     this.active = false;
     var self = this;
     this.addClickListener(function(evt) { self.onClick(evt); });
-    if (action)
-      this.addClickListener(action);
+    if (this.callback)
+      this.addClickListener(this.callback);
+    if (this.stylename)
+      this.setStyleName(this.stylename)
   },
   onClick: function(evt) {
     if(!this.active) {
       this.parent.clearActive();
       this.setActive(true);
     }
-    if(!evt && this.action) {
-      // manually trigger, so trigger action for complete click cycle
-      this.action();
+    if(!evt && this.callback) {
+      // manually trigger, so trigger callback for complete click cycle
+      this.callback();
     }
   },
   setActive: function(bool) {
@@ -3438,12 +3439,12 @@ var MenuItemBase = FocusWidget.extend({
 });
 
 var MenuItem = MenuItemBase.extend({
-  init: function(stylename, name, flowCommand, id, fn) {
+  init: function(name, fn, stylename) {
     // flowCommand type: [[state1, state2, ..], obj];
-    this._super(name, fn, flowCommand, id);
+    this._super(name, fn, stylename);
     this.subMenu = null;
     this.setStyleName(stylename);
-    this.setStyleName('btn clickable');
+    this.addStyleName('btn clickable');
   },
   setSubMenu: function(menu) {
     this.subMenu = menu;
@@ -3452,8 +3453,7 @@ var MenuItem = MenuItemBase.extend({
     return this.subMenu;
   },
   render: function() {
-    return html.li({'id':"menu-item-"+this.id.toLowerCase()},
-        html.a({'class':'btntxt', 'href':this.href}, this.name));
+    return html.li({}, html.a({'class':'btntxt'}, this.name));
   }
 });
 
