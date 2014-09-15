@@ -3518,7 +3518,7 @@ var FormGrid = Grid.extend({
     this.bubble.showErrorOnWidget(widget);
     this.lastValidatedObject = widget;
     // Force focus on ValidationObject
-    widget.getElement().focus();
+    //widget.getElement().focus(); // Currently removed because it can produce weird behavior like reenter-password doesnt match password and user forgot what was entered in password it is locked at reenter-password etc
   },
   clearBubbleOnWidget: function(widget) {
     this.bubble.hide(widget);
@@ -3590,7 +3590,7 @@ var FormGrid = Grid.extend({
           form.currentBlurItem = target.widget;
         }
         
-      } else if(event.type === 'click' && $(target).attr('name') === 'save') {
+      } else if(event.type === 'click' && $(target).attr('name') === 'save' || event.keyCode == 13) {
         // Validate whole form because user wants to submit/save it
         if(form.validateForm()) {
           self.onSaveFn(form, event);
