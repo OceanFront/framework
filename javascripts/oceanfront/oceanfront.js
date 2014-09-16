@@ -535,6 +535,14 @@ var DOM = {
    */
   createTD:        function() { return this.createElement('td'); },
   /**
+   * Returns a TH header DOM node
+   *
+   * @method createTH 
+   * @return {Element} Created DOM node element
+   * 
+   */
+  createTH:        function() { return this.createElement('th'); },
+  /**
    * Returns a TBODY DOM node
    *
    * @method createTBody 
@@ -3037,10 +3045,11 @@ var LazyPanel = SimplePanel.extend({
 var Grid = HTMLTable.extend({
   init: function(rows, cols) {
     this._super();
-    //this.numCols = 0
-    //this.numRows = 0
+    this.numCols = cols || 0
+    this.numRows = rows || 0
     this.create(rows,cols);
     this.setStyleName('of-Grid');
+    this.insertHeader();
   },
   createCell: function() {
     var td = this._super();
@@ -3055,9 +3064,15 @@ var Grid = HTMLTable.extend({
       }
     }
   },
+  insertHeader: function() {
+    var tr = DOM.createTR();
+    for (var i = 0; i < this.numCols; i++) {
+      DOM.insertChild(tr, DOM.createTH(), -1);
+    };
+    DOM.insertChild(this.getBodyElement(), tr, 0);
+  },
   setHeader: function(pos, name) {
     var label = new Label(name);
-    label.setStyleName("table-header");
     this.setWidget(0, pos, label);
   }
 });
