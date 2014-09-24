@@ -4081,7 +4081,7 @@ var FileWidget = DragAndDropWidget.extend({
     var self = this;
     this.imageHolder = new FlowPanel();
     this.imageLabel = new Text("Drop image here!");
-    this.imageNameL = new Text("No file choosen...");
+    this.imageNameL = new Text("No file choosen...", true);
     this.imageSizeL = new Text("---");
     this.fileB = new FileBox();
     this.fileB.addChangeListener(function(widget, e) {
