@@ -558,29 +558,36 @@ var APIError = Class.extend({
   init: function(xhr) {
     var self = this;
     this.xhr = xhr;
+    this.status = xhr.status;
   },
   getStatus: function() {
     return this.xhr.status;
   },
   getErrorText: function() {
-    var error_obj = JSON.parse(this.xhr.responseText);
-    var text = "";
-    for(var key in error_obj) {
-      // Each value is a Array with errors in the key-subject
-      // Aggregate them with line break
-      for (var i = 0; i < error_obj[key].length; i++) {
-        if(error_obj[key][i] === "can't be blank") {
-          // Need to include key which says what can't be blank
-          text += key + " " + error_obj[key][i] + "\n";
-        } else {
-          text += error_obj[key][i] + "\n";
+    if(this.getStatus() == 500) {
+      return this.getStatusText();
+    } else if(this.getStatus() == 503) {
+      return this.getStatusText();
+    } else {
+      var error_obj = JSON.parse(this.xhr.responseText);
+      var text = "";
+      for(var key in error_obj) {
+        // Each value is a Array with errors in the key-subject
+        // Aggregate them with line break
+        for (var i = 0; i < error_obj[key].length; i++) {
+          if(error_obj[key][i] === "can't be blank") {
+            // Need to include key which says what can't be blank
+            text += key + " " + error_obj[key][i] + "\n";
+          } else {
+            text += error_obj[key][i] + "\n";
+          }
         }
       }
+      return text;
     }
-    return text;
   },
-  getErrorResponse: function() {
-    return JSON.parse(this.xhr.responseText);
+  getStatusText: function() {
+    return this.xhr.statusText;
   },
   getXHRObject: function() {
     return this.xhr;
