@@ -3853,7 +3853,12 @@ var DragAndDropWidget = FlowPanel.extend({
     this.dragoverListeners = [];
     this.dropListeners = [];
     this.dragendListeners = [];
-    this.sinkEvents(Event.ONCLICK|Event.FOCUSEVENTS|Event.KEYEVENTS|Event.ONLOAD|Event.ONLOADEND|Event.ONLOADSTART|Event.ONPROGRESS|Event.ONABORT|Event.ONERROR|Event.ONDRAGSTART|Event.ONDRAG|Event.ONDRAGENTER|Event.ONDRAGLEAVE|Event.ONDRAGOVER|Event.ONDROP|Event.ONDRAGEND);
+    this.mouseoverListeners = [];
+    this.sinkEvents(Event.MOUSEOVER|Event.ONCLICK|Event.FOCUSEVENTS|Event.KEYEVENTS|Event.ONLOAD|Event.ONLOADEND|Event.ONLOADSTART|Event.ONPROGRESS|Event.ONABORT|Event.ONERROR|Event.ONDRAGSTART|Event.ONDRAG|Event.ONDRAGENTER|Event.ONDRAGLEAVE|Event.ONDRAGOVER|Event.ONDROP|Event.ONDRAGEND);
+  },
+  addMouseOverListener: function(listener) {
+    this.mouseoverListeners.push(listener);
+    return this;
   },
   addLoadListener: function(listener) {
     this.loadListeners.push(listener);
@@ -3926,68 +3931,59 @@ var DragAndDropWidget = FlowPanel.extend({
       for (var i = 0; i < this.clickListeners.length; i++) {
         this.clickListeners[i](this, event);
       }
-    }
-    else if (type == 'blur' || type == 'focus') {
+    } else if (type == 'mouseover') {
+      for (var i = 0; i < this.mouseoverListeners.length; i++) {
+        this.mouseoverListeners[i](this, event);
+      }
+    } else if (type == 'blur' || type == 'focus') {
       for (var i = 0; i < this.focusListeners.length; i++) {
         this.focusListeners[i](this, event);
       }
-    }
-    else if (type == 'keydown' || type == 'keypress' || type == 'keyup') {
+    } else if (type == 'keydown' || type == 'keypress' || type == 'keyup') {
       for (var i = 0; i < this.keyboardListeners.length; i++) {
         this.keyboardListeners[i](this, event);
       }
-    }
-    else if (type == 'load') {
+    } else if (type == 'load') {
       for (var i = 0; i < this.loadListeners.length; i++) {
         this.loadListeners[i](this, event);
       }
-    }
-    else if (type == 'loadend') {
+    } else if (type == 'loadend') {
       for (var i = 0; i < this.loadendListeners.length; i++) {
         this.loadendListeners[i](this, event);
       }
-    }
-    else if (type == 'progress') {
+    } else if (type == 'progress') {
       for (var i = 0; i < this.progressListeners.length; i++) {
         this.progressListeners[i](this, event);
       }
-    }
-    else if (type == 'abort') {
+    } else if (type == 'abort') {
       for (var i = 0; i < this.abortListeners.length; i++) {
         this.abortListeners[i](this, event);
       }
-    }
-    else if (type == 'error') {
+    } else if (type == 'error') {
       for (var i = 0; i < this.errorListeners.length; i++) {
         this.errorListeners[i](this, event);
       }
-    }
-    else if (type == 'drop') {
+    } else if (type == 'drop') {
       for (var i = 0; i < this.dropListeners.length; i++) {
         this.dropListeners[i](this, event);
       }
-    }
-    else if (type == 'dragenter') {
+    } else if (type == 'dragenter') {
       for (var i = 0; i < this.dragenterListeners.length; i++) {
         this.dragenterListeners[i](this, event);
       }
-    }
-    else if (type == 'dragleave') {
+    } else if (type == 'dragleave') {
       for (var i = 0; i < this.dragleaveListeners.length; i++) {
         this.dragleaveListeners[i](this, event);
       }
-    }
-    else if (type == 'dragend') {
+    } else if (type == 'dragend') {
       for (var i = 0; i < this.dragendListeners.length; i++) {
         this.dragendListeners[i](this, event);
       }
-    }
-    else if (type == 'dragstart') {
+    } else if (type == 'dragstart') {
       for (var i = 0; i < this.dragstartListeners.length; i++) {
         this.dragstartListeners[i](this, event);
       }
-    }
-    else if (type == 'dragover') {
+    } else if (type == 'dragover') {
       for (var i = 0; i < this.dragoverListeners.length; i++) {
         this.dragoverListeners[i](this, event);
       }

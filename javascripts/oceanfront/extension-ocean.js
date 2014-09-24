@@ -558,6 +558,7 @@ var APIError = Class.extend({
   init: function(xhr) {
     var self = this;
     this.xhr = xhr;
+    this.status = xhr.status;
   },
   getStatus: function() {
     return this.xhr.status;
