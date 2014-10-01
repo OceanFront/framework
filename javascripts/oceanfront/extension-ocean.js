@@ -326,7 +326,7 @@ var Text = CMSObject.extend({
   }
 });
 
-var Image = CMSObject.extend({
+var OFImage = CMSObject.extend({
   init: function(cmsobj) {
     this._super(cmsobj);
 
