@@ -564,7 +564,7 @@ var APIError = Class.extend({
     return this.xhr.status;
   },
   getErrorText: function() {
-    if(this.getStatus() == 500) {
+    if(this.getStatus() == 500 && !this.xhr.responseText) {
       return this.getStatusText();
     } else if(this.getStatus() == 503) {
       return this.getStatusText();
