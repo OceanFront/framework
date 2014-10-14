@@ -555,9 +555,6 @@ var PAPIBase = Class.extend({
         contentType: "application/json; utf-8",
         cache: true,
         success: function(res, code, xhr) {
-          console.log(code);
-          console.log(res);
-          console.log(xhr);
           self.pre_success(res, code, xhr);
           success_callback(res, extras, xhr);
         },
