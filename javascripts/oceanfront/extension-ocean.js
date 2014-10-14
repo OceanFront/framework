@@ -332,7 +332,7 @@ var Text = CMSObject.extend({
   }
 });
 
-var Image = CMSObject.extend({
+var OFImage = CMSObject.extend({
   init: function(cmsobj) {
     this._super(cmsobj);
 
@@ -555,6 +555,9 @@ var PAPIBase = Class.extend({
         contentType: "application/json; utf-8",
         cache: true,
         success: function(res, code, xhr) {
+          console.log(code);
+          console.log(res);
+          console.log(xhr);
           self.pre_success(res, code, xhr);
           success_callback(res, extras, xhr);
         },
@@ -588,7 +591,7 @@ var APIError = Class.extend({
     return this.xhr.status;
   },
   getErrorText: function() {
-    if(this.getStatus() == 500) {
+    if(this.getStatus() == 500 && !this.xhr.responseText) {
       return this.getStatusText();
     } else if(this.getStatus() == 503) {
       return this.getStatusText();
