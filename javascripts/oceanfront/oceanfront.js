@@ -242,10 +242,18 @@ var BrowserKlass = Class.extend({
         /(opera)(?:.*version|)[ \/]([\w.]+)/.exec(ua) ||
         /(msie) ([\w.]+)/.exec(ua) || ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) || [];
 
-    return {
+    if(/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(ua)) {
+      // all devices are called just that: device
+      return {
+        browser: "device",
+        version: "0"
+      };
+    } else {
+      return {
         browser: match[1] || "",
         version: match[2] || "0"
-    };
+      };
+    }
   }
 });
 
