@@ -1657,12 +1657,15 @@ var UIObject = Class.extend({
   },
   removeStyleName: function(style) {
     DOM.removeStyleName(this.getElement(), style);
+    return this;
   },
   addStyleName: function(style) {
     DOM.addStyleName(this.getElement(), style);
+    return this;
   },
   setPrimaryStyleName: function(style) {
     this.setStyleName(this.getElement(), style, false);
+    return this;
   },
   setStyleName: function(element,style,add) {
     if(style == null) {
