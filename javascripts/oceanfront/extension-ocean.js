@@ -15,6 +15,7 @@ var CMSObject = Widget.extend({
     if(!this.getElement()) {this.setElement(DOM.createDiv()); }
     this.obj = cmsobj;
     this.mouseupListeners = [];
+    this.enabled = true;
     this.setWordWrap(wordwrap);
   },
   setupCMSObj: function() {
@@ -52,15 +53,23 @@ var CMSObject = Widget.extend({
       });
     }
   },
+  disable: function() {
+    this.enabled = false;
+  },
+  enable: function() {
+    this.enabled = true;
+  },
   addOnMouseUpListener: function(listener) {
     this.mouseupListeners.push(listener);
     return this;
   },
   onBrowserEvent: function(event) {
-    var type = event.type;
-    if(type == 'mouseup') {
-      for(var i=0; i<this.mouseupListeners.length; i++) {
-        this.mouseupListeners[i](this, event);      
+    if(this.enabled) {
+      var type = event.type;
+      if(type == 'mouseup') {
+        for(var i=0; i<this.mouseupListeners.length; i++) {
+          this.mouseupListeners[i](this, event);      
+        }
       }
     }
   },
