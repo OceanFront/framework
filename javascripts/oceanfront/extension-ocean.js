@@ -338,6 +338,13 @@ var Text = CMSObject.extend({
     }
     
     this.setupCMSObj();
+  },
+  setText: function(cmsobj) {
+    if(Object.prototype.toString.call( cmsobj ) === '[object Array]') {
+      this._super(cmsobj[0]);
+    } else {
+      DOM.setInnerText(this.getElement(),cmsobj);
+    }
   }
 });
 
