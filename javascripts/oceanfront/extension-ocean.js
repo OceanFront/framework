@@ -345,6 +345,7 @@ var Text = CMSObject.extend({
     } else {
       DOM.setInnerText(this.getElement(),cmsobj);
     }
+    return this;
   }
 });
 
@@ -519,6 +520,7 @@ var HTML = CMSObject.extend({
   },
   setHTML: function(html) {
     DOM.setInnerHTML(this.getElement(), html);
+    return this;
   }
 });
 
