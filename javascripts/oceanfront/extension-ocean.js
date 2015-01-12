@@ -23,7 +23,7 @@ var CMSObject = Widget.extend({
     // So doing this in the init would remove, and replace, the element and therefore the set up listeners on the first element
     this.sinkEvents(Event.ONMOUSEUP);
     //Flag set in common.js
-    if(window.CMSAdminMode) {
+    if(window.CMSAdminMode && this.obj) {
       var self = this;
       this.addStyleName("clickable");
 
@@ -345,6 +345,8 @@ var Text = CMSObject.extend({
     } else {
       DOM.setInnerText(this.getElement(),cmsobj);
     }
+    this.obj = cmsobj;
+    this.setupCMSObj();
     return this;
   }
 });
