@@ -2,7 +2,7 @@
 //                    OceanFront Framework
 //                David Tatti | Lars Rustemeier
 //
-//  www.github.com/OceanDev/oceanfront
+//  www.github.com/OceanFront/oceanfront
 //  www.oceanframework.com
 ////////////////////////////////////////////////////////////////////
 
@@ -218,6 +218,14 @@ var BrowserKlass = Class.extend({
      * 
      */
     this.version = result.version;
+    /**
+     * The os on mobile devices
+     *
+     * @property os
+     * @type String
+     * 
+     */
+    this.os = result.os;
   },
   /**
    * Detects what Browser and version it is
@@ -243,15 +251,25 @@ var BrowserKlass = Class.extend({
         /(msie) ([\w.]+)/.exec(ua) || ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) || [];
 
     if(/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(ua)) {
-      // all devices are called just that: device
+      var name = "";
+      if(/iphone|ipad|ipod/i.test(ua)) {
+        name = "ios";
+      } else if(/android/i.test(ua)) {
+        name = "android";
+      }
+
+
+      // all mobile are called just that: mobile
       return {
-        browser: "device",
-        version: "0"
+        browser: "mobile",
+        version: "0",
+        os: name
       };
     } else {
       return {
         browser: match[1] || "",
-        version: match[2] || "0"
+        version: match[2] || "0",
+        os: ""
       };
     }
   }
