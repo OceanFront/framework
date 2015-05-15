@@ -3731,6 +3731,9 @@ var WidgetLoader = Widget.extend({
     this.parentWidth = null;
     this.parentHeight = null;
   },
+  setSphereGradientBackground: function() {
+    this.setStyleName("widget-loader-sphere");
+  },
   adaptSize: function() {
     // Calculate if there is a fixed height on parent, then use that
     var parentheight = $(this.getElement().parentElement).height();

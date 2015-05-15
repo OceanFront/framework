@@ -226,6 +226,20 @@ div {
 	z-index: 100;
 }
 
+.widget-loader-sphere {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background: -moz-radial-gradient(center, ellipse cover, rgba(0,0,0,0.75) 0%, rgba(8,8,8,0.75) 10%, rgba(76,76,76,0.08) 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(0,0,0,0.75)), color-stop(10%,rgba(8,8,8,0.75)), color-stop(100%,rgba(76,76,76,0.08))); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover, rgba(0,0,0,0.75) 0%,rgba(8,8,8,0.75) 10%,rgba(76,76,76,0.08) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover, rgba(0,0,0,0.75) 0%,rgba(8,8,8,0.75) 10%,rgba(76,76,76,0.08) 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover, rgba(0,0,0,0.75) 0%,rgba(8,8,8,0.75) 10%,rgba(76,76,76,0.08) 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center, rgba(0,0,0,0.75) 0%,rgba(8,8,8,0.75) 10%,rgba(76,76,76,0.08) 100%); /* W3C */
+	z-index: 100;
+}
+
 .widget-loader-spinner {
 	position: absolute;
 	top: 0;
