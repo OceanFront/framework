@@ -3752,7 +3752,7 @@ var WidgetLoader = Widget.extend({
     if(typeof parentwidth === "number" && parentwidth > 0) {
       $('img', this.getElement()).css('left', parseInt(parentwidth/2 - 20));
     } else {
-      $('img', this.getElement()).css('left', '40%');
+      $('img', this.getElement()).css('left', 'auto');
     }
 
     this.parentWidth = parentwidth;
