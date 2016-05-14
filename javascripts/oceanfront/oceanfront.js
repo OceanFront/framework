@@ -3576,10 +3576,16 @@ var MenuItem = MenuItemBase.extend({
         return this.subMenu;
     },
     render: function() {
-        return html.li({}, html.a({
-            'class': 'btntxt',
-            'href': this.href
-        }, this.name));
+        if(this.href === "") {
+            return html.li({}, html.a({
+                'class': 'btntxt'
+            }, this.name));
+        } else {
+            return html.li({}, html.a({
+                'class': 'btntxt',
+                'href': this.href
+            }, this.name));
+        }
     }
 });
 
