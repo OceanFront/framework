@@ -3159,6 +3159,22 @@ var Grid = HTMLTable.extend({
         this.create(rows, cols);
         this.setStyleName('of-Grid');
         this.insertHeader();
+
+        // Setup default listeners behavior
+        this.clickListeners = [];
+        this.sinkEvents(Event.ONCLICK);
+    },
+    addClickListener: function(listener) {
+        this.clickListeners.push(listener);
+    },
+    onBrowserEvent: function(event) {
+        this._super(event);
+        var type = DOM.eventGetType(event);
+        if (type == 'click') {
+            for (var i = 0; i < this.clickListeners.length; i++) {
+                this.clickListeners[i](this, event);
+            }
+        }
     },
     createCell: function() {
         var td = this._super();
