@@ -3513,8 +3513,9 @@ var MenuPane = FlowPanel.extend({
     add: function(widget) {
         this._super(widget, this.getElement());
         // Set first added MenuItem as default
-        if (this.defaultMenuItemName === null)
+        if (this.defaultMenuItemName === null) {
             this.defaultMenuItemName = widget;
+        }
         this.menuItems[widget.id] = widget;
     },
     render: function() {
@@ -3566,6 +3567,7 @@ var MenuItem = MenuItemBase.extend({
         // flowCommand type: [[state1, state2, ..], obj];
         this._super(name, href, fn, stylename);
         this.subMenu = null;
+        this.id = name;
         this.setStyleName(stylename);
         this.addStyleName('btn clickable');
     },
