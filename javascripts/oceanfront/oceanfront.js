@@ -3002,7 +3002,11 @@ var ListBox = FocusWidget.extend({
     },
     getSelectedValue: function() {
         var index = this.getSelectedIndex();
-        return this.getValue(index);
+        if(index === -1) {
+            return null;
+        } else {
+            return this.getValue(index);
+        }
     },
     getVisibleItemCount: function() {
         return DOM.getAttribute(this.getElement(), "size");
@@ -3585,7 +3589,7 @@ var MenuItem = MenuItemBase.extend({
         this.subMenu = null;
         this.id = name;
         this.setStyleName(stylename);
-        this.addStyleName('btn clickable');
+        this.addStyleName('of-btn clickable');
     },
     setSubMenu: function(menu) {
         this.subMenu = menu;
